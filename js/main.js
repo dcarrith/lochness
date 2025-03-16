@@ -200,4 +200,172 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Run once on page load
     animateOnScroll();
+    
+    // Interactive word cloud with drag functionality
+    const wordCloud = document.querySelector('.lochness-wordcloud');
+    const words = document.querySelectorAll('.word');
+    
+    if (wordCloud) {
+        let isDragging = false;
+        let startX, startY;
+        let offsetX = 0, offsetY = 0;
+        let currentX = 0, currentY = 0;
+        
+        // Function to handle mouse down or touch start
+        function startDrag(e) {
+            // Prevent default behavior for touch events
+            if (e.type === 'touchstart') {
+                e.preventDefault();
+                const touch = e.touches[0];
+                startX = touch.clientX;
+                startY = touch.clientY;
+            } else {
+                startX = e.clientX;
+                startY = e.clientY;
+            }
+            
+            isDragging = true;
+            wordCloud.classList.add('dragging');
+            
+            // Store current transform values
+            const transform = window.getComputedStyle(wordCloud).getPropertyValue('transform');
+            if (transform !== 'none') {
+                const matrix = new DOMMatrix(transform);
+                currentX = matrix.e;
+                currentY = matrix.f;
+            }
+            
+            // Add event listeners for move and end events
+            if (e.type === 'touchstart') {
+                document.addEventListener('touchmove', dragMove, { passive: false });
+                document.addEventListener('touchend', endDrag);
+            } else {
+                document.addEventListener('mousemove', dragMove);
+                document.addEventListener('mouseup', endDrag);
+            }
+        }
+        
+        // Function to handle mouse move or touch move
+        function dragMove(e) {
+            if (!isDragging) return;
+            
+            // Prevent default behavior for touch events
+            if (e.type === 'touchmove') {
+                e.preventDefault();
+                const touch = e.touches[0];
+                offsetX = touch.clientX - startX;
+                offsetY = touch.clientY - startY;
+            } else {
+                offsetX = e.clientX - startX;
+                offsetY = e.clientY - startY;
+            }
+            
+            // Apply the transform
+            wordCloud.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+            wordCloud.style.animation = 'none';
+        }
+        
+        // Function to handle mouse up or touch end
+        function endDrag() {
+            isDragging = false;
+            wordCloud.classList.remove('dragging');
+            
+            // Update current position
+            currentX += offsetX;
+            currentY += offsetY;
+            
+            // Remove event listeners
+            document.removeEventListener('mousemove', dragMove);
+            document.removeEventListener('mouseup', endDrag);
+            document.removeEventListener('touchmove', dragMove);
+            document.removeEventListener('touchend', endDrag);
+            
+            // Reset animation after a short delay
+            setTimeout(() => {
+                wordCloud.style.animation = '';
+                wordCloud.style.transform = '';
+            }, 3000);
+        }
+        
+        // Add event listeners for drag start
+        wordCloud.addEventListener('mousedown', startDrag);
+        wordCloud.addEventListener('touchstart', startDrag, { passive: false });
+        
+        // Make individual words draggable
+        words.forEach(word => {
+            let wordIsDragging = false;
+            let wordStartX, wordStartY;
+            let wordOffsetX = 0, wordOffsetY = 0;
+            let originalLeft, originalTop;
+            
+            function startWordDrag(e) {
+                e.stopPropagation(); // Prevent parent from also being dragged
+                
+                if (e.type === 'touchstart') {
+                    e.preventDefault();
+                    const touch = e.touches[0];
+                    wordStartX = touch.clientX;
+                    wordStartY = touch.clientY;
+                } else {
+                    wordStartX = e.clientX;
+                    wordStartY = e.clientY;
+                }
+                
+                wordIsDragging = true;
+                word.classList.add('dragging');
+                
+                // Store original position
+                originalLeft = parseInt(window.getComputedStyle(word).left);
+                originalTop = parseInt(window.getComputedStyle(word).top);
+                
+                // Add event listeners for move and end events
+                if (e.type === 'touchstart') {
+                    document.addEventListener('touchmove', dragWordMove, { passive: false });
+                    document.addEventListener('touchend', endWordDrag);
+                } else {
+                    document.addEventListener('mousemove', dragWordMove);
+                    document.addEventListener('mouseup', endWordDrag);
+                }
+            }
+            
+            function dragWordMove(e) {
+                if (!wordIsDragging) return;
+                
+                if (e.type === 'touchmove') {
+                    e.preventDefault();
+                    const touch = e.touches[0];
+                    wordOffsetX = touch.clientX - wordStartX;
+                    wordOffsetY = touch.clientY - wordStartY;
+                } else {
+                    wordOffsetX = e.clientX - wordStartX;
+                    wordOffsetY = e.clientY - wordStartY;
+                }
+                
+                // Apply the new position
+                word.style.left = `${originalLeft + wordOffsetX}px`;
+                word.style.top = `${originalTop + wordOffsetY}px`;
+                word.style.animation = 'none';
+            }
+            
+            function endWordDrag() {
+                wordIsDragging = false;
+                word.classList.remove('dragging');
+                
+                // Remove event listeners
+                document.removeEventListener('mousemove', dragWordMove);
+                document.removeEventListener('mouseup', endWordDrag);
+                document.removeEventListener('touchmove', dragWordMove);
+                document.removeEventListener('touchend', endWordDrag);
+                
+                // Reset animation after a short delay
+                setTimeout(() => {
+                    word.style.animation = '';
+                }, 3000);
+            }
+            
+            // Add event listeners for drag start
+            word.addEventListener('mousedown', startWordDrag);
+            word.addEventListener('touchstart', startWordDrag, { passive: false });
+        });
+    }
 });

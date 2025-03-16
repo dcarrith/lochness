@@ -272,8 +272,14 @@ section {
     height: 350px;
     top: 40%;
     right: 5%;
-    pointer-events: none;
+    pointer-events: auto;
     animation: float 8s infinite ease-in-out;
+    cursor: grab;
+}
+
+.lochness-wordcloud.dragging {
+    cursor: grabbing;
+    animation: none;
 }
 
 .word {
@@ -291,6 +297,8 @@ section {
     justify-content: center;
     box-shadow: 0 0 10px rgba(58, 172, 89, 0.3);
     transition: all 0.3s ease;
+    cursor: pointer;
+    user-select: none;
 }
 
 .word:hover {
@@ -299,6 +307,11 @@ section {
     z-index: 100;
     box-shadow: 0 0 15px rgba(58, 172, 89, 0.5);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.word.dragging {
+    transition: none;
+    z-index: 200;
 }
 
 /* Word sizes */
@@ -1356,6 +1369,7 @@ section {
         height: 230px;
         transform: scale(0.65);
         right: 0;
+        touch-action: none; /* Prevents scrolling while dragging on touch devices */
     }
     
     .w-xlarge { font-size: 1.5rem; }
