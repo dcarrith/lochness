@@ -266,74 +266,77 @@ section {
     opacity: 0;
 }
 
-.floating-elements {
+.tag-cloud-container {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     pointer-events: none;
+    perspective: 800px;
+    overflow: hidden;
 }
 
-.crypto-icon, .data-point {
+.tag-cloud {
     position: absolute;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: float 6s infinite ease-in-out;
-    z-index: 1;
+    width: 300px;
+    height: 300px;
+    top: 50%;
+    right: 10%;
+    transform-style: preserve-3d;
+    animation: tagCloudRotate 20s infinite linear;
 }
 
-.crypto-icon {
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    font-size: 1.8rem;
+@keyframes tagCloudRotate {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+    100% {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
 }
 
-.crypto-icon.chia {
-    top: 25%;
-    right: 15%;
-    animation-delay: 0s;
-    color: #3AAC59;
-}
-
-.crypto-icon.chialisp {
-    bottom: 30%;
-    right: 25%;
-    animation-delay: 2s;
-    color: #5DBE7E;
-}
-
-.data-point {
-    padding: 10px 20px;
-    background: rgba(46, 204, 113, 0.2);
+.tag {
+    position: absolute;
+    padding: 8px 15px;
+    background: rgba(58, 172, 89, 0.2);
     backdrop-filter: blur(5px);
     border-radius: 20px;
     font-size: 0.9rem;
-    font-weight: 500;
+    font-weight: 600;
     white-space: nowrap;
+    color: var(--light-text);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-origin: center;
+    box-shadow: 0 0 10px rgba(58, 172, 89, 0.3);
+    transition: background 0.3s ease;
 }
 
-.data-point.dp1 {
-    top: 40%;
-    right: 30%;
-    animation-delay: 1s;
+.tag:hover {
+    background: rgba(58, 172, 89, 0.4);
 }
 
-.data-point.dp2 {
-    top: 60%;
-    right: 10%;
-    animation-delay: 3s;
-}
-
-.data-point.dp3 {
-    bottom: 20%;
-    left: 20%;
-    animation-delay: 2s;
-}
+.tag.t1 { transform: rotateX(0deg) rotateY(0deg) translateZ(120px); }
+.tag.t2 { transform: rotateX(40deg) rotateY(20deg) translateZ(120px); }
+.tag.t3 { transform: rotateX(80deg) rotateY(40deg) translateZ(120px); }
+.tag.t4 { transform: rotateX(120deg) rotateY(60deg) translateZ(120px); }
+.tag.t5 { transform: rotateX(160deg) rotateY(80deg) translateZ(120px); }
+.tag.t6 { transform: rotateX(200deg) rotateY(100deg) translateZ(120px); }
+.tag.t7 { transform: rotateX(240deg) rotateY(120deg) translateZ(120px); }
+.tag.t8 { transform: rotateX(280deg) rotateY(140deg) translateZ(120px); }
+.tag.t9 { transform: rotateX(320deg) rotateY(160deg) translateZ(120px); }
+.tag.t10 { transform: rotateX(0deg) rotateY(180deg) translateZ(120px); }
+.tag.t11 { transform: rotateX(40deg) rotateY(200deg) translateZ(120px); }
+.tag.t12 { transform: rotateX(80deg) rotateY(220deg) translateZ(120px); }
+.tag.t13 { transform: rotateX(120deg) rotateY(240deg) translateZ(120px); }
+.tag.t14 { transform: rotateX(160deg) rotateY(260deg) translateZ(120px); }
+.tag.t15 { transform: rotateX(200deg) rotateY(280deg) translateZ(120px); }
+.tag.t16 { transform: rotateX(240deg) rotateY(300deg) translateZ(120px); }
+.tag.t17 { transform: rotateX(280deg) rotateY(320deg) translateZ(120px); }
+.tag.t18 { transform: rotateX(320deg) rotateY(340deg) translateZ(120px); }
 
 .scroll-indicator {
     position: absolute;
@@ -1302,6 +1305,17 @@ section {
     
     .btn {
         width: 100%;
+    }
+    
+    .tag-cloud {
+        width: 200px;
+        height: 200px;
+        right: 5%;
+    }
+    
+    .tag {
+        font-size: 0.8rem;
+        padding: 6px 12px;
     }
     
     .about-content, 
