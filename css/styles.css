@@ -266,43 +266,22 @@ section {
     opacity: 0;
 }
 
-.tag-cloud-container {
+.lochness-wordcloud {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    perspective: 800px;
-    overflow: hidden;
-}
-
-.tag-cloud {
-    position: absolute;
-    width: 300px;
+    width: 500px;
     height: 300px;
-    top: 50%;
-    right: 10%;
-    transform-style: preserve-3d;
-    animation: tagCloudRotate 20s infinite linear;
+    top: 40%;
+    right: 5%;
+    pointer-events: none;
+    animation: float 8s infinite ease-in-out;
 }
 
-@keyframes tagCloudRotate {
-    0% {
-        transform: rotateX(0deg) rotateY(0deg);
-    }
-    100% {
-        transform: rotateX(360deg) rotateY(360deg);
-    }
-}
-
-.tag {
+.word {
     position: absolute;
     padding: 8px 15px;
     background: rgba(58, 172, 89, 0.2);
     backdrop-filter: blur(5px);
     border-radius: 20px;
-    font-size: 0.9rem;
     font-weight: 600;
     white-space: nowrap;
     color: var(--light-text);
@@ -310,33 +289,83 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    transform-origin: center;
     box-shadow: 0 0 10px rgba(58, 172, 89, 0.3);
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-.tag:hover {
+.word:hover {
     background: rgba(58, 172, 89, 0.4);
+    transform: scale(1.1);
 }
 
-.tag.t1 { transform: rotateX(0deg) rotateY(0deg) translateZ(120px); }
-.tag.t2 { transform: rotateX(40deg) rotateY(20deg) translateZ(120px); }
-.tag.t3 { transform: rotateX(80deg) rotateY(40deg) translateZ(120px); }
-.tag.t4 { transform: rotateX(120deg) rotateY(60deg) translateZ(120px); }
-.tag.t5 { transform: rotateX(160deg) rotateY(80deg) translateZ(120px); }
-.tag.t6 { transform: rotateX(200deg) rotateY(100deg) translateZ(120px); }
-.tag.t7 { transform: rotateX(240deg) rotateY(120deg) translateZ(120px); }
-.tag.t8 { transform: rotateX(280deg) rotateY(140deg) translateZ(120px); }
-.tag.t9 { transform: rotateX(320deg) rotateY(160deg) translateZ(120px); }
-.tag.t10 { transform: rotateX(0deg) rotateY(180deg) translateZ(120px); }
-.tag.t11 { transform: rotateX(40deg) rotateY(200deg) translateZ(120px); }
-.tag.t12 { transform: rotateX(80deg) rotateY(220deg) translateZ(120px); }
-.tag.t13 { transform: rotateX(120deg) rotateY(240deg) translateZ(120px); }
-.tag.t14 { transform: rotateX(160deg) rotateY(260deg) translateZ(120px); }
-.tag.t15 { transform: rotateX(200deg) rotateY(280deg) translateZ(120px); }
-.tag.t16 { transform: rotateX(240deg) rotateY(300deg) translateZ(120px); }
-.tag.t17 { transform: rotateX(280deg) rotateY(320deg) translateZ(120px); }
-.tag.t18 { transform: rotateX(320deg) rotateY(340deg) translateZ(120px); }
+/* Word sizes */
+.w-xsmall { font-size: 0.7rem; }
+.w-small { font-size: 0.9rem; }
+.w-medium { font-size: 1.1rem; }
+.w-large { font-size: 1.4rem; }
+.w-xlarge { font-size: 1.8rem; }
+
+/* Lochness monster shape positioning */
+/* Head and neck */
+.head { top: 20px; left: 20px; z-index: 10; }
+.neck1 { top: 40px; left: 70px; }
+.neck2 { top: 60px; left: 120px; }
+.neck3 { top: 70px; left: 170px; }
+
+/* Body */
+.body1 { top: 90px; left: 220px; }
+.body2 { top: 130px; left: 180px; }
+.body3 { top: 160px; left: 140px; }
+.body4 { top: 180px; left: 100px; }
+.body5 { top: 190px; left: 60px; }
+
+/* Humps */
+.hump1 { top: 40px; left: 260px; }
+.hump2 { top: 60px; left: 320px; }
+.hump3 { top: 90px; left: 370px; }
+
+/* Tail */
+.tail1 { top: 120px; left: 400px; }
+.tail2 { top: 150px; left: 430px; }
+.tail3 { top: 180px; left: 450px; }
+
+/* Legs/Flippers */
+.leg1 { top: 220px; left: 80px; }
+.leg2 { top: 240px; left: 120px; }
+.leg3 { top: 220px; left: 160px; }
+.leg4 { top: 240px; left: 200px; }
+
+/* Animation for the whole monster */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(1deg);
+    }
+}
+
+/* Individual word animations */
+.word {
+    animation: wordPulse 5s infinite ease-in-out;
+}
+
+.word:nth-child(odd) {
+    animation-delay: 0.5s;
+}
+
+.word:nth-child(even) {
+    animation-delay: 1s;
+}
+
+@keyframes wordPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
 
 .scroll-indicator {
     position: absolute;
@@ -1307,16 +1336,18 @@ section {
         width: 100%;
     }
     
-    .tag-cloud {
-        width: 200px;
+    .lochness-wordcloud {
+        width: 300px;
         height: 200px;
-        right: 5%;
+        transform: scale(0.7);
+        right: 0;
     }
     
-    .tag {
-        font-size: 0.8rem;
-        padding: 6px 12px;
-    }
+    .w-xlarge { font-size: 1.5rem; }
+    .w-large { font-size: 1.2rem; }
+    .w-medium { font-size: 1rem; }
+    .w-small { font-size: 0.8rem; }
+    .w-xsmall { font-size: 0.6rem; }
     
     .about-content, 
     .tech-showcase, 
