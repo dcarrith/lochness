@@ -19,7 +19,7 @@ spec:
         # To load the lochness-website:latest image tar into the kind nodes
         # for pulling images directly.
         #   kind load image-archive lochness-website.tar --name lochness-cluster 
-        image: lochness-website:latest
+        image: localhost/lochness-website:latest
         ports:
         - containerPort: 80
         readinessProbe:

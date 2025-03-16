@@ -19,14 +19,19 @@ kind delete cluster --name lochness-cluster
 
 echo "Checking for leftover Podman images..."
 if command -v podman &> /dev/null; then
-    if podman images | grep -q "lochness-website"; then
-        echo "Removing Podman images..."
-        podman rmi localhost/lochness-website:latest -f || true
+    # Check if podman machine is running
+    if podman machine list 2>/dev/null | grep -q "Currently running"; then
+        if podman images 2>/dev/null | grep -q "lochness-website"; then
+            echo "Removing Podman images..."
+            podman rmi localhost/lochness-website:latest -f || true
+        fi
+        
+        # Remove any dangling images
+        echo "Removing dangling images..."
+        podman image prune -f || true
+    else
+        echo "Podman machine is not running, skipping image cleanup"
     fi
-    
-    # Remove any dangling images
-    echo "Removing dangling images..."
-    podman image prune -f
 fi
 
 # Check for leftover tarball

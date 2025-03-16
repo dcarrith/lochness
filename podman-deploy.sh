@@ -75,6 +75,17 @@ podman save localhost/lochness-website:latest -o lochness-website.tar
 echo "Loading the image into Kind..."
 kind load image-archive lochness-website.tar --name lochness-cluster
 
+# Verify the image was loaded correctly
+echo "Verifying image in Kind cluster..."
+docker exec -it lochness-cluster-control-plane crictl images | grep lochness-website || {
+    echo "Warning: Image may not have loaded correctly. Trying alternative approach..."
+    # Try to load the image with the correct name directly
+    podman tag localhost/lochness-website:latest lochness-website:latest
+    podman save lochness-website:latest -o lochness-website-alt.tar
+    kind load image-archive lochness-website-alt.tar --name lochness-cluster
+    rm lochness-website-alt.tar
+}
+
 echo "Deploying to Kubernetes..."
 kubectl apply -f k8s-deployment.yaml
 
@@ -103,7 +114,7 @@ echo "Verifying service exposure..."
 kubectl get services -o wide
 
 echo "Lochness website is now running!"
-echo "Access it at http://localhost:8888"
+echo "Access it at http://localhost:8080"
 echo "To check pod status: kubectl get pods"
 echo "To view logs: kubectl logs -l app=lochness-website"
 
