@@ -207,6 +207,64 @@ document.addEventListener('DOMContentLoaded', function() {
     // Run once on page load
     animateOnScroll();
     
+    // Modal functionality
+    const serviceCards = document.querySelectorAll('.service-card');
+    const modals = document.querySelectorAll('.modal');
+    const modalCloseButtons = document.querySelectorAll('.modal-close');
+    const modalCtaButtons = document.querySelectorAll('.modal-cta');
+    
+    // Open modal when clicking on a service card
+    serviceCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const modalId = this.getAttribute('data-modal');
+            const modal = document.getElementById(modalId);
+            
+            if (modal) {
+                modal.classList.add('active');
+                document.body.classList.add('modal-open');
+                
+                // Close modal when clicking outside of modal content
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeModal(modal);
+                    }
+                });
+            }
+        });
+    });
+    
+    // Close modal when clicking the close button
+    modalCloseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const modal = this.closest('.modal');
+            closeModal(modal);
+        });
+    });
+    
+    // Close modal when clicking a CTA button
+    modalCtaButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const modal = this.closest('.modal');
+            closeModal(modal);
+        });
+    });
+    
+    // Close modal when pressing Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const activeModal = document.querySelector('.modal.active');
+            if (activeModal) {
+                closeModal(activeModal);
+            }
+        }
+    });
+    
+    // Function to close modal
+    function closeModal(modal) {
+        modal.classList.remove('active');
+        document.body.classList.remove('modal-open');
+    }
+    
     // Interactive word cloud with drag functionality
     const wordCloud = document.querySelector('.lochness-wordcloud');
     const words = document.querySelectorAll('.word');

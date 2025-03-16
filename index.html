@@ -139,65 +139,380 @@
                 <div class="separator"></div>
             </div>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card" data-modal="modal-farm-monitoring">
                     <div class="service-icon">
                         <i class="fas fa-robot"></i>
                     </div>
                     <h3>AI-Powered Farm Monitoring</h3>
                     <p>Continuous monitoring of Chia farms with intelligent anomaly detection and automated response systems to maximize farming efficiency.</p>
+                    <div class="service-card-overlay">
+                        <span>Learn More</span>
+                    </div>
                 </div>
-                <div class="service-card">
+                <div class="service-card" data-modal="modal-chialisp-security">
                     <div class="service-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3>Chialisp Security</h3>
                     <p>Advanced security protocols and threat detection to protect Chia smart contracts and blockchain infrastructure from vulnerabilities.</p>
+                    <div class="service-card-overlay">
+                        <span>Learn More</span>
+                    </div>
                 </div>
-                <div class="service-card">
+                <div class="service-card" data-modal="modal-farming-analytics">
                     <div class="service-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h3>Farming Predictive Analytics</h3>
                     <p>Leverage machine learning to forecast farming yields, optimize plot management, and prevent downtime in your Chia farming operation.</p>
+                    <div class="service-card-overlay">
+                        <span>Learn More</span>
+                    </div>
                 </div>
-                <div class="service-card">
+                <div class="service-card" data-modal="modal-smart-contracts">
                     <div class="service-icon">
                         <i class="fas fa-cogs"></i>
                     </div>
                     <h3>Smart Contract Operations</h3>
                     <p>Streamline Chia smart contract development with intelligent automation, testing frameworks, and deployment optimization.</p>
+                    <div class="service-card-overlay">
+                        <span>Learn More</span>
+                    </div>
                 </div>
-                <div class="service-card">
+                <div class="service-card" data-modal="modal-datalayer-rad">
                     <div class="service-icon">
                         <i class="fas fa-database"></i>
                     </div>
                     <h3>DataLayer RAD</h3>
                     <p>AI-powered rapid application development utilizing Chia DataLayer for decentralized data storage and management solutions.</p>
+                    <div class="service-card-overlay">
+                        <span>Learn More</span>
+                    </div>
                 </div>
-                <div class="service-card">
+                <div class="service-card" data-modal="modal-enterprise-provenance">
                     <div class="service-icon">
                         <i class="fas fa-fingerprint"></i>
                     </div>
                     <h3>Enterprise Provenance</h3>
                     <p>Blockchain-based tracking and verification solutions for enterprise supply chains, product authentication, and regulatory compliance.</p>
+                    <div class="service-card-overlay">
+                        <span>Learn More</span>
+                    </div>
                 </div>
-                <div class="service-card">
+                <div class="service-card" data-modal="modal-infrastructure-as-code">
                     <div class="service-icon">
                         <i class="fas fa-server"></i>
                     </div>
                     <h3>Infrastructure as Code</h3>
                     <p>Automated deployment and management of Chia blockchain infrastructure using modern IaC tools, ensuring consistency, scalability, and disaster recovery.</p>
+                    <div class="service-card-overlay">
+                        <span>Learn More</span>
+                    </div>
                 </div>
-                <div class="service-card">
+                <div class="service-card" data-modal="modal-performance-optimization">
                     <div class="service-icon">
                         <i class="fas fa-tachometer-alt"></i>
                     </div>
                     <h3>Performance Optimization</h3>
                     <p>Comprehensive analysis and tuning of Chia nodes, farming operations, and smart contracts to maximize throughput, minimize latency, and reduce resource usage.</p>
+                    <div class="service-card-overlay">
+                        <span>Learn More</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Service Modals -->
+    <div class="modals-container">
+        <!-- AI-Powered Farm Monitoring Modal -->
+        <div id="modal-farm-monitoring" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI-Powered Farm Monitoring</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Our AI-powered farm monitoring solution provides continuous oversight of your Chia farming operations with intelligent anomaly detection and automated response systems.</p>
+                    
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li><strong>Real-time Monitoring:</strong> Track harvester response times, plot validation rates, and network connectivity.</li>
+                        <li><strong>Predictive Maintenance:</strong> AI algorithms predict potential hardware failures before they impact your farming.</li>
+                        <li><strong>Automated Responses:</strong> Set up custom triggers and automated actions when issues are detected.</li>
+                        <li><strong>Performance Analytics:</strong> Detailed dashboards showing historical performance and optimization opportunities.</li>
+                        <li><strong>Multi-farm Management:</strong> Monitor and manage multiple farming operations from a single dashboard.</li>
+                    </ul>
+                    
+                    <h4>Benefits:</h4>
+                    <ul>
+                        <li>Increase farming efficiency by up to 30%</li>
+                        <li>Reduce downtime with proactive issue detection</li>
+                        <li>Optimize hardware resource allocation</li>
+                        <li>Maximize XCH rewards through consistent operation</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="#contact" class="btn btn-primary modal-cta">Get Started</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chialisp Security Modal -->
+        <div id="modal-chialisp-security" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Chialisp Security</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Our Chialisp security services provide advanced protection and threat detection to safeguard your Chia smart contracts and blockchain infrastructure from vulnerabilities.</p>
+                    
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li><strong>Smart Contract Auditing:</strong> Comprehensive code reviews to identify security vulnerabilities.</li>
+                        <li><strong>Formal Verification:</strong> Mathematical proof of contract correctness and security properties.</li>
+                        <li><strong>Penetration Testing:</strong> Simulated attacks to identify potential exploits before deployment.</li>
+                        <li><strong>Security Monitoring:</strong> Continuous monitoring of on-chain activity for suspicious patterns.</li>
+                        <li><strong>Incident Response:</strong> Rapid response team to address and mitigate security breaches.</li>
+                    </ul>
+                    
+                    <h4>Benefits:</h4>
+                    <ul>
+                        <li>Protect digital assets from theft and exploitation</li>
+                        <li>Build user trust with verified secure contracts</li>
+                        <li>Reduce risk of financial losses due to code vulnerabilities</li>
+                        <li>Ensure compliance with security best practices</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="#contact" class="btn btn-primary modal-cta">Get Started</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Farming Predictive Analytics Modal -->
+        <div id="modal-farming-analytics" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Farming Predictive Analytics</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Our farming predictive analytics service leverages machine learning to forecast farming yields, optimize plot management, and prevent downtime in your Chia farming operation.</p>
+                    
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li><strong>Yield Forecasting:</strong> AI-powered predictions of expected XCH rewards based on farm size and network conditions.</li>
+                        <li><strong>Plot Optimization:</strong> Analysis of plot quality and recommendations for optimal k-size distribution.</li>
+                        <li><strong>Network Trend Analysis:</strong> Track and predict changes in netspace to adjust farming strategy.</li>
+                        <li><strong>Resource Allocation:</strong> Optimize hardware resources based on performance data.</li>
+                        <li><strong>Competitive Benchmarking:</strong> Compare your farm's performance against industry averages.</li>
+                    </ul>
+                    
+                    <h4>Benefits:</h4>
+                    <ul>
+                        <li>Make data-driven decisions about farm expansion</li>
+                        <li>Identify and address performance bottlenecks</li>
+                        <li>Optimize capital expenditure based on ROI predictions</li>
+                        <li>Maximize farming efficiency through continuous improvement</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="#contact" class="btn btn-primary modal-cta">Get Started</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Smart Contract Operations Modal -->
+        <div id="modal-smart-contracts" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Smart Contract Operations</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Our smart contract operations service streamlines Chia smart contract development with intelligent automation, testing frameworks, and deployment optimization.</p>
+                    
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li><strong>Chialisp Development:</strong> Expert development of custom smart contracts for your specific use case.</li>
+                        <li><strong>Automated Testing:</strong> Comprehensive test suites to ensure contract reliability and security.</li>
+                        <li><strong>CI/CD Integration:</strong> Streamlined deployment pipelines for efficient updates and maintenance.</li>
+                        <li><strong>Performance Optimization:</strong> Fine-tuning of contract code for maximum efficiency and minimum cost.</li>
+                        <li><strong>Contract Monitoring:</strong> Real-time monitoring of contract performance and usage patterns.</li>
+                    </ul>
+                    
+                    <h4>Benefits:</h4>
+                    <ul>
+                        <li>Accelerate development timelines</li>
+                        <li>Reduce development costs through automation</li>
+                        <li>Ensure contract reliability and security</li>
+                        <li>Simplify maintenance and updates</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="#contact" class="btn btn-primary modal-cta">Get Started</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- DataLayer RAD Modal -->
+        <div id="modal-datalayer-rad" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>DataLayer RAD</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Our DataLayer Rapid Application Development service provides AI-powered tools for building decentralized applications utilizing Chia DataLayer for secure, immutable data storage and management.</p>
+                    
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li><strong>Low-Code Development:</strong> Visual development tools to accelerate DataLayer application creation.</li>
+                        <li><strong>AI-Generated Code:</strong> Automated generation of DataLayer integration code based on application requirements.</li>
+                        <li><strong>Data Modeling:</strong> Optimized data structures for efficient on-chain storage and retrieval.</li>
+                        <li><strong>API Integration:</strong> Seamless connection between DataLayer and existing systems.</li>
+                        <li><strong>Scalability Planning:</strong> Architecture design for applications that can grow with your user base.</li>
+                    </ul>
+                    
+                    <h4>Benefits:</h4>
+                    <ul>
+                        <li>Reduce development time by up to 70%</li>
+                        <li>Lower technical barriers to DataLayer adoption</li>
+                        <li>Create truly decentralized applications with immutable data</li>
+                        <li>Future-proof your data architecture</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="#contact" class="btn btn-primary modal-cta">Get Started</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enterprise Provenance Modal -->
+        <div id="modal-enterprise-provenance" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                    <h3>Enterprise Provenance</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Our enterprise provenance solutions leverage Chia's sustainable blockchain to create immutable records for supply chain tracking, product authentication, and regulatory compliance.</p>
+                    
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li><strong>Supply Chain Tracking:</strong> End-to-end visibility of products from origin to consumer.</li>
+                        <li><strong>Product Authentication:</strong> Verifiable digital certificates of authenticity for physical goods.</li>
+                        <li><strong>Regulatory Compliance:</strong> Automated record-keeping for audit and compliance requirements.</li>
+                        <li><strong>ERP Integration:</strong> Seamless connection with existing enterprise systems.</li>
+                        <li><strong>Consumer Verification:</strong> User-friendly tools for customers to verify product authenticity.</li>
+                    </ul>
+                    
+                    <h4>Benefits:</h4>
+                    <ul>
+                        <li>Combat counterfeiting and fraud</li>
+                        <li>Build consumer trust through transparency</li>
+                        <li>Simplify compliance reporting</li>
+                        <li>Leverage blockchain without high energy costs</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="#contact" class="btn btn-primary modal-cta">Get Started</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Infrastructure as Code Modal -->
+        <div id="modal-infrastructure-as-code" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Infrastructure as Code</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Our Infrastructure as Code service provides automated deployment and management of Chia blockchain infrastructure using modern IaC tools, ensuring consistency, scalability, and disaster recovery.</p>
+                    
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li><strong>Automated Deployment:</strong> Terraform and Ansible scripts for consistent Chia node deployment.</li>
+                        <li><strong>Configuration Management:</strong> Version-controlled infrastructure configurations.</li>
+                        <li><strong>Scaling Solutions:</strong> Auto-scaling architectures for farming and full node operations.</li>
+                        <li><strong>Disaster Recovery:</strong> Automated backup and recovery procedures for critical blockchain data.</li>
+                        <li><strong>Multi-environment Management:</strong> Consistent deployment across development, testing, and production environments.</li>
+                    </ul>
+                    
+                    <h4>Benefits:</h4>
+                    <ul>
+                        <li>Reduce infrastructure management overhead</li>
+                        <li>Ensure consistent deployment across all environments</li>
+                        <li>Minimize downtime through automated recovery</li>
+                        <li>Scale operations efficiently as needs grow</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="#contact" class="btn btn-primary modal-cta">Get Started</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Optimization Modal -->
+        <div id="modal-performance-optimization" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Performance Optimization</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Our performance optimization service provides comprehensive analysis and tuning of Chia nodes, farming operations, and smart contracts to maximize throughput, minimize latency, and reduce resource usage.</p>
+                    
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li><strong>Performance Auditing:</strong> Detailed analysis of current system performance and bottlenecks.</li>
+                        <li><strong>Hardware Optimization:</strong> Recommendations for optimal hardware configurations based on workload.</li>
+                        <li><strong>Network Tuning:</strong> Optimization of network settings for maximum blockchain synchronization speed.</li>
+                        <li><strong>Database Optimization:</strong> Tuning of blockchain databases for faster queries and reduced storage requirements.</li>
+                        <li><strong>Load Testing:</strong> Stress testing of systems to identify breaking points and capacity limits.</li>
+                    </ul>
+                    
+                    <h4>Benefits:</h4>
+                    <ul>
+                        <li>Reduce operational costs through efficient resource usage</li>
+                        <li>Improve response times for critical operations</li>
+                        <li>Increase system capacity without additional hardware</li>
+                        <li>Enhance overall system reliability under load</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="#contact" class="btn btn-primary modal-cta">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Technology Section -->
     <section id="technology" class="technology">
