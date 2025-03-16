@@ -722,6 +722,186 @@ section {
     background: var(--light-text);
 }
 
+/* Enterprise Solutions Section */
+.enterprise {
+    background: var(--light-color);
+    padding: 100px 0;
+}
+
+.enterprise-content {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.enterprise-info {
+    width: 100%;
+}
+
+.enterprise-info h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--dark-color);
+}
+
+.enterprise-info > p {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    max-width: 800px;
+}
+
+.enterprise-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 30px;
+}
+
+.enterprise-feature {
+    display: flex;
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.enterprise-feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+    margin-right: 20px;
+    min-width: 60px;
+    height: 60px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.feature-content h4 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.feature-content p {
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.enterprise-cta {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.cta-card {
+    flex: 1;
+    min-width: 300px;
+    background: var(--gradient-primary);
+    color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(58, 172, 89, 0.2);
+}
+
+.cta-card h4 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.cta-card p {
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.case-studies {
+    flex: 1;
+    min-width: 300px;
+}
+
+.case-studies h4 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--dark-color);
+}
+
+.case-study {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.case-study:hover {
+    transform: translateX(5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.case-logo {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.case-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.case-content h5 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: var(--dark-color);
+}
+
+.case-content p {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.read-more {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .enterprise-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .enterprise-feature {
+        padding: 20px;
+    }
+    
+    .feature-icon {
+        min-width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+}
+
 /* Contact Section */
 .contact {
     background: var(--light-color);

@@ -110,6 +110,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 case 'datalayer-rad':
                     responseMessage = 'Our DataLayer specialists will contact you to discuss your rapid application development needs.';
                     break;
+                case 'enterprise-provenance':
+                    responseMessage = 'Our enterprise blockchain team will reach out to discuss how we can implement provenance and transparency solutions for your business.';
+                    break;
                 default:
                     responseMessage = 'We\'ll get back to you shortly about your Chia blockchain needs.';
             }
