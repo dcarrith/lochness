@@ -21,21 +21,24 @@
     <animate attributeName="opacity" values="0.3;0.5;0.3" dur="3s" repeatCount="indefinite" />
   </circle>
   
-  <!-- Lochness Monster -->
-  <!-- Head and neck coming through the stargate -->
-  <path d="M110 80 C125 70, 140 85, 150 95 C160 105, 170 110, 180 105" stroke="#3AAC59" stroke-width="12" stroke-linecap="round" fill="none" />
-  <path d="M150 95 C158 88, 165 92, 170 85" stroke="#3AAC59" stroke-width="8" stroke-linecap="round" fill="none" />
+  <!-- Abstract Lochness Monster -->
+  <!-- Flowing curved shape representing the monster -->
+  <path d="M110 90 Q130 60, 150 90 T190 80 Q210 70, 220 100" 
+        stroke="#3AAC59" stroke-width="10" stroke-linecap="round" fill="none" />
   
-  <!-- Monster head -->
-  <circle cx="180" cy="105" r="15" fill="#3AAC59" />
-  <circle cx="185" cy="102" r="3" fill="#2C3E50" /> <!-- Eye -->
+  <!-- Second curve for body -->
+  <path d="M130 100 Q150 120, 170 100 T210 110" 
+        stroke="#3AAC59" stroke-width="8" stroke-linecap="round" fill="none" />
   
-  <!-- Monster mouth open to catch fish -->
-  <path d="M185 110 C195 114, 200 110, 205 108" stroke="#3AAC59" stroke-width="5" stroke-linecap="round" fill="none" />
+  <!-- Abstract humps -->
+  <path d="M150 80 Q160 65, 170 80" 
+        stroke="#3AAC59" stroke-width="6" stroke-linecap="round" fill="none" />
+  <path d="M180 75 Q190 60, 200 75" 
+        stroke="#3AAC59" stroke-width="6" stroke-linecap="round" fill="none" />
   
-  <!-- Fish -->
-  <path d="M210 105 L225 98 L210 90 Z" fill="#5DADE2" />
-  <path d="M210 105 L220 110 L210 115 Z" fill="#5DADE2" />
+  <!-- Abstract head with eye -->
+  <circle cx="220" cy="100" r="8" fill="#3AAC59" />
+  <circle cx="223" cy="97" r="2" fill="#2C3E50" /> <!-- Eye -->
   
   <!-- Ripples in the event horizon -->
   <path d="M90 100 C95 95, 105 95, 110 100" stroke="#2C3E50" stroke-width="1.5" stroke-dasharray="2,2" fill="none" />
