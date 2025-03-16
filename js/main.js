@@ -113,6 +113,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 case 'enterprise-provenance':
                     responseMessage = 'Our enterprise blockchain team will reach out to discuss how we can implement provenance and transparency solutions for your business.';
                     break;
+                case 'infrastructure-as-code':
+                    responseMessage = 'Our infrastructure specialists will contact you to discuss automating your Chia blockchain infrastructure deployment and management.';
+                    break;
+                case 'performance-optimization':
+                    responseMessage = 'Our performance engineering team will reach out to help optimize your Chia operations for maximum efficiency and throughput.';
+                    break;
                 default:
                     responseMessage = 'We\'ll get back to you shortly about your Chia blockchain needs.';
             }
