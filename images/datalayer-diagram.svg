@@ -3,7 +3,7 @@
   <rect width="600" height="400" rx="10" fill="#0C2427" opacity="0.8"/>
   
   <!-- Title -->
-  <text x="300" y="40" font-family="Montserrat" font-size="20" font-weight="bold" fill="white" text-anchor="middle">Chia DataLayer with Lochness AI</text>
+  <text x="300" y="40" font-family="Montserrat" font-size="20" font-weight="bold" fill="white" text-anchor="middle">AI-Powered Rapid Application Development</text>
   
   <!-- Chia Blockchain Layer -->
   <rect x="100" y="300" width="400" height="60" rx="5" fill="url(#gradient1)"/>
@@ -19,7 +19,7 @@
   
   <!-- Application Layer -->
   <rect x="100" y="60" width="400" height="60" rx="5" fill="url(#gradient4)"/>
-  <text x="300" y="95" font-family="Montserrat" font-size="16" font-weight="bold" fill="white" text-anchor="middle">DECENTRALIZED APPLICATIONS</text>
+  <text x="300" y="95" font-family="Montserrat" font-size="16" font-weight="bold" fill="white" text-anchor="middle">RAPID APPLICATION DEVELOPMENT</text>
   
   <!-- Connecting Lines -->
   <line x1="300" y1="120" x2="300" y2="140" stroke="white" stroke-width="2" stroke-dasharray="5,5"/>
@@ -37,7 +37,7 @@
     <animate attributeName="opacity" values="1;0;1" dur="2s" begin="1s" repeatCount="indefinite"/>
   </circle>
   
-  <!-- AI Elements -->
+  <!-- AI Elements in the AI Engine Layer -->
   <circle cx="180" cy="170" r="15" fill="#3AAC59" opacity="0.7">
     <animate attributeName="r" values="15;18;15" dur="3s" repeatCount="indefinite"/>
   </circle>
@@ -70,18 +70,55 @@
   <rect x="390" y="235" width="30" height="30" rx="3" fill="white" opacity="0.2"/>
   <rect x="430" y="235" width="30" height="30" rx="3" fill="white" opacity="0.2"/>
   
-  <!-- App Icons -->
-  <rect x="150" y="75" width="30" height="30" rx="15" fill="white" opacity="0.2"/>
-  <text x="165" y="95" font-family="FontAwesome" font-size="14" fill="white" text-anchor="middle">&#xf0ac;</text>
+  <!-- RAD Elements in the Application Layer -->
+  <!-- Code Generation -->
+  <rect x="130" y="75" width="30" height="30" rx="5" fill="white" opacity="0.2"/>
+  <text x="145" y="95" font-family="FontAwesome" font-size="14" fill="white" text-anchor="middle">&#xf121;</text>
   
-  <rect x="230" y="75" width="30" height="30" rx="15" fill="white" opacity="0.2"/>
-  <text x="245" y="95" font-family="FontAwesome" font-size="14" fill="white" text-anchor="middle">&#xf1c0;</text>
+  <!-- Visual Builder -->
+  <rect x="190" y="75" width="30" height="30" rx="5" fill="white" opacity="0.2"/>
+  <text x="205" y="95" font-family="FontAwesome" font-size="14" fill="white" text-anchor="middle">&#xf247;</text>
   
-  <rect x="310" y="75" width="30" height="30" rx="15" fill="white" opacity="0.2"/>
-  <text x="325" y="95" font-family="FontAwesome" font-size="14" fill="white" text-anchor="middle">&#xf0e8;</text>
+  <!-- Data Modeling -->
+  <rect x="250" y="75" width="30" height="30" rx="5" fill="white" opacity="0.2"/>
+  <text x="265" y="95" font-family="FontAwesome" font-size="14" fill="white" text-anchor="middle">&#xf1c0;</text>
   
-  <rect x="390" y="75" width="30" height="30" rx="15" fill="white" opacity="0.2"/>
-  <text x="405" y="95" font-family="FontAwesome" font-size="14" fill="white" text-anchor="middle">&#xf0c3;</text>
+  <!-- API Integration -->
+  <rect x="310" y="75" width="30" height="30" rx="5" fill="white" opacity="0.2"/>
+  <text x="325" y="95" font-family="FontAwesome" font-size="14" fill="white" text-anchor="middle">&#xf0c1;</text>
+  
+  <!-- Testing -->
+  <rect x="370" y="75" width="30" height="30" rx="5" fill="white" opacity="0.2"/>
+  <text x="385" y="95" font-family="FontAwesome" font-size="14" fill="white" text-anchor="middle">&#xf0c3;</text>
+  
+  <!-- Deployment -->
+  <rect x="430" y="75" width="30" height="30" rx="5" fill="white" opacity="0.2"/>
+  <text x="445" y="95" font-family="FontAwesome" font-size="14" fill="white" text-anchor="middle">&#xf135;</text>
+  
+  <!-- AI to RAD Connections -->
+  <path d="M180,140 C180,120 130,110 130,90" stroke="#3AAC59" stroke-width="2" stroke-dasharray="3,3" opacity="0.6"/>
+  <path d="M220,140 C220,120 190,110 190,90" stroke="#3AAC59" stroke-width="2" stroke-dasharray="3,3" opacity="0.6"/>
+  <path d="M260,140 C260,120 250,110 250,90" stroke="#3AAC59" stroke-width="2" stroke-dasharray="3,3" opacity="0.6"/>
+  <path d="M340,140 C340,120 310,110 310,90" stroke="#3AAC59" stroke-width="2" stroke-dasharray="3,3" opacity="0.6"/>
+  <path d="M380,140 C380,120 370,110 370,90" stroke="#3AAC59" stroke-width="2" stroke-dasharray="3,3" opacity="0.6"/>
+  <path d="M420,140 C420,120 430,110 430,90" stroke="#3AAC59" stroke-width="2" stroke-dasharray="3,3" opacity="0.6"/>
+  
+  <!-- Feature Labels -->
+  <text x="130" y="65" font-family="Montserrat" font-size="8" fill="white" text-anchor="middle">CODE GEN</text>
+  <text x="190" y="65" font-family="Montserrat" font-size="8" fill="white" text-anchor="middle">VISUAL BUILDER</text>
+  <text x="250" y="65" font-family="Montserrat" font-size="8" fill="white" text-anchor="middle">DATA MODEL</text>
+  <text x="310" y="65" font-family="Montserrat" font-size="8" fill="white" text-anchor="middle">API</text>
+  <text x="370" y="65" font-family="Montserrat" font-size="8" fill="white" text-anchor="middle">TESTING</text>
+  <text x="430" y="65" font-family="Montserrat" font-size="8" fill="white" text-anchor="middle">DEPLOY</text>
+  
+  <!-- AI Feature Labels -->
+  <text x="180" y="135" font-family="Montserrat" font-size="8" fill="white" text-anchor="middle">NLP</text>
+  <text x="220" y="135" font-family="Montserrat" font-size="8" fill="white" text-anchor="middle">ML</text>
+  <text x="260" y="135" font-family="Montserrat" font-size="8" fill="white" text-anchor="middle">VISION</text>
+  <text x="300" y="135" font-family="Montserrat" font-size="8" fill="white" text-anchor="middle">LLM</text>
+  <text x="340" y="135" font-family="Montserrat" font-size="8" fill="white" text-anchor="middle">PREDICT</text>
+  <text x="380" y="135" font-family="Montserrat" font-size="8" fill="white" text-anchor="middle">OPTIMIZE</text>
+  <text x="420" y="135" font-family="Montserrat" font-size="8" fill="white" text-anchor="middle">SECURE</text>
   
   <!-- Gradients -->
   <defs>
