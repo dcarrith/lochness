@@ -1,8 +1,44 @@
 <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
   <circle cx="100" cy="100" r="90" fill="#0C2427"/>
-  <path d="M100 20C55.8 20 20 55.8 20 100C20 144.2 55.8 180 100 180C144.2 180 180 144.2 180 100C180 55.8 144.2 20 100 20ZM100 170C61.3 170 30 138.7 30 100C30 61.3 61.3 30 100 30C138.7 30 170 61.3 170 100C170 138.7 138.7 170 100 170Z" fill="#3AAC59"/>
-  <path d="M140 80C140 80 130 65 115 65C100 65 90 80 90 80C90 80 80 65 65 65C50 65 40 80 40 80C40 80 50 120 65 135C80 150 90 135 90 135C90 135 100 150 115 135C130 120 140 80 140 80Z" fill="#3AAC59"/>
-  <circle cx="70" cy="85" r="5" fill="#ECF0F1"/>
-  <circle cx="130" cy="85" r="5" fill="#ECF0F1"/>
-  <path d="M85 110C85 110 95 120 115 110" stroke="#ECF0F1" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Stargate -->
+  <circle cx="100" cy="100" r="70" fill="none" stroke="#3AAC59" stroke-width="15" />
+  <circle cx="100" cy="100" r="60" fill="#0C2427" stroke="#3AAC59" stroke-width="2" />
+  
+  <!-- Stargate Symbols -->
+  <path d="M100 40 L105 50 L95 50 Z" fill="#ECF0F1" />
+  <path d="M160 100 L150 105 L150 95 Z" fill="#ECF0F1" />
+  <path d="M100 160 L95 150 L105 150 Z" fill="#ECF0F1" />
+  <path d="M40 100 L50 95 L50 105 Z" fill="#ECF0F1" />
+  <path d="M142 58 L135 65 L128 58 Z" fill="#ECF0F1" />
+  <path d="M142 142 L135 135 L128 142 Z" fill="#ECF0F1" />
+  <path d="M58 142 L65 135 L72 142 Z" fill="#ECF0F1" />
+  <path d="M58 58 L65 65 L72 58 Z" fill="#ECF0F1" />
+  
+  <!-- Stargate Event Horizon -->
+  <circle cx="100" cy="100" r="50" fill="#3AAC59" opacity="0.3">
+    <animate attributeName="opacity" values="0.3;0.5;0.3" dur="3s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Lochness Monster -->
+  <!-- Head and neck coming through the stargate -->
+  <path d="M120 80 C130 75, 140 85, 145 95 C150 105, 155 110, 160 105" stroke="#3AAC59" stroke-width="8" stroke-linecap="round" fill="none" />
+  <path d="M145 95 C150 90, 155 92, 158 88" stroke="#3AAC59" stroke-width="5" stroke-linecap="round" fill="none" />
+  
+  <!-- Monster head -->
+  <circle cx="160" cy="105" r="10" fill="#3AAC59" />
+  <circle cx="165" cy="102" r="2" fill="#ECF0F1" /> <!-- Eye -->
+  
+  <!-- Monster mouth open to catch fish -->
+  <path d="M165 110 C170 112, 175 110, 178 108" stroke="#3AAC59" stroke-width="3" stroke-linecap="round" fill="none" />
+  
+  <!-- Fish -->
+  <path d="M180 105 L190 100 L180 95 Z" fill="#5DADE2" />
+  <path d="M180 105 L185 108 L180 110 Z" fill="#5DADE2" />
+  
+  <!-- Ripples in the event horizon -->
+  <path d="M90 100 C95 95, 105 95, 110 100" stroke="#ECF0F1" stroke-width="1.5" stroke-dasharray="2,2" fill="none" />
+  <path d="M85 105 C95 100, 105 100, 115 105" stroke="#ECF0F1" stroke-width="1.5" stroke-dasharray="2,2" fill="none" />
+  <path d="M80 110 C95 105, 105 105, 120 110" stroke="#ECF0F1" stroke-width="1.5" stroke-dasharray="2,2" fill="none" />
 </svg>
