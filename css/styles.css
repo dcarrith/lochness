@@ -268,8 +268,8 @@ section {
 
 .lochness-wordcloud {
     position: absolute;
-    width: 550px;
-    height: 350px;
+    width: 600px;
+    height: 380px;
     top: 40%;
     right: 5%;
     pointer-events: auto;
@@ -334,6 +334,8 @@ section {
 .body3 { top: 160px; left: 140px; }
 .body4 { top: 180px; left: 100px; }
 .body5 { top: 190px; left: 60px; }
+.body6 { top: 150px; left: 200px; }
+.body7 { top: 170px; left: 80px; }
 
 /* Humps */
 .hump1 { top: 40px; left: 260px; }
@@ -341,6 +343,8 @@ section {
 .hump3 { top: 90px; left: 370px; }
 .hump4 { top: 30px; left: 290px; }
 .hump5 { top: 70px; left: 345px; }
+.hump6 { top: 50px; left: 280px; }
+.hump7 { top: 80px; left: 330px; }
 
 /* Tail */
 .tail1 { top: 120px; left: 400px; }
@@ -348,6 +352,8 @@ section {
 .tail3 { top: 180px; left: 450px; }
 .tail4 { top: 135px; left: 415px; }
 .tail5 { top: 165px; left: 445px; }
+.tail6 { top: 110px; left: 380px; }
+.tail7 { top: 140px; left: 390px; }
 
 /* Legs/Flippers */
 .leg1 { top: 220px; left: 80px; }
@@ -356,6 +362,8 @@ section {
 .leg4 { top: 240px; left: 200px; }
 .leg5 { top: 210px; left: 120px; }
 .leg6 { top: 230px; left: 170px; }
+.leg7 { top: 215px; left: 140px; }
+.leg8 { top: 235px; left: 190px; }
 
 /* Animation for the whole monster */
 @keyframes float {
@@ -1365,9 +1373,9 @@ section {
     }
     
     .lochness-wordcloud {
-        width: 330px;
-        height: 230px;
-        transform: scale(0.65);
+        width: 360px;
+        height: 250px;
+        transform: scale(0.6);
         right: 0;
         touch-action: none; /* Prevents scrolling while dragging on touch devices */
     }
