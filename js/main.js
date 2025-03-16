@@ -91,14 +91,80 @@ document.addEventListener('DOMContentLoaded', function() {
             // For demo purposes, we'll just log it and show a success message
             console.log({name, email, service, message});
             
-            // Show success message
+            // Show success message with Chia-specific response
+            let responseMessage = '';
+            
+            switch(service) {
+                case 'farm-monitoring':
+                    responseMessage = 'We\'ll help you optimize your Chia farming operation!';
+                    break;
+                case 'chialisp-security':
+                    responseMessage = 'Our Chialisp security experts will be in touch to discuss your smart contract needs.';
+                    break;
+                case 'farming-analytics':
+                    responseMessage = 'We\'ll analyze your farming setup to help maximize your XCH rewards.';
+                    break;
+                case 'smart-contracts':
+                    responseMessage = 'Our Chialisp developers will contact you about your smart contract project.';
+                    break;
+                default:
+                    responseMessage = 'We\'ll get back to you shortly about your Chia blockchain needs.';
+            }
+            
             contactForm.innerHTML = `
                 <div class="success-message">
                     <h3>Thank you for your message, ${name}!</h3>
-                    <p>We'll get back to you shortly at ${email}.</p>
+                    <p>${responseMessage}</p>
+                    <p>We'll reach out to you at ${email} within 24 hours.</p>
                 </div>
             `;
         });
+    }
+    
+    // Add a simple Chia farming calculator
+    const calculatorSection = document.createElement('div');
+    calculatorSection.className = 'calculator-widget';
+    calculatorSection.innerHTML = `
+        <h4>Chia Farming Calculator</h4>
+        <div class="calculator-form">
+            <div class="form-group">
+                <label for="plotSize">Number of Plots:</label>
+                <input type="number" id="plotSize" min="1" value="100">
+            </div>
+            <div class="form-group">
+                <label for="networkSize">Network Space (EiB):</label>
+                <input type="number" id="networkSize" min="0.1" step="0.1" value="40">
+            </div>
+            <button id="calculateBtn" class="btn btn-primary">Calculate</button>
+            <div id="calculationResult"></div>
+        </div>
+    `;
+    
+    // Add calculator to the technology section
+    const techFeatures = document.querySelector('.tech-features');
+    if (techFeatures) {
+        techFeatures.appendChild(calculatorSection);
+        
+        // Add calculator functionality
+        const calculateBtn = document.getElementById('calculateBtn');
+        if (calculateBtn) {
+            calculateBtn.addEventListener('click', function() {
+                const plots = parseFloat(document.getElementById('plotSize').value);
+                const networkSize = parseFloat(document.getElementById('networkSize').value);
+                
+                // Simple Chia reward calculation (approximate)
+                const plotSizeInTiB = plots * 0.1; // Each plot is roughly 0.1 TiB
+                const networkSizeInTiB = networkSize * 1024 * 1024; // Convert EiB to TiB
+                const dailyRewards = (plotSizeInTiB / networkSizeInTiB) * 4608 * 2; // 4608 blocks per day, 2 XCH per block
+                
+                const resultElement = document.getElementById('calculationResult');
+                resultElement.innerHTML = `
+                    <p>With ${plots} plots (${plotSizeInTiB.toFixed(2)} TiB) on a ${networkSize} EiB network:</p>
+                    <p>Estimated daily XCH: <strong>${dailyRewards.toFixed(4)} XCH</strong></p>
+                    <p>Estimated monthly XCH: <strong>${(dailyRewards * 30).toFixed(4)} XCH</strong></p>
+                `;
+            });
+        }
     }
     
     // Animate elements when they come into view

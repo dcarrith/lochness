@@ -1,14 +1,14 @@
 /* Base Styles */
 :root {
-    --primary-color: #3498db;
-    --secondary-color: #2ecc71;
-    --accent-color: #9b59b6;
-    --dark-color: #2c3e50;
-    --light-color: #ecf0f1;
+    --primary-color: #3AAC59; /* Chia green */
+    --secondary-color: #5DBE7E; /* Lighter Chia green */
+    --accent-color: #344966; /* Dark blue accent */
+    --dark-color: #0C2427; /* Dark green-blue */
+    --light-color: #F3F8F2; /* Light green-tinted white */
     --text-color: #333;
     --light-text: #fff;
-    --gradient-primary: linear-gradient(135deg, #3498db, #9b59b6);
-    --gradient-secondary: linear-gradient(135deg, #2ecc71, #3498db);
+    --gradient-primary: linear-gradient(135deg, #3AAC59, #344966);
+    --gradient-secondary: linear-gradient(135deg, #5DBE7E, #3AAC59);
     --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
 }
@@ -293,18 +293,18 @@ section {
     font-size: 1.8rem;
 }
 
-.crypto-icon.btc {
+.crypto-icon.chia {
     top: 25%;
     right: 15%;
     animation-delay: 0s;
-    color: #f7931a;
+    color: #3AAC59;
 }
 
-.crypto-icon.eth {
+.crypto-icon.chialisp {
     bottom: 30%;
     right: 25%;
     animation-delay: 2s;
-    color: #627eea;
+    color: #5DBE7E;
 }
 
 .data-point {
@@ -910,6 +910,48 @@ section {
     to {
         opacity: 1;
     }
+}
+
+/* Calculator Widget */
+.calculator-widget {
+    margin-top: 40px;
+    padding: 25px;
+    background: var(--light-color);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+}
+
+.calculator-widget h4 {
+    margin-bottom: 20px;
+    color: var(--dark-color);
+    font-size: 1.3rem;
+}
+
+.calculator-form .form-group {
+    margin-bottom: 15px;
+}
+
+.calculator-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+#calculationResult {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(58, 172, 89, 0.1);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 4px;
+}
+
+#calculationResult p {
+    margin-bottom: 10px;
+}
+
+#calculationResult strong {
+    color: var(--primary-color);
+    font-size: 1.1rem;
 }
 
 /* Media Queries */

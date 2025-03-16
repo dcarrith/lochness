@@ -16,18 +16,18 @@
   <circle cx="450" cy="400" r="50" fill="url(#gradient2)" />
   <text x="450" y="405" font-family="Montserrat" font-size="12" fill="white" text-anchor="middle">OPERATIONS</text>
   
-  <!-- Blockchain Nodes -->
-  <circle cx="300" cy="100" r="40" fill="#F7931A" />
-  <text x="300" y="105" font-family="Montserrat" font-size="10" fill="white" text-anchor="middle">BITCOIN</text>
+  <!-- Chia Blockchain Nodes -->
+  <circle cx="300" cy="100" r="40" fill="#3AAC59" />
+  <text x="300" y="105" font-family="Montserrat" font-size="10" fill="white" text-anchor="middle">FARMING</text>
   
-  <circle cx="500" cy="300" r="40" fill="#627EEA" />
-  <text x="500" y="305" font-family="Montserrat" font-size="10" fill="white" text-anchor="middle">ETHEREUM</text>
+  <circle cx="500" cy="300" r="40" fill="#3AAC59" />
+  <text x="500" y="305" font-family="Montserrat" font-size="10" fill="white" text-anchor="middle">CHIALISP</text>
   
-  <circle cx="300" cy="500" r="40" fill="#2775CA" />
-  <text x="300" y="505" font-family="Montserrat" font-size="10" fill="white" text-anchor="middle">USDC</text>
+  <circle cx="300" cy="500" r="40" fill="#3AAC59" />
+  <text x="300" y="505" font-family="Montserrat" font-size="10" fill="white" text-anchor="middle">PLOTTING</text>
   
-  <circle cx="100" cy="300" r="40" fill="#345D9D" />
-  <text x="100" y="305" font-family="Montserrat" font-size="10" fill="white" text-anchor="middle">CARDANO</text>
+  <circle cx="100" cy="300" r="40" fill="#3AAC59" />
+  <text x="100" y="305" font-family="Montserrat" font-size="10" fill="white" text-anchor="middle">XCH</text>
   
   <!-- Connection Lines -->
   <line x1="230" y1="300" x2="150" y2="240" stroke="#3498DB" stroke-width="3" stroke-dasharray="5,5" />
@@ -59,13 +59,13 @@
   <!-- Gradients -->
   <defs>
     <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3498DB" />
-      <stop offset="100%" stop-color="#9B59B6" />
+      <stop offset="0%" stop-color="#3AAC59" />
+      <stop offset="100%" stop-color="#344966" />
     </linearGradient>
     
     <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#2ECC71" />
-      <stop offset="100%" stop-color="#3498DB" />
+      <stop offset="0%" stop-color="#5DBE7E" />
+      <stop offset="100%" stop-color="#3AAC59" />
     </linearGradient>
   </defs>
 </svg>
