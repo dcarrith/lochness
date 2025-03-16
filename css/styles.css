@@ -678,6 +678,14 @@ section {
     opacity: 0.8;
 }
 
+.diagram-subcaption {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.8rem;
+    font-style: italic;
+    opacity: 0.7;
+}
+
 .datalayer-cta {
     display: flex;
     justify-content: center;
