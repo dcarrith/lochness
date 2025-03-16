@@ -24,5 +24,8 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 # Expose port 80
 EXPOSE 80
 
+# Set user to non-root for better security with Podman
+USER nginx
+
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]
