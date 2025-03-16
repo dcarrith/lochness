@@ -103,7 +103,7 @@ echo "Verifying service exposure..."
 kubectl get services -o wide
 
 echo "Lochness website is now running!"
-echo "Access it at http://localhost:8080"
+echo "Access it at http://localhost:8888"
 echo "To check pod status: kubectl get pods"
 echo "To view logs: kubectl logs -l app=lochness-website"
 

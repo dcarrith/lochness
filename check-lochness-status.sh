@@ -24,5 +24,5 @@ kubectl get services -o wide
 echo "Deployment status:"
 kubectl get deployments -o wide
 
-echo "To access the application, visit: http://localhost:8080"
+echo "To access the application, visit: http://localhost:8888"
 echo "To view logs: kubectl logs -l app=lochness-website"
