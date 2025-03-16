@@ -3,6 +3,9 @@
 # Don't exit on error, handle errors gracefully
 set +e
 
+# Print script execution steps
+set -x
+
 echo "Checking if Podman is installed..."
 if ! command -v podman &> /dev/null; then
     echo "Podman is not installed. Please install Podman first."
@@ -35,13 +38,13 @@ if ! podman machine list | grep -q "Currently running"; then
         podman machine start
     else
         echo "Initializing new Podman machine..."
-        podman machine init
+        podman machine init --cpus 2 --memory 4096
         podman machine start
     fi
     
     # Wait for machine to be fully ready
     echo "Waiting for Podman machine to be ready..."
-    sleep 10
+    sleep 15
 fi
 
 # Verify Podman connection
@@ -50,7 +53,7 @@ if ! podman info &> /dev/null; then
     echo "Cannot connect to Podman. Trying to restart the machine..."
     podman machine stop || true
     podman machine start
-    sleep 10
+    sleep 15
     
     if ! podman info &> /dev/null; then
         echo "Still cannot connect to Podman. Please check your Podman installation."
@@ -77,25 +80,32 @@ kubectl apply -f k8s-deployment.yaml
 
 echo "Waiting for deployment to be ready..."
 # Increase timeout and add retries
-for i in {1..5}; do
+for i in {1..10}; do
     echo "Checking deployment status (attempt $i)..."
-    if kubectl wait --for=condition=available --timeout=120s deployment/lochness-website; then
+    if kubectl wait --for=condition=available --timeout=180s deployment/lochness-website; then
         echo "Deployment is ready!"
         break
     fi
     
-    if [ $i -eq 5 ]; then
-        echo "Deployment not ready after 5 attempts. Please check the logs:"
+    if [ $i -eq 10 ]; then
+        echo "Deployment not ready after 10 attempts. Please check the logs:"
         kubectl get pods
         kubectl describe deployment lochness-website
+        kubectl logs -l app=lochness-website --tail=50
     else
-        echo "Deployment not ready yet, waiting 10 seconds before retrying..."
-        sleep 10
+        echo "Deployment not ready yet, waiting 15 seconds before retrying..."
+        sleep 15
     fi
 done
 
+# Check if service is exposed properly
+echo "Verifying service exposure..."
+kubectl get services -o wide
+
 echo "Lochness website is now running!"
 echo "Access it at http://localhost:8080"
+echo "To check pod status: kubectl get pods"
+echo "To view logs: kubectl logs -l app=lochness-website"
 
 # Clean up the tarball
 rm lochness-website.tar
