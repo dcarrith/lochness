@@ -2,46 +2,89 @@
   <!-- Background -->
   <circle cx="100" cy="100" r="90" fill="#0C2427"/>
   
-  <!-- Stargate -->
-  <circle cx="100" cy="100" r="70" fill="none" stroke="#3AAC59" stroke-width="15" />
-  <circle cx="100" cy="100" r="60" fill="#0C2427" stroke="#3AAC59" stroke-width="2" />
+  <!-- Outer Stargate Ring -->
+  <circle cx="100" cy="100" r="75" fill="none" stroke="#3AAC59" stroke-width="10" />
   
-  <!-- Stargate Symbols -->
-  <path d="M100 40 L105 50 L95 50 Z" fill="#ECF0F1" />
-  <path d="M160 100 L150 105 L150 95 Z" fill="#ECF0F1" />
-  <path d="M100 160 L95 150 L105 150 Z" fill="#ECF0F1" />
-  <path d="M40 100 L50 95 L50 105 Z" fill="#ECF0F1" />
-  <path d="M142 58 L135 65 L128 58 Z" fill="#ECF0F1" />
-  <path d="M142 142 L135 135 L128 142 Z" fill="#ECF0F1" />
-  <path d="M58 142 L65 135 L72 142 Z" fill="#ECF0F1" />
-  <path d="M58 58 L65 65 L72 58 Z" fill="#ECF0F1" />
-  
-  <!-- Stargate Event Horizon -->
-  <circle cx="100" cy="100" r="50" fill="#3AAC59" opacity="0.3">
-    <animate attributeName="opacity" values="0.3;0.5;0.3" dur="3s" repeatCount="indefinite" />
+  <!-- Middle Stargate Ring with Rotation Animation -->
+  <circle cx="100" cy="100" r="60" fill="none" stroke="#3AAC59" stroke-width="5" stroke-dasharray="15,5">
+    <animateTransform 
+      attributeName="transform" 
+      type="rotate" 
+      from="0 100 100" 
+      to="360 100 100" 
+      dur="30s" 
+      repeatCount="indefinite" />
   </circle>
   
-  <!-- Abstract Lochness Monster -->
-  <!-- Flowing curved shape representing the monster -->
-  <path d="M110 90 Q130 60, 150 90 T190 80 Q210 70, 220 100" 
-        stroke="#3AAC59" stroke-width="10" stroke-linecap="round" fill="none" />
+  <!-- Inner Stargate Ring with Reverse Rotation -->
+  <circle cx="100" cy="100" r="45" fill="none" stroke="#3AAC59" stroke-width="3" stroke-dasharray="5,10,15">
+    <animateTransform 
+      attributeName="transform" 
+      type="rotate" 
+      from="360 100 100" 
+      to="0 100 100" 
+      dur="20s" 
+      repeatCount="indefinite" />
+  </circle>
   
-  <!-- Second curve for body -->
-  <path d="M130 100 Q150 120, 170 100 T210 110" 
-        stroke="#3AAC59" stroke-width="8" stroke-linecap="round" fill="none" />
+  <!-- Stargate Event Horizon -->
+  <circle cx="100" cy="100" r="35" fill="#3AAC59" opacity="0.4">
+    <animate attributeName="opacity" values="0.4;0.7;0.4" dur="4s" repeatCount="indefinite" />
+    <animate attributeName="r" values="35;38;35" dur="8s" repeatCount="indefinite" />
+  </circle>
   
-  <!-- Abstract humps -->
-  <path d="M150 80 Q160 65, 170 80" 
-        stroke="#3AAC59" stroke-width="6" stroke-linecap="round" fill="none" />
-  <path d="M180 75 Q190 60, 200 75" 
-        stroke="#3AAC59" stroke-width="6" stroke-linecap="round" fill="none" />
+  <!-- Time Symbols -->
+  <g transform="translate(100, 100)">
+    <animateTransform 
+      attributeName="transform" 
+      type="rotate" 
+      from="0 0 0" 
+      to="360 0 0" 
+      dur="60s" 
+      repeatCount="indefinite" 
+      additive="sum" />
+    
+    <!-- Clock Hands -->
+    <line x1="0" y1="0" x2="0" y2="-30" stroke="#ECF0F1" stroke-width="2" />
+    <line x1="0" y1="0" x2="20" y2="0" stroke="#ECF0F1" stroke-width="2" />
+  </g>
   
-  <!-- Abstract head with eye -->
-  <circle cx="220" cy="100" r="8" fill="#3AAC59" />
-  <circle cx="223" cy="97" r="2" fill="#ECF0F1" /> <!-- Eye -->
+  <!-- Constellation Points -->
+  <circle cx="70" cy="70" r="2" fill="#ECF0F1" />
+  <circle cx="130" cy="70" r="2" fill="#ECF0F1" />
+  <circle cx="70" cy="130" r="2" fill="#ECF0F1" />
+  <circle cx="130" cy="130" r="2" fill="#ECF0F1" />
+  <circle cx="60" cy="100" r="2" fill="#ECF0F1" />
+  <circle cx="140" cy="100" r="2" fill="#ECF0F1" />
+  <circle cx="100" cy="60" r="2" fill="#ECF0F1" />
+  <circle cx="100" cy="140" r="2" fill="#ECF0F1" />
   
-  <!-- Ripples in the event horizon -->
-  <path d="M90 100 C95 95, 105 95, 110 100" stroke="#ECF0F1" stroke-width="1.5" stroke-dasharray="2,2" fill="none" />
-  <path d="M85 105 C95 100, 105 100, 115 105" stroke="#ECF0F1" stroke-width="1.5" stroke-dasharray="2,2" fill="none" />
-  <path d="M80 110 C95 105, 105 105, 120 110" stroke="#ECF0F1" stroke-width="1.5" stroke-dasharray="2,2" fill="none" />
+  <!-- Constellation Lines -->
+  <line x1="70" y1="70" x2="130" y2="70" stroke="#ECF0F1" stroke-width="0.5" stroke-opacity="0.5" />
+  <line x1="130" y1="70" x2="130" y2="130" stroke="#ECF0F1" stroke-width="0.5" stroke-opacity="0.5" />
+  <line x1="130" y1="130" x2="70" y2="130" stroke="#ECF0F1" stroke-width="0.5" stroke-opacity="0.5" />
+  <line x1="70" y1="130" x2="70" y2="70" stroke="#ECF0F1" stroke-width="0.5" stroke-opacity="0.5" />
+  <line x1="60" y1="100" x2="140" y2="100" stroke="#ECF0F1" stroke-width="0.5" stroke-opacity="0.5" />
+  <line x1="100" y1="60" x2="100" y2="140" stroke="#ECF0F1" stroke-width="0.5" stroke-opacity="0.5" />
+  
+  <!-- Energy Pulses -->
+  <circle cx="100" cy="100" r="85" fill="none" stroke="#3AAC59" stroke-width="1" opacity="0">
+    <animate attributeName="r" values="35;85" dur="4s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.7;0" dur="4s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="100" cy="100" r="85" fill="none" stroke="#3AAC59" stroke-width="1" opacity="0">
+    <animate attributeName="r" values="35;85" dur="4s" begin="1s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.7;0" dur="4s" begin="1s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="100" cy="100" r="85" fill="none" stroke="#3AAC59" stroke-width="1" opacity="0">
+    <animate attributeName="r" values="35;85" dur="4s" begin="2s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.7;0" dur="4s" begin="2s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="100" cy="100" r="85" fill="none" stroke="#3AAC59" stroke-width="1" opacity="0">
+    <animate attributeName="r" values="35;85" dur="4s" begin="3s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.7;0" dur="4s" begin="3s" repeatCount="indefinite" />
+  </circle>
 </svg>
