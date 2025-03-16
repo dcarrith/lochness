@@ -231,3 +231,8 @@ resource "aws_ecs_service" "lochness_service" {
 
   depends_on = [aws_lb_listener.lochness_listener]
 }
+
+# Output the AWS region for use in deployment scripts
+output "aws_region" {
+  value = var.aws_region
+}
