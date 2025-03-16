@@ -268,8 +268,8 @@ section {
 
 .lochness-wordcloud {
     position: absolute;
-    width: 500px;
-    height: 300px;
+    width: 550px;
+    height: 350px;
     top: 40%;
     right: 5%;
     pointer-events: none;
@@ -326,17 +326,23 @@ section {
 .hump1 { top: 40px; left: 260px; }
 .hump2 { top: 60px; left: 320px; }
 .hump3 { top: 90px; left: 370px; }
+.hump4 { top: 30px; left: 290px; }
+.hump5 { top: 70px; left: 345px; }
 
 /* Tail */
 .tail1 { top: 120px; left: 400px; }
 .tail2 { top: 150px; left: 430px; }
 .tail3 { top: 180px; left: 450px; }
+.tail4 { top: 135px; left: 415px; }
+.tail5 { top: 165px; left: 445px; }
 
 /* Legs/Flippers */
 .leg1 { top: 220px; left: 80px; }
 .leg2 { top: 240px; left: 120px; }
 .leg3 { top: 220px; left: 160px; }
 .leg4 { top: 240px; left: 200px; }
+.leg5 { top: 210px; left: 120px; }
+.leg6 { top: 230px; left: 170px; }
 
 /* Animation for the whole monster */
 @keyframes float {
@@ -1346,9 +1352,9 @@ section {
     }
     
     .lochness-wordcloud {
-        width: 300px;
-        height: 200px;
-        transform: scale(0.7);
+        width: 330px;
+        height: 230px;
+        transform: scale(0.65);
         right: 0;
     }
     
