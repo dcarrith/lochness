@@ -337,11 +337,14 @@ section {
 
 /* Animation for the whole monster */
 @keyframes float {
-    0%, 100% {
+    0% {
         transform: translateY(0) rotate(0deg);
     }
     50% {
         transform: translateY(-15px) rotate(1deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
     }
 }
 
@@ -359,11 +362,14 @@ section {
 }
 
 @keyframes wordPulse {
-    0%, 100% {
+    0% {
         transform: scale(1);
     }
     50% {
         transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
     }
 }
 
