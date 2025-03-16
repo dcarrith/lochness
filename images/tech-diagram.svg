@@ -1,0 +1,71 @@
+<svg width="600" height="600" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Central Node -->
+  <circle cx="300" cy="300" r="80" fill="url(#gradient1)" />
+  <text x="300" y="305" font-family="Montserrat" font-size="16" font-weight="bold" fill="white" text-anchor="middle">LOCHNESS AI</text>
+  
+  <!-- Outer Nodes -->
+  <circle cx="150" cy="200" r="50" fill="url(#gradient2)" />
+  <text x="150" y="205" font-family="Montserrat" font-size="12" fill="white" text-anchor="middle">MONITORING</text>
+  
+  <circle cx="450" cy="200" r="50" fill="url(#gradient2)" />
+  <text x="450" y="205" font-family="Montserrat" font-size="12" fill="white" text-anchor="middle">SECURITY</text>
+  
+  <circle cx="150" cy="400" r="50" fill="url(#gradient2)" />
+  <text x="150" y="405" font-family="Montserrat" font-size="12" fill="white" text-anchor="middle">ANALYTICS</text>
+  
+  <circle cx="450" cy="400" r="50" fill="url(#gradient2)" />
+  <text x="450" y="405" font-family="Montserrat" font-size="12" fill="white" text-anchor="middle">OPERATIONS</text>
+  
+  <!-- Blockchain Nodes -->
+  <circle cx="300" cy="100" r="40" fill="#F7931A" />
+  <text x="300" y="105" font-family="Montserrat" font-size="10" fill="white" text-anchor="middle">BITCOIN</text>
+  
+  <circle cx="500" cy="300" r="40" fill="#627EEA" />
+  <text x="500" y="305" font-family="Montserrat" font-size="10" fill="white" text-anchor="middle">ETHEREUM</text>
+  
+  <circle cx="300" cy="500" r="40" fill="#2775CA" />
+  <text x="300" y="505" font-family="Montserrat" font-size="10" fill="white" text-anchor="middle">USDC</text>
+  
+  <circle cx="100" cy="300" r="40" fill="#345D9D" />
+  <text x="100" y="305" font-family="Montserrat" font-size="10" fill="white" text-anchor="middle">CARDANO</text>
+  
+  <!-- Connection Lines -->
+  <line x1="230" y1="300" x2="150" y2="240" stroke="#3498DB" stroke-width="3" stroke-dasharray="5,5" />
+  <line x1="370" y1="300" x2="450" y2="240" stroke="#3498DB" stroke-width="3" stroke-dasharray="5,5" />
+  <line x1="230" y1="300" x2="150" y2="360" stroke="#3498DB" stroke-width="3" stroke-dasharray="5,5" />
+  <line x1="370" y1="300" x2="450" y2="360" stroke="#3498DB" stroke-width="3" stroke-dasharray="5,5" />
+  
+  <line x1="300" y1="220" x2="300" y2="140" stroke="#F7931A" stroke-width="3" />
+  <line x1="380" y1="300" x2="460" y2="300" stroke="#627EEA" stroke-width="3" />
+  <line x1="300" y1="380" x2="300" y2="460" stroke="#2775CA" stroke-width="3" />
+  <line x1="220" y1="300" x2="140" y2="300" stroke="#345D9D" stroke-width="3" />
+  
+  <!-- Data Flow Animations -->
+  <circle cx="300" cy="300" r="100" fill="none" stroke="#3498DB" stroke-width="2" stroke-dasharray="10,10">
+    <animate attributeName="r" from="90" to="120" dur="3s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="0.8" to="0" dur="3s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="300" cy="300" r="100" fill="none" stroke="#3498DB" stroke-width="2" stroke-dasharray="10,10">
+    <animate attributeName="r" from="90" to="120" dur="3s" begin="1s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="0.8" to="0" dur="3s" begin="1s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="300" cy="300" r="100" fill="none" stroke="#3498DB" stroke-width="2" stroke-dasharray="10,10">
+    <animate attributeName="r" from="90" to="120" dur="3s" begin="2s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="0.8" to="0" dur="3s" begin="2s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3498DB" />
+      <stop offset="100%" stop-color="#9B59B6" />
+    </linearGradient>
+    
+    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2ECC71" />
+      <stop offset="100%" stop-color="#3498DB" />
+    </linearGradient>
+  </defs>
+</svg>
