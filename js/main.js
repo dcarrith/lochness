@@ -209,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Modal functionality
     const serviceCards = document.querySelectorAll('.service-card');
+    const enterpriseFeatures = document.querySelectorAll('.enterprise-feature');
     const modals = document.querySelectorAll('.modal');
     const modalCloseButtons = document.querySelectorAll('.modal-close');
     const modalCtaButtons = document.querySelectorAll('.modal-cta');
@@ -216,6 +217,26 @@ document.addEventListener('DOMContentLoaded', function() {
     // Open modal when clicking on a service card
     serviceCards.forEach(card => {
         card.addEventListener('click', function() {
+            const modalId = this.getAttribute('data-modal');
+            const modal = document.getElementById(modalId);
+            
+            if (modal) {
+                modal.classList.add('active');
+                document.body.classList.add('modal-open');
+                
+                // Close modal when clicking outside of modal content
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeModal(modal);
+                    }
+                });
+            }
+        });
+    });
+    
+    // Open modal when clicking on an enterprise feature
+    enterpriseFeatures.forEach(feature => {
+        feature.addEventListener('click', function() {
             const modalId = this.getAttribute('data-modal');
             const modal = document.getElementById(modalId);
             
