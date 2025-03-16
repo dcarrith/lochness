@@ -295,7 +295,10 @@ section {
 
 .word:hover {
     background: rgba(58, 172, 89, 0.4);
-    transform: scale(1.1);
+    transform: scale(1.5);
+    z-index: 100;
+    box-shadow: 0 0 15px rgba(58, 172, 89, 0.5);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* Word sizes */
