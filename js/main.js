@@ -254,6 +254,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Open modal when clicking on a case study
+    const caseStudies = document.querySelectorAll('.case-study');
+    caseStudies.forEach(study => {
+        study.addEventListener('click', function() {
+            const modalId = this.getAttribute('data-modal');
+            const modal = document.getElementById(modalId);
+            
+            if (modal) {
+                modal.classList.add('active');
+                document.body.classList.add('modal-open');
+                
+                // Close modal when clicking outside of modal content
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeModal(modal);
+                    }
+                });
+            }
+        });
+    });
+    
     // Close modal when clicking the close button
     modalCloseButtons.forEach(button => {
         button.addEventListener('click', function() {

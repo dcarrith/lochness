@@ -687,24 +687,24 @@
                     </div>
                     <div class="case-studies">
                         <h4>Success Stories</h4>
-                        <div class="case-study">
+                        <div class="case-study" data-modal="modal-case-study-1">
                             <div class="case-logo">
                                 <img src="images/case-study-1.jpg" alt="Global Foods Inc.">
                             </div>
                             <div class="case-content">
                                 <h5>Global Foods Inc.</h5>
                                 <p>Implemented farm-to-table traceability for organic produce, increasing consumer trust by 45%.</p>
-                                <a href="#" class="read-more">Read Case Study</a>
+                                <a href="javascript:void(0)" class="read-more">Read Case Study</a>
                             </div>
                         </div>
-                        <div class="case-study">
+                        <div class="case-study" data-modal="modal-case-study-2">
                             <div class="case-logo">
                                 <img src="images/case-study-2.jpg" alt="LuxBrands">
                             </div>
                             <div class="case-content">
                                 <h5>LuxBrands</h5>
                                 <p>Reduced counterfeit products by 80% with blockchain authentication for luxury accessories.</p>
-                                <a href="#" class="read-more">Read Case Study</a>
+                                <a href="javascript:void(0)" class="read-more">Read Case Study</a>
                             </div>
                         </div>
                     </div>
@@ -713,8 +713,105 @@
         </div>
     </section>
 
-    <!-- Enterprise Solution Modals -->
+    <!-- Case Study Modals -->
     <div class="modals-container">
+        <!-- Global Foods Inc. Case Study Modal -->
+        <div id="modal-case-study-1" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Global Foods Inc. Success Story</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="case-study-hero">
+                        <img src="images/case-study-1.jpg" alt="Global Foods Inc.">
+                    </div>
+                    
+                    <h4>Challenge</h4>
+                    <p>Global Foods Inc., a leading organic produce distributor, faced increasing consumer demand for transparency in their supply chain. They needed a solution to verify the authenticity of their organic claims and provide consumers with complete visibility from farm to table.</p>
+                    
+                    <h4>Solution</h4>
+                    <p>Lochness Group implemented a comprehensive blockchain-based traceability system using Chia's sustainable blockchain technology:</p>
+                    <ul>
+                        <li>Deployed IoT sensors at key points in the supply chain to automatically record environmental conditions</li>
+                        <li>Created unique digital identities for each batch of produce linked to immutable records on Chia blockchain</li>
+                        <li>Developed a consumer-facing mobile app for QR code scanning to access complete product journey</li>
+                        <li>Integrated with existing ERP systems to automate data collection and verification</li>
+                        <li>Implemented AI-powered anomaly detection to identify potential issues in real-time</li>
+                    </ul>
+                    
+                    <h4>Results</h4>
+                    <ul>
+                        <li>45% increase in consumer trust measured through brand loyalty metrics</li>
+                        <li>28% reduction in supply chain disputes with transparent, verifiable data</li>
+                        <li>Ability to command 15% price premium for fully traceable organic products</li>
+                        <li>70% faster response time for quality control issues</li>
+                        <li>Simplified compliance reporting for organic certification</li>
+                    </ul>
+                    
+                    <blockquote>
+                        "The blockchain traceability solution from Lochness Group has transformed our business. Not only can we prove the authenticity of our organic claims, but we've also streamlined our operations and built unprecedented trust with our customers."
+                        <cite>— Maria Rodriguez, COO, Global Foods Inc.</cite>
+                    </blockquote>
+                </div>
+                <div class="modal-footer">
+                    <a href="#contact" class="btn btn-primary modal-cta">Implement Similar Solution</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- LuxBrands Case Study Modal -->
+        <div id="modal-case-study-2" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>LuxBrands Success Story</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="case-study-hero">
+                        <img src="images/case-study-2.jpg" alt="LuxBrands">
+                    </div>
+                    
+                    <h4>Challenge</h4>
+                    <p>LuxBrands, a premium fashion and accessories company, was losing millions annually to counterfeit products. Their traditional authentication methods were easily replicated by sophisticated counterfeiters, damaging brand reputation and customer trust.</p>
+                    
+                    <h4>Solution</h4>
+                    <p>Lochness Group developed a blockchain-based authentication system using Chia's secure and sustainable blockchain:</p>
+                    <ul>
+                        <li>Created unique digital certificates for each product with cryptographic proof of authenticity</li>
+                        <li>Embedded NFC tags in products linked to blockchain certificates for seamless verification</li>
+                        <li>Developed a consumer mobile app for instant authentication and ownership registration</li>
+                        <li>Implemented a secure ownership transfer protocol for secondary market sales</li>
+                        <li>Built a real-time analytics dashboard to track verification patterns and detect potential fraud</li>
+                    </ul>
+                    
+                    <h4>Results</h4>
+                    <ul>
+                        <li>80% reduction in counterfeit products within key markets</li>
+                        <li>35% increase in consumer confidence measured through post-purchase surveys</li>
+                        <li>Created new direct marketing channel through authentication app with 68% engagement rate</li>
+                        <li>Enabled secure secondary market transactions with 22% revenue share</li>
+                        <li>Comprehensive data on product lifecycle and market distribution</li>
+                    </ul>
+                    
+                    <blockquote>
+                        "Counterfeiting was existential threat to our brand. The blockchain authentication solution from Lochness Group has been transformative - not only in fighting fakes but in creating an entirely new way to connect with our customers and participate in the resale market."
+                        <cite>— Jonathan Chen, CEO, LuxBrands</cite>
+                    </blockquote>
+                </div>
+                <div class="modal-footer">
+                    <a href="#contact" class="btn btn-primary modal-cta">Implement Similar Solution</a>
+                </div>
+            </div>
+        </div>
+        
+    <!-- Enterprise Solution Modals -->
         <!-- Supply Chain Traceability Modal -->
         <div id="modal-supply-chain" class="modal">
             <div class="modal-content">
