@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Exit on error
-set -e
+# Don't exit on error, handle errors gracefully
+set +e
 
 echo "Checking if Podman is installed..."
 if ! command -v podman &> /dev/null; then
@@ -27,13 +27,40 @@ if ! command -v kubectl &> /dev/null; then
     exit 1
 fi
 
-echo "Starting Podman machine if not running..."
+echo "Ensuring Podman machine is running..."
 if ! podman machine list | grep -q "Currently running"; then
-    podman machine init
+    echo "Podman machine is not running. Starting it now..."
+    # Check if machine exists first
+    if podman machine list | grep -q "podman-machine-default"; then
+        podman machine start
+    else
+        echo "Initializing new Podman machine..."
+        podman machine init
+        podman machine start
+    fi
+    
+    # Wait for machine to be fully ready
+    echo "Waiting for Podman machine to be ready..."
+    sleep 10
+fi
+
+# Verify Podman connection
+echo "Verifying Podman connection..."
+if ! podman info &> /dev/null; then
+    echo "Cannot connect to Podman. Trying to restart the machine..."
+    podman machine stop || true
     podman machine start
+    sleep 10
+    
+    if ! podman info &> /dev/null; then
+        echo "Still cannot connect to Podman. Please check your Podman installation."
+        exit 1
+    fi
 fi
 
 echo "Creating Kind cluster..."
+# Delete existing cluster if it exists
+kind delete cluster --name lochness-cluster 2>/dev/null || true
 kind create cluster --config kind-config.yaml
 
 echo "Building Lochness website container with Podman..."
@@ -49,7 +76,23 @@ echo "Deploying to Kubernetes..."
 kubectl apply -f k8s-deployment.yaml
 
 echo "Waiting for deployment to be ready..."
-kubectl wait --for=condition=available --timeout=60s deployment/lochness-website
+# Increase timeout and add retries
+for i in {1..5}; do
+    echo "Checking deployment status (attempt $i)..."
+    if kubectl wait --for=condition=available --timeout=120s deployment/lochness-website; then
+        echo "Deployment is ready!"
+        break
+    fi
+    
+    if [ $i -eq 5 ]; then
+        echo "Deployment not ready after 5 attempts. Please check the logs:"
+        kubectl get pods
+        kubectl describe deployment lochness-website
+    else
+        echo "Deployment not ready yet, waiting 10 seconds before retrying..."
+        sleep 10
+    fi
+done
 
 echo "Lochness website is now running!"
 echo "Access it at http://localhost:8080"
