@@ -3,6 +3,11 @@ FROM nginx:alpine
 # Install curl for healthchecks
 RUN apk --no-cache add curl
 
+# Create directories if they don't exist
+RUN mkdir -p /usr/share/nginx/html/css \
+    && mkdir -p /usr/share/nginx/html/js \
+    && mkdir -p /usr/share/nginx/html/images
+
 # Copy website files
 COPY index.html /usr/share/nginx/html/
 COPY css/ /usr/share/nginx/html/css/
