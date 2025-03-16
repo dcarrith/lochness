@@ -268,8 +268,8 @@ section {
 
 .lochness-wordcloud {
     position: absolute;
-    width: 600px;
-    height: 380px;
+    width: 650px;
+    height: 400px;
     top: 40%;
     right: 5%;
     pointer-events: auto;
@@ -354,6 +354,8 @@ section {
 .tail5 { top: 165px; left: 445px; }
 .tail6 { top: 110px; left: 380px; }
 .tail7 { top: 140px; left: 390px; }
+.tail8 { top: 125px; left: 440px; }
+.tail9 { top: 155px; left: 410px; }
 
 /* Legs/Flippers */
 .leg1 { top: 220px; left: 80px; }
@@ -364,6 +366,8 @@ section {
 .leg6 { top: 230px; left: 170px; }
 .leg7 { top: 215px; left: 140px; }
 .leg8 { top: 235px; left: 190px; }
+.leg9 { top: 225px; left: 110px; }
+.leg10 { top: 245px; left: 150px; }
 
 /* Animation for the whole monster */
 @keyframes float {
