@@ -519,6 +519,109 @@ section {
     color: var(--primary-color);
 }
 
+/* DataLayer Section */
+.datalayer {
+    color: var(--light-text);
+}
+
+.datalayer-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin-bottom: 40px;
+}
+
+.datalayer-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.datalayer-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.datalayer-info > p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    line-height: 1.7;
+}
+
+.datalayer-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.dl-feature {
+    display: flex;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
+    transition: var(--transition);
+}
+
+.dl-feature:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.dl-feature i {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin-right: 15px;
+    margin-top: 5px;
+}
+
+.dl-feature h4 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.dl-feature p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.datalayer-diagram {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.datalayer-diagram img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.diagram-caption {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.datalayer-cta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .datalayer-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .datalayer-cta {
+        flex-direction: column;
+    }
+}
+
 /* Testimonials Section */
 .testimonial-slider {
     position: relative;

@@ -107,6 +107,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 case 'smart-contracts':
                     responseMessage = 'Our Chialisp developers will contact you about your smart contract project.';
                     break;
+                case 'datalayer-rad':
+                    responseMessage = 'Our DataLayer specialists will contact you to discuss your rapid application development needs.';
+                    break;
                 default:
                     responseMessage = 'We\'ll get back to you shortly about your Chia blockchain needs.';
             }
