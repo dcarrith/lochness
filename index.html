@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lochness Group | AIOps for Chia Blockchain</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/contracts.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -23,6 +24,7 @@
                 <a href="#technology">Technology</a>
                 <a href="#datalayer">DataLayer</a>
                 <a href="#enterprise">Enterprise</a>
+                <a href="#contracts">Contracts</a>
                 <a href="#contact">Contact</a>
             </div>
             <div class="hamburger">
@@ -713,8 +715,327 @@
         </div>
     </section>
 
-    <!-- Case Study Modals -->
+    <!-- Contract Specialist Modals -->
     <div class="modals-container">
+        <!-- Farm Specialist Modal -->
+        <div id="modal-farm-specialist" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <h3>Chia Farm Specialist</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Our Chia Farm Specialists are experts in optimizing farming operations to maximize efficiency and rewards.</p>
+                    
+                    <h4>Expertise:</h4>
+                    <ul>
+                        <li>Farm setup and configuration optimization</li>
+                        <li>Harvester response time improvement</li>
+                        <li>Plot management and quality assessment</li>
+                        <li>Hardware resource allocation</li>
+                        <li>Monitoring system implementation</li>
+                    </ul>
+                    
+                    <h4>Contract Details:</h4>
+                    <div class="contract-details-table">
+                        <div class="detail-row">
+                            <div class="detail-label">Rate:</div>
+                            <div class="detail-value">0.25 XCH per hour</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Minimum Term:</div>
+                            <div class="detail-value">10 hours</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Availability:</div>
+                            <div class="detail-value">Within 48 hours of contract acceptance</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Deliverables:</div>
+                            <div class="detail-value">Performance assessment report, optimization recommendations, implementation assistance</div>
+                        </div>
+                    </div>
+                    
+                    <h4>Specialist Profile:</h4>
+                    <div class="specialist-profile">
+                        <p>All Farm Specialists have at least 2 years of professional Chia farming experience and have managed farms of 500+ plots. They are certified in Lochness AIOps methodologies and have a proven track record of improving farm efficiency.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary download-offer" data-offer="farm-specialist.offer">Download Offer File</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chialisp Developer Modal -->
+        <div id="modal-chialisp-developer" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Chialisp Developer</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Our Chialisp Developers are experts in creating efficient, secure smart contracts for the Chia blockchain.</p>
+                    
+                    <h4>Expertise:</h4>
+                    <ul>
+                        <li>Custom smart contract development</li>
+                        <li>Optimization of existing contracts</li>
+                        <li>Integration with external systems</li>
+                        <li>Testing and deployment</li>
+                        <li>Documentation and knowledge transfer</li>
+                    </ul>
+                    
+                    <h4>Contract Details:</h4>
+                    <div class="contract-details-table">
+                        <div class="detail-row">
+                            <div class="detail-label">Rate:</div>
+                            <div class="detail-value">0.5 XCH per hour</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Minimum Term:</div>
+                            <div class="detail-value">20 hours</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Availability:</div>
+                            <div class="detail-value">Within 72 hours of contract acceptance</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Deliverables:</div>
+                            <div class="detail-value">Source code, documentation, test cases, deployment assistance</div>
+                        </div>
+                    </div>
+                    
+                    <h4>Specialist Profile:</h4>
+                    <div class="specialist-profile">
+                        <p>All Chialisp Developers have contributed to multiple production Chia applications and have deep understanding of CLVM. They follow secure coding practices and are experienced in developing various types of smart contracts including NFTs, DeFi applications, and custom solutions.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary download-offer" data-offer="chialisp-dev.offer">Download Offer File</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Auditor Modal -->
+        <div id="modal-security-auditor" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Security Auditor</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Our Security Auditors specialize in identifying vulnerabilities and security risks in Chialisp smart contracts and Chia blockchain applications.</p>
+                    
+                    <h4>Expertise:</h4>
+                    <ul>
+                        <li>Comprehensive code review</li>
+                        <li>Vulnerability assessment</li>
+                        <li>Attack vector analysis</li>
+                        <li>Security best practices implementation</li>
+                        <li>Formal verification</li>
+                    </ul>
+                    
+                    <h4>Contract Details:</h4>
+                    <div class="contract-details-table">
+                        <div class="detail-row">
+                            <div class="detail-label">Rate:</div>
+                            <div class="detail-value">0.75 XCH per hour</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Minimum Term:</div>
+                            <div class="detail-value">15 hours</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Availability:</div>
+                            <div class="detail-value">Within 5 business days of contract acceptance</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Deliverables:</div>
+                            <div class="detail-value">Detailed audit report, vulnerability assessment, remediation recommendations</div>
+                        </div>
+                    </div>
+                    
+                    <h4>Specialist Profile:</h4>
+                    <div class="specialist-profile">
+                        <p>All Security Auditors have backgrounds in cybersecurity and blockchain security. They have performed audits on multiple Chia projects and are skilled in identifying common and obscure vulnerabilities in Chialisp code. Many hold security certifications and have experience with formal verification methods.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary download-offer" data-offer="security-audit.offer">Download Offer File</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- DataLayer Architect Modal -->
+        <div id="modal-datalayer-architect" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>DataLayer Architect</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Our DataLayer Architects specialize in designing and implementing solutions that leverage Chia's DataLayer for decentralized data storage and management.</p>
+                    
+                    <h4>Expertise:</h4>
+                    <ul>
+                        <li>DataLayer solution architecture</li>
+                        <li>Data structure optimization</li>
+                        <li>Integration with existing systems</li>
+                        <li>Scalability planning</li>
+                        <li>Performance optimization</li>
+                    </ul>
+                    
+                    <h4>Contract Details:</h4>
+                    <div class="contract-details-table">
+                        <div class="detail-row">
+                            <div class="detail-label">Rate:</div>
+                            <div class="detail-value">0.6 XCH per hour</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Minimum Term:</div>
+                            <div class="detail-value">25 hours</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Availability:</div>
+                            <div class="detail-value">Within 1 week of contract acceptance</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Deliverables:</div>
+                            <div class="detail-value">Architecture design, implementation plan, code samples, documentation</div>
+                        </div>
+                    </div>
+                    
+                    <h4>Specialist Profile:</h4>
+                    <div class="specialist-profile">
+                        <p>All DataLayer Architects have extensive experience with database design and distributed systems. They have worked on multiple DataLayer projects and understand the unique challenges and opportunities of decentralized data storage. They are skilled in designing efficient data structures that minimize on-chain storage costs while maximizing functionality.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary download-offer" data-offer="datalayer-architect.offer">Download Offer File</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- AIOps Engineer Modal -->
+        <div id="modal-aiops-engineer" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AIOps Engineer</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Our AIOps Engineers specialize in implementing AI-powered operational solutions for Chia blockchain infrastructure and applications.</p>
+                    
+                    <h4>Expertise:</h4>
+                    <ul>
+                        <li>AI/ML model development for operations</li>
+                        <li>Predictive analytics implementation</li>
+                        <li>Automated response systems</li>
+                        <li>Performance monitoring and optimization</li>
+                        <li>Anomaly detection systems</li>
+                    </ul>
+                    
+                    <h4>Contract Details:</h4>
+                    <div class="contract-details-table">
+                        <div class="detail-row">
+                            <div class="detail-label">Rate:</div>
+                            <div class="detail-value">0.8 XCH per hour</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Minimum Term:</div>
+                            <div class="detail-value">30 hours</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Availability:</div>
+                            <div class="detail-value">Within 1 week of contract acceptance</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Deliverables:</div>
+                            <div class="detail-value">Custom AI models, monitoring dashboards, automated response systems, documentation</div>
+                        </div>
+                    </div>
+                    
+                    <h4>Specialist Profile:</h4>
+                    <div class="specialist-profile">
+                        <p>All AIOps Engineers have backgrounds in both artificial intelligence and DevOps. They are experienced in developing and deploying machine learning models for operational use cases and have worked extensively with Chia blockchain infrastructure. They understand the unique challenges of blockchain operations and how to apply AI to solve them.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary download-offer" data-offer="aiops-engineer.offer">Download Offer File</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Infrastructure Specialist Modal -->
+        <div id="modal-infrastructure-specialist" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Infrastructure Specialist</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Our Infrastructure Specialists design and deploy high-availability Chia blockchain infrastructure using modern DevOps practices and tools.</p>
+                    
+                    <h4>Expertise:</h4>
+                    <ul>
+                        <li>Infrastructure as Code (Terraform, Ansible)</li>
+                        <li>High-availability architecture</li>
+                        <li>Containerization and orchestration</li>
+                        <li>Disaster recovery planning</li>
+                        <li>Performance tuning</li>
+                    </ul>
+                    
+                    <h4>Contract Details:</h4>
+                    <div class="contract-details-table">
+                        <div class="detail-row">
+                            <div class="detail-label">Rate:</div>
+                            <div class="detail-value">0.4 XCH per hour</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Minimum Term:</div>
+                            <div class="detail-value">20 hours</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Availability:</div>
+                            <div class="detail-value">Within 72 hours of contract acceptance</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Deliverables:</div>
+                            <div class="detail-value">Infrastructure design, IaC scripts, deployment documentation, knowledge transfer</div>
+                        </div>
+                    </div>
+                    
+                    <h4>Specialist Profile:</h4>
+                    <div class="specialist-profile">
+                        <p>All Infrastructure Specialists have extensive experience with cloud platforms (AWS, Azure, GCP) and on-premises deployments. They are skilled in DevOps practices and tools, with specific expertise in deploying and managing Chia blockchain nodes and farming infrastructure. They focus on creating reliable, scalable, and secure infrastructure solutions.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary download-offer" data-offer="infrastructure-specialist.offer">Download Offer File</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case Study Modals -->
         <!-- Global Foods Inc. Case Study Modal -->
         <div id="modal-case-study-1" class="modal">
             <div class="modal-content">
@@ -1069,6 +1390,170 @@
         </div>
     </section>
 
+    <!-- Contracts Section -->
+    <section id="contracts" class="contracts parallax-section">
+        <div class="parallax-bg" style="background-image: url('images/contracts-bg.jpg');"></div>
+        <div class="container">
+            <div class="section-header light">
+                <h2>DeEmp Gig Economy Contracts</h2>
+                <div class="separator"></div>
+            </div>
+            <div class="contracts-intro">
+                <p>Access our network of verified AIOps specialists through secure, blockchain-based smart contracts. Our DeEmp (Decentralized Employment) platform connects you with expert contractors for your Chia blockchain needs.</p>
+            </div>
+            <div class="contracts-grid">
+                <div class="contract-card" data-modal="modal-farm-specialist">
+                    <div class="contract-icon">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <div class="contract-content">
+                        <h3>Chia Farm Specialist</h3>
+                        <p>Expert optimization of Chia farming operations</p>
+                        <div class="contract-details">
+                            <div class="contract-detail">
+                                <span class="detail-label">Rate:</span>
+                                <span class="detail-value">0.25 XCH/hour</span>
+                            </div>
+                            <div class="contract-detail">
+                                <span class="detail-label">Min. Term:</span>
+                                <span class="detail-value">10 hours</span>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-secondary btn-sm download-offer" data-offer="farm-specialist.offer">Download Offer File</a>
+                    </div>
+                </div>
+                
+                <div class="contract-card" data-modal="modal-chialisp-developer">
+                    <div class="contract-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="contract-content">
+                        <h3>Chialisp Developer</h3>
+                        <p>Smart contract development and optimization</p>
+                        <div class="contract-details">
+                            <div class="contract-detail">
+                                <span class="detail-label">Rate:</span>
+                                <span class="detail-value">0.5 XCH/hour</span>
+                            </div>
+                            <div class="contract-detail">
+                                <span class="detail-label">Min. Term:</span>
+                                <span class="detail-value">20 hours</span>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-secondary btn-sm download-offer" data-offer="chialisp-dev.offer">Download Offer File</a>
+                    </div>
+                </div>
+                
+                <div class="contract-card" data-modal="modal-security-auditor">
+                    <div class="contract-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="contract-content">
+                        <h3>Security Auditor</h3>
+                        <p>Comprehensive security audits for Chialisp contracts</p>
+                        <div class="contract-details">
+                            <div class="contract-detail">
+                                <span class="detail-label">Rate:</span>
+                                <span class="detail-value">0.75 XCH/hour</span>
+                            </div>
+                            <div class="contract-detail">
+                                <span class="detail-label">Min. Term:</span>
+                                <span class="detail-value">15 hours</span>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-secondary btn-sm download-offer" data-offer="security-audit.offer">Download Offer File</a>
+                    </div>
+                </div>
+                
+                <div class="contract-card" data-modal="modal-datalayer-architect">
+                    <div class="contract-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="contract-content">
+                        <h3>DataLayer Architect</h3>
+                        <p>Design and implementation of DataLayer solutions</p>
+                        <div class="contract-details">
+                            <div class="contract-detail">
+                                <span class="detail-label">Rate:</span>
+                                <span class="detail-value">0.6 XCH/hour</span>
+                            </div>
+                            <div class="contract-detail">
+                                <span class="detail-label">Min. Term:</span>
+                                <span class="detail-value">25 hours</span>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-secondary btn-sm download-offer" data-offer="datalayer-architect.offer">Download Offer File</a>
+                    </div>
+                </div>
+                
+                <div class="contract-card" data-modal="modal-aiops-engineer">
+                    <div class="contract-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="contract-content">
+                        <h3>AIOps Engineer</h3>
+                        <p>Implementation of AI-powered operational solutions</p>
+                        <div class="contract-details">
+                            <div class="contract-detail">
+                                <span class="detail-label">Rate:</span>
+                                <span class="detail-value">0.8 XCH/hour</span>
+                            </div>
+                            <div class="contract-detail">
+                                <span class="detail-label">Min. Term:</span>
+                                <span class="detail-value">30 hours</span>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-secondary btn-sm download-offer" data-offer="aiops-engineer.offer">Download Offer File</a>
+                    </div>
+                </div>
+                
+                <div class="contract-card" data-modal="modal-infrastructure-specialist">
+                    <div class="contract-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="contract-content">
+                        <h3>Infrastructure Specialist</h3>
+                        <p>Design and deployment of high-availability Chia infrastructure</p>
+                        <div class="contract-details">
+                            <div class="contract-detail">
+                                <span class="detail-label">Rate:</span>
+                                <span class="detail-value">0.4 XCH/hour</span>
+                            </div>
+                            <div class="contract-detail">
+                                <span class="detail-label">Min. Term:</span>
+                                <span class="detail-value">20 hours</span>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-secondary btn-sm download-offer" data-offer="infrastructure-specialist.offer">Download Offer File</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contracts-info">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>How DeEmp Contracts Work</h4>
+                        <ol>
+                            <li><strong>Download Offer File:</strong> Select the specialist that matches your needs and download the corresponding Chia offer file.</li>
+                            <li><strong>Accept Offer:</strong> Use your Chia wallet to accept the offer, which creates an escrow smart contract.</li>
+                            <li><strong>Work Begins:</strong> Once the contract is established, your specialist will contact you to begin work.</li>
+                            <li><strong>Milestone Payments:</strong> Funds are released from escrow as work milestones are completed and verified.</li>
+                            <li><strong>Contract Completion:</strong> Upon successful completion, final payment is released and the contract is closed.</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="custom-contract">
+                    <h4>Need a Custom Contract?</h4>
+                    <p>If you require specialized skills or have unique project requirements, we can create a custom contract tailored to your specific needs.</p>
+                    <a href="#contact" class="btn btn-primary">Request Custom Contract</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
@@ -1159,6 +1644,7 @@
                         <a href="#services">Enterprise Provenance</a>
                         <a href="#services">Infrastructure as Code</a>
                         <a href="#services">Performance Optimization</a>
+                        <a href="#contracts">DeEmp Contracts</a>
                     </div>
                     <div class="footer-column">
                         <h4>Resources</h4>
@@ -1189,5 +1675,6 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/contracts.js"></script>
 </body>
 </html>

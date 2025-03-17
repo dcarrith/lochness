@@ -210,6 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Modal functionality
     const serviceCards = document.querySelectorAll('.service-card');
     const enterpriseFeatures = document.querySelectorAll('.enterprise-feature');
+    const contractCards = document.querySelectorAll('.contract-card');
     const modals = document.querySelectorAll('.modal');
     const modalCloseButtons = document.querySelectorAll('.modal-close');
     const modalCtaButtons = document.querySelectorAll('.modal-cta');
