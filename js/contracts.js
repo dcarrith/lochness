@@ -1,6 +1,12 @@
 // Contracts functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Generate QR codes for each contract
+    // Wait for the page to fully load before generating QR codes
+    window.addEventListener('load', function() {
+        console.log('Window loaded, generating QR codes...');
+        setTimeout(generateContractQRCodes, 500); // Add a small delay to ensure DOM is ready
+    });
+    
+    // Also try to generate QR codes immediately
     generateContractQRCodes();
     
     // Handle offer file downloads
@@ -172,27 +178,51 @@ document.addEventListener('DOMContentLoaded', function() {
         Object.keys(offerData).forEach(key => {
             const qrElement = document.getElementById(`qr-${key}`);
             if (qrElement) {
-                new QRCode(qrElement, {
-                    text: offerData[key],
-                    width: 100,
-                    height: 100,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H
-                });
+                try {
+                    // Clear any existing content
+                    qrElement.innerHTML = '';
+                    
+                    // Create new QR code
+                    new QRCode(qrElement, {
+                        text: offerData[key],
+                        width: 100,
+                        height: 100,
+                        colorDark: "#000000",
+                        colorLight: "#ffffff",
+                        correctLevel: QRCode.CorrectLevel.H
+                    });
+                    
+                    console.log(`Generated QR code for ${key}`);
+                } catch (error) {
+                    console.error(`Error generating QR code for ${key}:`, error);
+                }
+            } else {
+                console.warn(`QR element not found for ${key}`);
             }
             
             // Also generate for modal elements
             const modalQrElement = document.getElementById(`modal-qr-${key}`);
             if (modalQrElement) {
-                new QRCode(modalQrElement, {
-                    text: offerData[key],
-                    width: 200,
-                    height: 200,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H
-                });
+                try {
+                    // Clear any existing content
+                    modalQrElement.innerHTML = '';
+                    
+                    // Create new QR code
+                    new QRCode(modalQrElement, {
+                        text: offerData[key],
+                        width: 200,
+                        height: 200,
+                        colorDark: "#000000",
+                        colorLight: "#ffffff",
+                        correctLevel: QRCode.CorrectLevel.H
+                    });
+                    
+                    console.log(`Generated modal QR code for ${key}`);
+                } catch (error) {
+                    console.error(`Error generating modal QR code for ${key}:`, error);
+                }
+            } else {
+                console.warn(`Modal QR element not found for ${key}`);
             }
         });
     }
@@ -231,10 +261,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             } else {
                 console.error('No offer data found for key:', specialistKey);
+                // Fallback to a generic QR code
+                createFallbackQRCode(element, `Chia offer for ${specialistKey}`);
             }
         } catch (error) {
             console.error('Error generating QR code:', error);
+            // Fallback to a generic QR code
+            createFallbackQRCode(element, `Chia offer for ${specialistKey}`);
         }
-        }
+    }
+    
+    // Fallback function to create a simple QR code image
+    function createFallbackQRCode(element, text) {
+        // Create a fallback QR code using an image
+        const img = document.createElement('img');
+        img.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(text)}`;
+        img.alt = 'QR Code';
+        img.width = 300;
+        img.height = 300;
+        element.appendChild(img);
+    }
     }
 });
