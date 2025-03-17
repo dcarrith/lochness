@@ -311,6 +311,11 @@
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 30px;
+    pointer-events: none; /* Disable all pointer events */
+}
+
+.embedded-qr.full-width .qr-instructions {
+    pointer-events: auto; /* Re-enable pointer events for text */
 }
 
 .embedded-qr .qr-code-large {
@@ -321,6 +326,13 @@
 .full-width .qr-code-large {
     width: 250px;
     height: 250px;
+    cursor: default !important;
+    pointer-events: none; /* Disable all pointer events */
+}
+
+.full-width .qr-code-large img {
+    cursor: default !important;
+    pointer-events: none; /* Disable all pointer events */
 }
 
 @media (max-width: 768px) {
