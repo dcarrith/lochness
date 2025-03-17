@@ -277,8 +277,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(() => {
                         const img = modalQrElement.querySelector('img');
                         if (img) {
-                            // Always make embedded QR codes non-clickable
+                            // Make modal QR codes non-clickable
                             img.style.cursor = 'default';
+                            img.style.pointerEvents = 'none';
                             // Remove any existing click event listeners
                             img.replaceWith(img.cloneNode(true));
                         }
@@ -295,11 +296,12 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             makeQRCodesClickable();
         
-            // Ensure embedded QR codes are visible and not clickable
-            document.querySelectorAll('.embedded-qr .qr-code-large').forEach(qrElement => {
+            // Ensure modal QR codes are visible and not clickable
+            document.querySelectorAll('.modal-body .qr-code-large').forEach(qrElement => {
                 const img = qrElement.querySelector('img');
                 if (img) {
                     img.style.cursor = 'default';
+                    img.style.pointerEvents = 'none';
                     // Remove any existing click event listeners by cloning
                     img.replaceWith(img.cloneNode(true));
                 }
