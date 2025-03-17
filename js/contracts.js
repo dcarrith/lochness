@@ -367,5 +367,4 @@ document.addEventListener('DOMContentLoaded', function() {
         img.height = 300;
         element.appendChild(img);
     }
-    }
 });
