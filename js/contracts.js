@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const qrRate = document.getElementById('qr-rate');
         const qrTerm = document.getElementById('qr-term');
         const qrDownloadLink = document.getElementById('qr-download-link');
-    
-    if (qrContainers.length > 0 && qrModal) {
+        
+        if (qrContainers.length > 0) {
         qrContainers.forEach(container => {
             container.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -234,6 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             console.error('Error generating QR code:', error);
+        }
         }
     }
 });
