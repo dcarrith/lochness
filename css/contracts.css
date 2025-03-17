@@ -309,11 +309,18 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     cursor: default !important;
     pointer-events: none; /* Disable all pointer events */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .modal-body .qr-code-large img {
     cursor: default !important;
     pointer-events: none; /* Disable all pointer events */
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 .modal-body .qr-instructions {

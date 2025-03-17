@@ -261,15 +261,35 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Clear any existing content
                     modalQrElement.innerHTML = '';
                     
+                    // Clear any existing content
+                    modalQrElement.innerHTML = '';
+                    
                     // Create new QR code - size will be controlled by CSS
-                    new QRCode(modalQrElement, {
-                        text: offerData[key],
-                        width: 500,
-                        height: 500,
-                        colorDark: "#000000",
-                        colorLight: "#ffffff",
-                        correctLevel: QRCode.CorrectLevel.H
-                    });
+                    try {
+                        new QRCode(modalQrElement, {
+                            text: offerData[key],
+                            width: 500,
+                            height: 500,
+                            colorDark: "#000000",
+                            colorLight: "#ffffff",
+                            correctLevel: QRCode.CorrectLevel.H
+                        });
+                        
+                        // Ensure the QR code is visible
+                        const img = modalQrElement.querySelector('img');
+                        if (img) {
+                            img.style.width = '100%';
+                            img.style.height = 'auto';
+                            img.style.display = 'block';
+                            console.log('QR code image created successfully');
+                        } else {
+                            console.error('QR code image not found after creation');
+                            createFallbackQRCode(modalQrElement, offerData[key]);
+                        }
+                    } catch (error) {
+                        console.error('Error creating QR code:', error);
+                        createFallbackQRCode(modalQrElement, offerData[key]);
+                    }
                     
                     console.log(`Generated modal QR code for ${key}`);
                     
