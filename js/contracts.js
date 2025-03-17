@@ -170,10 +170,16 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Make QR codes clickable after they're generated
     function makeQRCodesClickable() {
-        // Find all QR code images inside containers
-        const qrImages = document.querySelectorAll('.contract-qr-container img, .modal-qr-container img');
+        // Find all QR code images inside containers, excluding those in embedded-qr containers
+        const qrImages = document.querySelectorAll('.contract-qr-container img, .modal-qr-container:not(.embedded-qr .modal-qr-container) img');
         
         qrImages.forEach(img => {
+            // Skip if the image is inside an embedded-qr container
+            if (img.closest('.embedded-qr')) {
+                img.style.cursor = 'default';
+                return;
+            }
+            
             img.style.cursor = 'pointer';
             img.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -267,16 +273,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     console.log(`Generated modal QR code for ${key}`);
                     
-                    // Make the QR code clickable after a short delay
+                    // Make the QR code in modal non-clickable (just for display)
                     setTimeout(() => {
                         const img = modalQrElement.querySelector('img');
                         if (img) {
-                            img.style.cursor = 'pointer';
-                            img.addEventListener('click', function(e) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                modalQrElement.parentElement.click();
-                            });
+                            // Only make it non-clickable if it's in the embedded-qr container
+                            if (modalQrElement.closest('.embedded-qr')) {
+                                img.style.cursor = 'default';
+                            } else {
+                                img.style.cursor = 'pointer';
+                                img.addEventListener('click', function(e) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    modalQrElement.parentElement.click();
+                                });
+                            }
                         }
                     }, 100);
                 } catch (error) {
@@ -287,8 +298,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Make all QR codes clickable
-        setTimeout(makeQRCodesClickable, 500);
+        // Make QR codes clickable (except those in embedded-qr containers)
+        setTimeout(() => {
+            makeQRCodesClickable();
+        }, 500);
     }
     
     // Function to generate a large QR code for the QR modal
