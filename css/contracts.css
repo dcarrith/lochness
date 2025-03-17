@@ -105,16 +105,15 @@
 }
 
 .qr-code {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     background: #fff;
     padding: 5px;
     border-radius: 5px;
-    margin-bottom: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100px; /* Ensure minimum height */
+    min-height: 200px; /* Ensure minimum height */
 }
 
 .qr-code img {
