@@ -298,15 +298,29 @@
 
 .embedded-qr {
     margin-top: 20px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: default; /* Ensure the container doesn't look clickable */
 }
 
+.embedded-qr.full-width {
+    width: 100%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
 .embedded-qr .qr-code-large {
     width: 200px;
     height: 200px;
+}
+
+.full-width .qr-code-large {
+    width: 250px;
+    height: 250px;
 }
 
 @media (max-width: 768px) {
