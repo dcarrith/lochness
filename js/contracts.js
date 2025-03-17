@@ -57,14 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Check if QR modal elements exist before trying to use them
     if (qrModal) {
-        const largeQrCode = document.getElementById('large-qr-code');
-        const qrSpecialistTitle = document.getElementById('qr-specialist-title');
-        const qrRate = document.getElementById('qr-rate');
-        const qrTerm = document.getElementById('qr-term');
-        const qrDownloadLink = document.getElementById('qr-download-link');
-        
         if (qrContainers.length > 0) {
-        qrContainers.forEach(container => {
+            qrContainers.forEach(container => {
             container.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -235,6 +229,8 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
+        console.log('Generating QR code for key:', specialistKey);
+        
         // Clear any existing QR code
         element.innerHTML = '';
         
@@ -248,9 +244,19 @@ document.addEventListener('DOMContentLoaded', function() {
             'infrastructure-specialist': 'offer1qqy83wcuu2rykcmqvpsxzgqqemhmlaekcenaj0z6xn0q0kesdmk4k9rw6ks8wh4jd0verjl8h7xsj5jqmq4c80dz2vph4an4hnxdgxqgy83wcuu2rykcmqvpsxzgqqemhmlaekcenaj0z6xn0q0kesdmk4k9rw6ks8wh4jd0verjl8h7xsj5jqmq4c80dz2vph4an4hnxdgxzgy83wcuu2rykcmqvpsxzgqqemhmlaekcenaj0z6xn0q0kesdmk4k9rw6ks8wh4jd0verjl8h7xsj5jqmq4c80dz2vph4an4hnxdgx'
         };
         
+        // Check if QRCode library is available
+        if (typeof QRCode === 'undefined') {
+            console.error('QRCode library not loaded, using fallback');
+            createFallbackQRCode(element, `Chia offer for ${specialistKey}`);
+            return;
+        }
+        
         try {
             // Generate the large QR code
             if (offerData[specialistKey]) {
+                console.log('Creating QR code with text:', offerData[specialistKey].substring(0, 20) + '...');
+                
+                // Create a new QR code
                 new QRCode(element, {
                     text: offerData[specialistKey],
                     width: 300,
@@ -259,6 +265,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.H
                 });
+                
+                console.log('QR code created successfully');
             } else {
                 console.error('No offer data found for key:', specialistKey);
                 // Fallback to a generic QR code
