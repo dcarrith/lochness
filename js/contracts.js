@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (qrModal) {
         if (qrContainers.length > 0) {
             qrContainers.forEach(container => {
-            container.addEventListener('click', function(e) {
+                container.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 
@@ -121,9 +121,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('Opening QR modal');
                 qrModal.classList.add('active');
                 document.body.classList.add('modal-open');
+                });
             });
-        });
-    }
+        }
     
     // Add event listeners for QR modal if it exists
     if (qrModal) {
@@ -166,6 +166,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Make QR codes clickable after they're generated
+    function makeQRCodesClickable() {
+        // Find all QR code images inside containers
+        const qrImages = document.querySelectorAll('.contract-qr-container img, .modal-qr-container img');
+        
+        qrImages.forEach(img => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Find the closest container
+                const container = this.closest('.contract-qr-container, .modal-qr-container');
+                if (container) {
+                    // Trigger a click on the container
+                    container.click();
+                }
+            });
+        });
+        
+        console.log('Made QR codes clickable:', qrImages.length);
+    }
+    
     // Function to generate QR codes for all contracts
     function generateContractQRCodes() {
         // Check if QRCode library is available
@@ -203,6 +226,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                     
                     console.log(`Generated QR code for ${key}`);
+                    
+                    // Make the QR code clickable after a short delay
+                    setTimeout(() => {
+                        const img = qrElement.querySelector('img');
+                        if (img) {
+                            img.style.cursor = 'pointer';
+                            img.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                qrElement.parentElement.click();
+                            });
+                        }
+                    }, 100);
                 } catch (error) {
                     console.error(`Error generating QR code for ${key}:`, error);
                 }
@@ -228,6 +264,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                     
                     console.log(`Generated modal QR code for ${key}`);
+                    
+                    // Make the QR code clickable after a short delay
+                    setTimeout(() => {
+                        const img = modalQrElement.querySelector('img');
+                        if (img) {
+                            img.style.cursor = 'pointer';
+                            img.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                modalQrElement.parentElement.click();
+                            });
+                        }
+                    }, 100);
                 } catch (error) {
                     console.error(`Error generating modal QR code for ${key}:`, error);
                 }
@@ -235,6 +284,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.warn(`Modal QR element not found for ${key}`);
             }
         });
+        
+        // Make all QR codes clickable
+        setTimeout(makeQRCodesClickable, 500);
     }
     
     // Function to generate a large QR code for the QR modal
@@ -283,6 +335,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 console.log('QR code created successfully');
+                
+                // Make the QR code clickable after a short delay
+                setTimeout(() => {
+                    const img = element.querySelector('img');
+                    if (img) {
+                        img.style.cursor = 'pointer';
+                    }
+                }, 100);
             } else {
                 console.error('No offer data found for key:', specialistKey);
                 // Fallback to a generic QR code
