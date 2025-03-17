@@ -284,6 +284,41 @@
     max-width: 500px;
 }
 
+/* Modal body with QR code to the right */
+.modal-body-flex {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.modal-body-content {
+    flex: 1;
+}
+
+.embedded-qr {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.embedded-qr .qr-code-large {
+    width: 200px;
+    height: 200px;
+}
+
+@media (max-width: 768px) {
+    .modal-body-flex {
+        flex-direction: column;
+    }
+    
+    .embedded-qr {
+        width: 100%;
+        margin-top: 30px;
+    }
+}
+
 .qr-code-container {
     display: flex;
     justify-content: center;
