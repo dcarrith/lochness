@@ -1666,6 +1666,39 @@
         </div>
     </section>
 
+    <!-- QR Code Modal -->
+    <div id="qr-code-modal" class="modal qr-modal">
+        <div class="modal-content qr-modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">
+                <h3>Scan QR Code with Chia Wallet</h3>
+            </div>
+            <div class="modal-body">
+                <div class="qr-code-container">
+                    <div id="large-qr-code"></div>
+                </div>
+                <div class="qr-code-instructions">
+                    <p>Scan this QR code with your Chia wallet to accept the offer and hire this specialist.</p>
+                    <p>Contract details will be stored on the Chia blockchain.</p>
+                </div>
+                <div class="qr-code-details">
+                    <h4 id="qr-specialist-title">Specialist Contract</h4>
+                    <div class="qr-detail-row">
+                        <span class="qr-detail-label">Rate:</span>
+                        <span id="qr-rate" class="qr-detail-value">0.25 XCH/hour</span>
+                    </div>
+                    <div class="qr-detail-row">
+                        <span class="qr-detail-label">Minimum Term:</span>
+                        <span id="qr-term" class="qr-detail-value">10 hours</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="qr-download-link" class="btn btn-primary">Download Offer File</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
