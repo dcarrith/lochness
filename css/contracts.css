@@ -245,6 +245,14 @@
 }
 
 /* QR Code Modal Styles */
+.qr-modal {
+    display: none;
+}
+
+.qr-modal.active {
+    display: flex;
+}
+
 .qr-modal .modal-content {
     max-width: 500px;
 }
