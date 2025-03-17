@@ -223,15 +223,35 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Clear any existing content
                     qrElement.innerHTML = '';
                     
+                    // Clear any existing content
+                    qrElement.innerHTML = '';
+                    
                     // Create new QR code
-                    new QRCode(qrElement, {
-                        text: offerData[key],
-                        width: 200,
-                        height: 200,
-                        colorDark: "#000000",
-                        colorLight: "#ffffff",
-                        correctLevel: QRCode.CorrectLevel.H
-                    });
+                    try {
+                        new QRCode(qrElement, {
+                            text: offerData[key],
+                            width: 200,
+                            height: 200,
+                            colorDark: "#000000",
+                            colorLight: "#ffffff",
+                            correctLevel: QRCode.CorrectLevel.H
+                        });
+                        
+                        // Ensure the QR code is visible
+                        const img = qrElement.querySelector('img');
+                        if (img) {
+                            img.style.width = '100%';
+                            img.style.height = 'auto';
+                            img.style.display = 'block';
+                            console.log(`QR code image created successfully for ${key}`);
+                        } else {
+                            console.error(`QR code image not found after creation for ${key}`);
+                            createFallbackQRCode(qrElement, offerData[key]);
+                        }
+                    } catch (error) {
+                        console.error(`Error creating QR code for ${key}:`, error);
+                        createFallbackQRCode(qrElement, offerData[key]);
+                    }
                     
                     console.log(`Generated QR code for ${key}`);
                     
