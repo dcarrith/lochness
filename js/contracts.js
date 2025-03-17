@@ -261,11 +261,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Clear any existing content
                     modalQrElement.innerHTML = '';
                     
-                    // Create new QR code
+                    // Create new QR code - size will be controlled by CSS
                     new QRCode(modalQrElement, {
                         text: offerData[key],
-                        width: 300,
-                        height: 300,
+                        width: 500,
+                        height: 500,
                         colorDark: "#000000",
                         colorLight: "#ffffff",
                         correctLevel: QRCode.CorrectLevel.H
