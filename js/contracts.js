@@ -264,8 +264,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Create new QR code
                     new QRCode(modalQrElement, {
                         text: offerData[key],
-                        width: 200,
-                        height: 200,
+                        width: 300,
+                        height: 300,
                         colorDark: "#000000",
                         colorLight: "#ffffff",
                         correctLevel: QRCode.CorrectLevel.H

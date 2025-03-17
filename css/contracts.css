@@ -298,8 +298,8 @@
 
 /* QR code in modal body */
 .modal-body .qr-code-large {
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
     margin: 0 auto 20px;
     background-color: #fff;
     padding: 10px;
