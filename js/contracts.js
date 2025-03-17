@@ -63,6 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 e.stopPropagation();
                 
+                console.log('QR container clicked');
+                
                 // Find the closest contract card or modal to get the specialist info
                 const contractCard = this.closest('.contract-card');
                 const contractModal = this.closest('.modal-content');
@@ -71,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 let specialistKey;
                 
                 if (contractCard) {
+                    console.log('Found contract card');
                     // Get info from contract card
                     specialistType = contractCard.querySelector('h3').textContent;
                     rate = contractCard.querySelector('.detail-value').textContent;
@@ -80,7 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Get the QR code data
                     const qrCodeId = contractCard.querySelector('.qr-code').id;
                     specialistKey = qrCodeId.replace('qr-', '');
+                    console.log('Specialist key:', specialistKey);
                 } else if (contractModal) {
+                    console.log('Found contract modal');
                     // Get info from contract modal
                     specialistType = contractModal.querySelector('.modal-header h3').textContent;
                     const detailRows = contractModal.querySelectorAll('.detail-row');
@@ -91,18 +96,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Get the QR code data
                     const qrCodeId = contractModal.querySelector('.qr-code-large').id;
                     specialistKey = qrCodeId.replace('modal-qr-', '');
+                    console.log('Specialist key:', specialistKey);
                 }
                 
                 // Update QR modal with specialist info
-                document.getElementById('qr-specialist-title').textContent = specialistType;
-                document.getElementById('qr-rate').textContent = rate;
-                document.getElementById('qr-term').textContent = term;
-                document.getElementById('qr-download-link').setAttribute('data-offer', offerFile);
+                const titleElement = document.getElementById('qr-specialist-title');
+                const rateElement = document.getElementById('qr-rate');
+                const termElement = document.getElementById('qr-term');
+                const downloadElement = document.getElementById('qr-download-link');
+                const largeQrElement = document.getElementById('large-qr-code');
+                
+                if (titleElement) titleElement.textContent = specialistType;
+                if (rateElement) rateElement.textContent = rate;
+                if (termElement) termElement.textContent = term;
+                if (downloadElement) downloadElement.setAttribute('data-offer', offerFile);
                 
                 // Generate large QR code
-                generateLargeQRCode(specialistKey, document.getElementById('large-qr-code'));
+                if (largeQrElement && specialistKey) {
+                    console.log('Generating large QR code');
+                    generateLargeQRCode(specialistKey, largeQrElement);
+                }
                 
                 // Open the QR code modal
+                console.log('Opening QR modal');
                 qrModal.classList.add('active');
                 document.body.classList.add('modal-open');
             });
