@@ -14,10 +14,20 @@ spec:
       labels:
         app: lochness-website
     spec:
+      securityContext:
+        runAsNonRoot: true
+        fsGroup: 101  # nginx group
       containers:
       - name: lochness-website
         image: lochness-website:latest
         imagePullPolicy: IfNotPresent
+        securityContext:
+          runAsUser: 101  # nginx user
+          runAsGroup: 101  # nginx group
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
         ports:
         - containerPort: 80
         resources:
@@ -33,3 +43,23 @@ spec:
             port: 80
           initialDelaySeconds: 10
           periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        volumeMounts:
+        - name: var-cache-nginx
+          mountPath: /var/cache/nginx
+        - name: var-run
+          mountPath: /var/run
+        - name: var-log-nginx
+          mountPath: /var/log/nginx
+      volumes:
+      - name: var-cache-nginx
+        emptyDir: {}
+      - name: var-run
+        emptyDir: {}
+      - name: var-log-nginx
+        emptyDir: {}
