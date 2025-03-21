@@ -14,6 +14,6 @@ echo "Building Lochness website container..."
 docker build -t lochness-website .
 
 echo "Starting Lochness website container..."
-docker run -d -p 8080:80 --name lochness-website-container lochness-website
+docker run -d -p 8888:80 --name lochness-website-container lochness-website
 
-echo "Lochness website is now running at http://localhost:8080"
+echo "Lochness website is now running at http://localhost:8888"

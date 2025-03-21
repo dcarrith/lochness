@@ -21,7 +21,7 @@ docker stop lochness-container 2>/dev/null || true
 docker rm lochness-container 2>/dev/null || true
 
 echo "Starting Lochness website container..."
-docker run -d -p 8080:80 --name lochness-container lochness-website:latest
+docker run -d -p 8888:80 --name lochness-container lochness-website:latest
 
 echo "Lochness website is now running!"
-echo "Access it at http://localhost:8080"
+echo "Access it at http://localhost:8888"
