@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lochness-website
+  labels:
+    app: lochness-website
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lochness-website
+  template:
+    metadata:
+      labels:
+        app: lochness-website
+    spec:
+      containers:
+      - name: lochness-website
+        image: lochness-website:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "512Mi"
+          requests:
+            cpu: "0.2"
+            memory: "256Mi"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 30
