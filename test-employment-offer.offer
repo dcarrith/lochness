@@ -1,0 +1,27 @@
+offer1qqzh3wcuu2rykvy0gzez0jx2499pq6kpn0z3rk9hg0h9ynhrqypn5qnj3llla7w6rq9swk5zc9nvm0qrz2gzx3llla2g9sczx3lllawscs0u27hxk0y05fcukqx3lllaatcs975z4cw9qsx3llla2t8jqsx3lllar554u3qsx3lllavt90t7dx3llla2x0u4wp5qnj3lllawjkj3rx5qnj3lllakux6fc4x3lllajh8rf3px5qnj3llla9u9k3rp0z3rkvdy9r28j5g8fgczx3llla8t8j6vdx3llla06mjrg3x3llla2vjp9y9czez0j9c4qx5qnj3llla2vjkfa305f3gr32qx5qnj3llla2vjk9rdx5qnj3llla2t8jg4w05fcrvdy9r28j5g8fgyp0z3rmxdqlratp9rvdy0up923j9c4qx5qnj3lllatvj8fk305f3gr32qx5qnj3llla2vjkga4x3lllawjk4gqx5qnj3llla0394r6ax5qnj3llla0394gupczx3lllak5jhftx0jljwum0qrz2gzx3lllaztjkfax0jljwumczy3rgpnzv0nw6rq9swk5zc9nvm0qrz2gzx3lllakuxggqsczy3rgve5qnj3lllay5q4g6x0z3rpqqqqqqrrgch8m0
+
+# This is a test employment offer file for Lochness Group
+# 
+# NFT DATA:
+# - Profile Picture NFT ID: nft1testprofilepic12345
+# - Profile Picture URI: https://example.com/nft/profile/12345.json
+# - Banner Image NFT ID: nft1testbannerimage67890
+# - Banner Image URI: https://example.com/nft/banner/67890.json
+#
+# CONTRACT DETAILS:
+# - Position: Chia Blockchain Developer
+# - Rate: 0.5 XCH per hour
+# - Minimum Hours: 160 hours
+# - Contract Term: 1 year (52 weeks)
+# - Skills Required: Chialisp, Smart Contract Development, DataLayer
+# - Expiration: 30 days from creation
+#
+# PUZZLE HASH: 
+# p2_delegation_puzzle_hash_9a741e9f3f9d976599a4b546ea6a0e68a9af278b
+#
+# This offer encodes:
+# 1. The profile NFT transfer to the employer upon contract acceptance
+# 2. The clawback mechanism if contract terms are breached
+# 3. The payment schedule (bi-weekly) for the duration of the contract
+# 4. The smart contract logic for verifying work completion
+# 5. The expiration timer (30 days)
