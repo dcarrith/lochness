@@ -339,15 +339,9 @@ document.addEventListener('DOMContentLoaded', function() {
      * Generate default profile images
      */
     function generateDefaultProfileImages() {
-        // Generate a default avatar and banner with LG (Lochness Group) initials
+        // Generate a default avatar with LG (Lochness Group) initials
         if (typeof generateProfileAvatar === 'function') {
             generateProfileAvatar('Lochness Group', 'profile-avatar');
-        }
-        
-        if (typeof generateProfileBanner === 'function') {
-            generateProfileBanner('Lochness Group', 'banner-image', {
-                title: 'Lochness Group Profile'
-            });
         }
     }
 
@@ -365,25 +359,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (avatarElement) {
                 avatarElement.innerHTML = `<img src="${profile.avatar}" alt="${profile.name}">`;
             }
-        }
-        
-        // Generate profile banner
-        if (typeof generateProfileBanner === 'function') {
-            generateProfileBanner(profile.name, 'banner-image', {
-                title: profile.title || 'Lochness Group Professional'
-            });
-        } else {
-            // Fallback to static image if generator not available
-            const bannerElement = document.getElementById('banner-image');
-            if (bannerElement) {
-                bannerElement.style.backgroundImage = `url('${profile.banner}')`;
-            }
-        }
-        
-        // Remove loading overlay
-        const loadingOverlay = document.querySelector('.loading-overlay');
-        if (loadingOverlay) {
-            loadingOverlay.style.display = 'none';
         }
         
         // Set basic profile info
