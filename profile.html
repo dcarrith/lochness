@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeEmp Professional Profile | Lochness Group</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/contracts.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="images/lochness-logo.svg" alt="Lochness Group Logo">
+                <span>Lochness Group</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#technology">Technology</a>
+                <a href="index.html#datalayer">DataLayer</a>
+                <a href="index.html#enterprise">Enterprise</a>
+                <a href="index.html#contracts">Contracts</a>
+                <a href="profile.html" class="active">DeEmp Profile</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Header -->
+    <section class="profile-banner parallax-section">
+        <div id="banner-image" class="parallax-bg">
+            <!-- Banner image will be loaded dynamically -->
+            <div class="loading-overlay">
+                <div class="loader"></div>
+                <p>Loading profile...</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="profile-header">
+                <div class="profile-avatar-container">
+                    <div id="profile-avatar" class="profile-avatar">
+                        <!-- Profile picture will be loaded dynamically -->
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h1 id="profile-name">Loading profile...</h1>
+                    <div id="profile-title" class="profile-title"></div>
+                    <div class="profile-did">
+                        <span>Chia DID: </span>
+                        <code id="profile-did-value"></code>
+                    </div>
+                    <div class="profile-actions">
+                        <button id="verify-button" class="btn btn-secondary">
+                            <i class="fas fa-check-circle"></i> Verify Credentials
+                        </button>
+                        <button id="contact-button" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i> Contact Professional
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Content -->
+    <section class="profile-content">
+        <div class="container">
+            <div class="profile-tabs">
+                <button class="tab-button active" data-tab="overview">Overview</button>
+                <button class="tab-button" data-tab="expertise">Expertise</button>
+                <button class="tab-button" data-tab="experience">Experience</button>
+                <button class="tab-button" data-tab="contracts">Smart Contracts</button>
+            </div>
+
+            <div class="tab-content">
+                <!-- Overview Tab -->
+                <div id="overview" class="tab-pane active">
+                    <div class="overview-grid">
+                        <div class="overview-summary">
+                            <h3>Professional Summary</h3>
+                            <p id="profile-summary">Loading summary information...</p>
+                        </div>
+                        <div class="overview-sidebar">
+                            <div class="overview-card">
+                                <h4><i class="fas fa-star"></i> Ratings</h4>
+                                <div id="profile-ratings" class="rating-stars">
+                                    <span class="rating-score">0</span>
+                                    <div class="stars-container">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="rating-count">(0 reviews)</span>
+                                </div>
+                            </div>
+                            <div class="overview-card">
+                                <h4><i class="fas fa-briefcase"></i> Availability</h4>
+                                <div id="profile-availability" class="availability">
+                                    <span class="availability-status">Unknown</span>
+                                </div>
+                            </div>
+                            <div class="overview-card">
+                                <h4><i class="fas fa-map-marker-alt"></i> Location</h4>
+                                <p id="profile-location">Loading location...</p>
+                            </div>
+                            <div class="overview-card">
+                                <h4><i class="fas fa-clock"></i> Response Time</h4>
+                                <p id="profile-response-time">Loading...</p>
+                            </div>
+                            <div class="overview-card">
+                                <h4><i class="fas fa-language"></i> Languages</h4>
+                                <ul id="profile-languages" class="skills-list">
+                                    <li>Loading languages...</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expertise Tab -->
+                <div id="expertise" class="tab-pane">
+                    <div class="expertise-container">
+                        <div class="skills-section">
+                            <h3>Skills</h3>
+                            <div id="skills-container" class="skills-grid">
+                                <!-- Skills will be added dynamically -->
+                                <div class="skill-placeholder"></div>
+                                <div class="skill-placeholder"></div>
+                                <div class="skill-placeholder"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="certifications-section">
+                            <h3>Certifications</h3>
+                            <div id="certifications-container" class="certifications-list">
+                                <!-- Certifications will be added dynamically -->
+                                <div class="cert-placeholder"></div>
+                                <div class="cert-placeholder"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="tools-section">
+                            <h3>Tools & Technologies</h3>
+                            <div id="tools-container" class="tools-grid">
+                                <!-- Tools will be added dynamically -->
+                                <div class="tool-placeholder"></div>
+                                <div class="tool-placeholder"></div>
+                                <div class="tool-placeholder"></div>
+                                <div class="tool-placeholder"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience Tab -->
+                <div id="experience" class="tab-pane">
+                    <div class="experience-container">
+                        <div class="work-experience">
+                            <h3>Work Experience</h3>
+                            <div id="work-experience-timeline" class="timeline">
+                                <!-- Work experience will be added dynamically -->
+                                <div class="timeline-placeholder"></div>
+                                <div class="timeline-placeholder"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="projects-section">
+                            <h3>Projects</h3>
+                            <div id="projects-container" class="projects-grid">
+                                <!-- Projects will be added dynamically -->
+                                <div class="project-placeholder"></div>
+                                <div class="project-placeholder"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="education-section">
+                            <h3>Education</h3>
+                            <div id="education-container" class="education-timeline">
+                                <!-- Education will be added dynamically -->
+                                <div class="education-placeholder"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Contracts Tab -->
+                <div id="contracts" class="tab-pane">
+                    <div class="contracts-explanation">
+                        <h3>Available Smart Contracts</h3>
+                        <p>These smart contracts represent the professional services offered. Scan the QR code or download the offer file to engage this professional's services through the Chia blockchain.</p>
+                    </div>
+                    
+                    <div id="contracts-container" class="contracts-grid">
+                        <!-- Contract cards will be added dynamically -->
+                        <div class="contract-placeholder"></div>
+                        <div class="contract-placeholder"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offer Uploader Section -->
+    <section class="offer-uploader">
+        <div class="container">
+            <div class="uploader-container">
+                <h2>Load Profile from Chia Offer</h2>
+                <p>Upload a Chia offer file or paste an offer URL to view a professional's profile</p>
+                
+                <div class="upload-options">
+                    <div class="file-upload">
+                        <label for="offer-file" class="btn btn-secondary">
+                            <i class="fas fa-file-upload"></i> Upload Offer File
+                        </label>
+                        <input type="file" id="offer-file" accept=".offer" hidden>
+                        <span id="file-name">No file selected</span>
+                    </div>
+                    
+                    <div class="or-divider">
+                        <span>OR</span>
+                    </div>
+                    
+                    <div class="offer-paste">
+                        <input type="text" id="offer-url" placeholder="Paste Chia offer URL or text">
+                        <button id="parse-offer-btn" class="btn btn-primary">Load Profile</button>
+                    </div>
+                </div>
+                
+                <div id="upload-error" class="upload-error"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/lochness-logo-white.svg" alt="Lochness Group Logo">
+                    <span>Lochness Group</span>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="index.html#about">About Us</a>
+                        <a href="#">Team</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Press</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <a href="index.html#services">Farm Monitoring</a>
+                        <a href="index.html#services">Chialisp Security</a>
+                        <a href="index.html#services">Farming Analytics</a>
+                        <a href="index.html#services">Smart Contract Development</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <a href="#">Blog</a>
+                        <a href="#">Whitepapers</a>
+                        <a href="#">Documentation</a>
+                        <a href="#">API</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">GDPR</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Lochness Group. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>
