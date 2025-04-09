@@ -101,11 +101,20 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function parseOfferUrl(offerUrl) {
         try {
+            // Show loading indication
+            showLoadingState(true);
+            
             // In a real implementation, this would make an API call to parse the offer URL
-            // For now, we'll simulate it with sample data
-            parseOfferContent(offerUrl);
+            // For now, we'll extract employment details and show confirmation
+            if (offerUrl.startsWith('offer1') || offerUrl.includes('offer1')) {
+                extractEmploymentOfferDetails(offerUrl);
+            } else {
+                showError('Invalid offer format. Offer must begin with "offer1"');
+                showLoadingState(false);
+            }
         } catch (error) {
             showError('Error parsing offer URL: ' + error.message);
+            showLoadingState(false);
         }
     }
     
@@ -115,25 +124,20 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function parseOfferContent(offerContent) {
         try {
-            // In a real implementation, this would decode the Chia offer
-            // For demonstration, we'll use sample data
+            // Show loading indication
+            showLoadingState(true);
             
             // Check if the offer starts with 'offer1' to simulate offer validation
             if (offerContent.startsWith('offer1') || offerContent.includes('offer1')) {
-                loadSampleProfileData();
-                // Hide the upload error if previously shown
-                uploadError.textContent = '';
-                
-                // Show success message
-                alert('Profile loaded successfully!');
-                
-                // Scroll to top of profile
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Extract employment details from the offer file
+                extractEmploymentOfferDetails(offerContent);
             } else {
                 showError('Invalid offer format. Offer must begin with "offer1"');
+                showLoadingState(false);
             }
         } catch (error) {
             showError('Error parsing offer content: ' + error.message);
+            showLoadingState(false);
         }
     }
     
@@ -156,6 +160,234 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function showError(message) {
         uploadError.textContent = message;
+    }
+    
+    /**
+     * Shows or hides loading state
+     * @param {boolean} isLoading - Whether to show or hide loading state
+     */
+    function showLoadingState(isLoading) {
+        // Implement loading indicator if needed
+        // For now, we'll just disable the button during loading
+        if (parseOfferBtn) {
+            parseOfferBtn.disabled = isLoading;
+            parseOfferBtn.innerHTML = isLoading ? 
+                '<i class="fas fa-spinner fa-spin"></i> Loading...' : 
+                'Load Profile';
+        }
+    }
+    
+    /**
+     * Extract employment offer details from offer content
+     * @param {string} offerContent - The offer content to parse
+     */
+    function extractEmploymentOfferDetails(offerContent) {
+        try {
+            // In a real implementation, this would properly decode the Chia offer
+            // For now, we'll extract simulated data based on the offer content
+            
+            // Generate deterministic details based on the offer content hash
+            const offerHash = simpleHash(offerContent);
+            
+            // Determine position type based on offer content
+            let position, rate, term, skills;
+            
+            if (offerContent.includes('farm') || offerContent.includes('tractor')) {
+                position = "Farm Optimization Specialist";
+                rate = "0.3 XCH per hour";
+                term = "15 hours";
+                skills = ["Chia Farming", "Performance Optimization", "Hardware Configuration"];
+            } else if (offerContent.includes('code') || offerContent.includes('dev') || offerContent.includes('chialisp')) {
+                position = "Chialisp Smart Contract Developer";
+                rate = "0.5 XCH per hour";
+                term = "20 hours";
+                skills = ["Chialisp", "Smart Contracts", "Security Auditing"];
+            } else if (offerContent.includes('data') || offerContent.includes('layer')) {
+                position = "DataLayer Solution Architect";
+                rate = "0.6 XCH per hour";
+                term = "25 hours";
+                skills = ["DataLayer", "System Architecture", "Integration"];
+            } else {
+                // Default case - generate details based on hash
+                const positions = ["Blockchain Consultant", "AIOps Engineer", "Infrastructure Specialist"];
+                const rates = ["0.4 XCH per hour", "0.35 XCH per hour", "0.45 XCH per hour"];
+                const terms = ["18 hours", "22 hours", "16 hours"];
+                const skillSets = [
+                    ["Blockchain", "Consulting", "Strategy"],
+                    ["AI", "Operations", "Automation"],
+                    ["Infrastructure", "DevOps", "Scaling"]
+                ];
+                
+                const index = offerHash % 3;
+                position = positions[index];
+                rate = rates[index];
+                term = terms[index];
+                skills = skillSets[index];
+            }
+            
+            // Calculate expiration date (30 days from now)
+            const expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + 30);
+            const formattedExpiration = expirationDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Display the confirmation UI with extracted details
+            displayOfferConfirmation({
+                position,
+                rate,
+                term,
+                skills,
+                expiration: formattedExpiration,
+                offerContent // Store the original offer for submission
+            });
+            
+            // Hide loading state
+            showLoadingState(false);
+            
+        } catch (error) {
+            console.error('Error extracting offer details:', error);
+            showError('Could not extract employment details from offer');
+            showLoadingState(false);
+        }
+    }
+    
+    /**
+     * Display the offer confirmation UI
+     * @param {Object} offerDetails - The extracted offer details
+     */
+    function displayOfferConfirmation(offerDetails) {
+        // Get the confirmation container
+        const confirmationContainer = document.getElementById('offer-confirmation');
+        if (!confirmationContainer) return;
+        
+        // Fill in the offer details
+        document.getElementById('offer-position').textContent = offerDetails.position;
+        document.getElementById('offer-rate').textContent = offerDetails.rate;
+        document.getElementById('offer-term').textContent = offerDetails.term;
+        document.getElementById('offer-expiration').textContent = offerDetails.expiration;
+        
+        // Add skills tags
+        const skillsContainer = document.getElementById('offer-skills');
+        skillsContainer.innerHTML = '';
+        offerDetails.skills.forEach(skill => {
+            const skillTag = document.createElement('span');
+            skillTag.className = 'skill-tag';
+            skillTag.textContent = skill;
+            skillsContainer.appendChild(skillTag);
+        });
+        
+        // Show the confirmation container
+        confirmationContainer.style.display = 'block';
+        
+        // Scroll to the confirmation section
+        confirmationContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Store offer details for submission
+        confirmationContainer.dataset.offerContent = offerDetails.offerContent;
+        
+        // Add event listeners for confirmation buttons
+        setupConfirmationButtons(offerDetails);
+    }
+    
+    /**
+     * Setup event listeners for confirmation buttons
+     * @param {Object} offerDetails - The offer details
+     */
+    function setupConfirmationButtons(offerDetails) {
+        const submitBtn = document.getElementById('submit-offer-btn');
+        const cancelBtn = document.getElementById('cancel-offer-btn');
+        
+        // Remove any existing event listeners
+        if (submitBtn._offerListener) {
+            submitBtn.removeEventListener('click', submitBtn._offerListener);
+        }
+        if (cancelBtn._offerListener) {
+            cancelBtn.removeEventListener('click', cancelBtn._offerListener);
+        }
+        
+        // Submit button handler
+        submitBtn._offerListener = () => {
+            submitEmploymentOffer(offerDetails);
+        };
+        submitBtn.addEventListener('click', submitBtn._offerListener);
+        
+        // Cancel button handler
+        cancelBtn._offerListener = () => {
+            document.getElementById('offer-confirmation').style.display = 'none';
+        };
+        cancelBtn.addEventListener('click', cancelBtn._offerListener);
+    }
+    
+    /**
+     * Submit the employment offer
+     * @param {Object} offerDetails - The offer details to submit
+     */
+    function submitEmploymentOffer(offerDetails) {
+        try {
+            // Show loading state
+            const submitBtn = document.getElementById('submit-offer-btn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            }
+            
+            // In a real implementation, this would send the offer to a server
+            // For now, we'll simulate a successful submission
+            setTimeout(() => {
+                // Hide the confirmation panel
+                document.getElementById('offer-confirmation').style.display = 'none';
+                
+                // Show success message
+                const successMessage = document.createElement('div');
+                successMessage.className = 'success-message';
+                successMessage.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Employment Offer Submitted!</h3>
+                    <p>Your offer for <strong>${offerDetails.position}</strong> has been successfully submitted.</p>
+                    <p>The offer will expire on <strong>${offerDetails.expiration}</strong>.</p>
+                `;
+                
+                // Add to the uploader container
+                const uploaderContainer = document.querySelector('.uploader-container');
+                if (uploaderContainer) {
+                    // Clear previous content
+                    uploaderContainer.innerHTML = '';
+                    uploaderContainer.appendChild(successMessage);
+                    
+                    // Add a button to submit another offer
+                    const newOfferBtn = document.createElement('button');
+                    newOfferBtn.className = 'btn btn-primary';
+                    newOfferBtn.innerHTML = '<i class="fas fa-plus"></i> Submit Another Offer';
+                    newOfferBtn.style.marginTop = '20px';
+                    newOfferBtn.addEventListener('click', () => {
+                        window.location.reload();
+                    });
+                    
+                    uploaderContainer.appendChild(newOfferBtn);
+                }
+                
+                // Reset form if needed
+                offerUrlInput.value = '';
+                fileNameDisplay.textContent = 'No file selected';
+                
+                // Log details to console (in a real app, this would be sent to the server)
+                console.log('Employment offer submitted:', offerDetails);
+                
+            }, 1500); // Simulate server processing time
+            
+        } catch (error) {
+            console.error('Error submitting offer:', error);
+            showError('Failed to submit employment offer: ' + error.message);
+            
+            // Re-enable submit button
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit Offer';
+            }
+        }
     }
     
     /**

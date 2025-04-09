@@ -221,11 +221,11 @@
         <div class="parallax-bg" style="background-image: url('images/contracts-bg.jpg');"></div>
         <div class="container">
             <div class="section-header light">
-                <h2>Load Profile from Chia Offer</h2>
+                <h2>Submit an offer of employment</h2>
                 <div class="separator"></div>
             </div>
             <div class="uploader-container">
-                <p>Upload a Chia offer file or paste an offer URL to view a professional's profile</p>
+                <p>Upload a Chia offer file or paste an offer URL to submit your employment offer. Offers expire in 30 days.</p>
                 
                 <div class="upload-options">
                     <div class="file-upload">
@@ -247,6 +247,40 @@
                 </div>
                 
                 <div id="upload-error" class="upload-error"></div>
+                
+                <!-- Offer confirmation section (hidden by default) -->
+                <div id="offer-confirmation" class="offer-confirmation" style="display: none;">
+                    <div class="confirmation-header">
+                        <h3>Confirm Employment Offer</h3>
+                        <p>Please review the details of your employment offer before submitting:</p>
+                    </div>
+                    <div class="offer-details">
+                        <div class="offer-detail">
+                            <span class="detail-label">Position:</span>
+                            <span id="offer-position" class="detail-value">-</span>
+                        </div>
+                        <div class="offer-detail">
+                            <span class="detail-label">Rate:</span>
+                            <span id="offer-rate" class="detail-value">-</span>
+                        </div>
+                        <div class="offer-detail">
+                            <span class="detail-label">Minimum Term:</span>
+                            <span id="offer-term" class="detail-value">-</span>
+                        </div>
+                        <div class="offer-detail">
+                            <span class="detail-label">Skills Required:</span>
+                            <div id="offer-skills" class="detail-value skills-tags">-</div>
+                        </div>
+                        <div class="offer-detail">
+                            <span class="detail-label">Expiration:</span>
+                            <span id="offer-expiration" class="detail-value">30 days from today</span>
+                        </div>
+                    </div>
+                    <div class="confirmation-actions">
+                        <button id="submit-offer-btn" class="btn btn-primary">Submit Offer</button>
+                        <button id="cancel-offer-btn" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
