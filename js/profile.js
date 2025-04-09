@@ -4,6 +4,8 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Generate default profile images on load
+    generateDefaultProfileImages();
     // DOM Elements
     const offerFileInput = document.getElementById('offer-file');
     const offerUrlInput = document.getElementById('offer-url');
@@ -334,25 +336,54 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     /**
+     * Generate default profile images
+     */
+    function generateDefaultProfileImages() {
+        // Generate a default avatar and banner with LG (Lochness Group) initials
+        if (typeof generateProfileAvatar === 'function') {
+            generateProfileAvatar('Lochness Group', 'profile-avatar');
+        }
+        
+        if (typeof generateProfileBanner === 'function') {
+            generateProfileBanner('Lochness Group', 'banner-image', {
+                title: 'Lochness Group Profile'
+            });
+        }
+    }
+
+    /**
      * Render profile data to the page
      * @param {Object} profile - The profile data to render
      */
     function renderProfile(profile) {
-        // Set banner image
-        const bannerElement = document.getElementById('banner-image');
-        if (bannerElement) {
-            bannerElement.style.backgroundImage = `url('${profile.banner}')`;
-            // Remove loading overlay if present
-            const loadingOverlay = bannerElement.querySelector('.loading-overlay');
-            if (loadingOverlay) {
-                loadingOverlay.style.display = 'none';
+        // Generate profile avatar
+        if (typeof generateProfileAvatar === 'function') {
+            generateProfileAvatar(profile.name, 'profile-avatar');
+        } else {
+            // Fallback to static image if generator not available
+            const avatarElement = document.getElementById('profile-avatar');
+            if (avatarElement) {
+                avatarElement.innerHTML = `<img src="${profile.avatar}" alt="${profile.name}">`;
             }
         }
         
-        // Set profile avatar
-        const avatarElement = document.getElementById('profile-avatar');
-        if (avatarElement) {
-            avatarElement.innerHTML = `<img src="${profile.avatar}" alt="${profile.name}">`;
+        // Generate profile banner
+        if (typeof generateProfileBanner === 'function') {
+            generateProfileBanner(profile.name, 'banner-image', {
+                title: profile.title || 'Lochness Group Professional'
+            });
+        } else {
+            // Fallback to static image if generator not available
+            const bannerElement = document.getElementById('banner-image');
+            if (bannerElement) {
+                bannerElement.style.backgroundImage = `url('${profile.banner}')`;
+            }
+        }
+        
+        // Remove loading overlay
+        const loadingOverlay = document.querySelector('.loading-overlay');
+        if (loadingOverlay) {
+            loadingOverlay.style.display = 'none';
         }
         
         // Set basic profile info
