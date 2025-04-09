@@ -234,6 +234,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 day: 'numeric'
             });
             
+            // Calculate days remaining for the display
+            const currentDate = new Date();
+            const daysRemaining = Math.ceil((expirationDate - currentDate) / (1000 * 60 * 60 * 24));
+            
             // Display the confirmation UI with extracted details
             displayOfferConfirmation({
                 position,
@@ -241,6 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 term,
                 skills,
                 expiration: formattedExpiration,
+                daysRemaining: daysRemaining,
                 offerContent // Store the original offer for submission
             });
             
@@ -267,7 +272,20 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('offer-position').textContent = offerDetails.position;
         document.getElementById('offer-rate').textContent = offerDetails.rate;
         document.getElementById('offer-term').textContent = offerDetails.term;
-        document.getElementById('offer-expiration').textContent = offerDetails.expiration;
+        
+        // Set expiration date with appropriate styling
+        const expirationElement = document.getElementById('offer-expiration');
+        expirationElement.textContent = offerDetails.expiration;
+        
+        // Apply color based on days remaining
+        expirationElement.className = ''; // Clear existing classes
+        if (offerDetails.daysRemaining <= 3) {
+            expirationElement.classList.add('expires-critical');
+        } else if (offerDetails.daysRemaining <= 10) {
+            expirationElement.classList.add('expires-soon');
+        } else {
+            expirationElement.classList.add('expires-normal');
+        }
         
         // Add skills tags
         const skillsContainer = document.getElementById('offer-skills');
@@ -347,7 +365,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     <i class="fas fa-check-circle"></i>
                     <h3>Employment Offer Submitted!</h3>
                     <p>Your offer for <strong>${offerDetails.position}</strong> has been successfully submitted.</p>
-                    <p>The offer will expire on <strong>${offerDetails.expiration}</strong>.</p>
+                    <p>The offer will expire on <strong class="${offerDetails.daysRemaining <= 3 ? 'expires-critical' : 
+                        offerDetails.daysRemaining <= 10 ? 'expires-soon' : 'expires-normal'}">${offerDetails.expiration}</strong>.</p>
                 `;
                 
                 // Add to the uploader container

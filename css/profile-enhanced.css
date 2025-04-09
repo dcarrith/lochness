@@ -480,8 +480,19 @@
 }
 
 #offer-expiration {
-    color: #ffcc00;
     font-weight: 500;
+}
+
+#offer-expiration.expires-normal {
+    color: #2ecc71; /* Green when > 10 days left */
+}
+
+#offer-expiration.expires-soon {
+    color: #f39c12; /* Yellow when ≤ 10 days left */
+}
+
+#offer-expiration.expires-critical {
+    color: #e74c3c; /* Red when ≤ 3 days left */
 }
 
 /* Success message styling */
