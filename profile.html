@@ -438,6 +438,15 @@
 
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <!-- Add error handlers for scripts -->
+    <script>
+        // Handle script loading errors
+        window.addEventListener('error', function(e) {
+            if (e.target && e.target.tagName === 'SCRIPT') {
+                console.warn('Script loading error:', e.target.src);
+            }
+        }, true);
+    </script>
     <script src="js/profile-image-generator.js"></script>
     <script src="js/main.js"></script>
     <script src="js/contracts.js"></script>

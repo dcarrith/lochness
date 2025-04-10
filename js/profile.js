@@ -197,6 +197,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     /**
+     * Simple hash function for strings
+     * @param {string} str - The string to hash
+     * @returns {number} A numeric hash of the string
+     */
+    function simpleHash(str) {
+        if (!str) return 0;
+        
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash; // Convert to 32bit integer
+        }
+        return Math.abs(hash);
+    }
+
+    /**
      * Show the verification result
      * @param {boolean} success - Whether verification was successful
      * @param {Object} details - The verification details
@@ -228,7 +245,8 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('credential-signature').textContent = details.signature;
             
             // Set explorer link
-            explorerLink.href = `https://www.chiaexplorer.com/blockchain/coin/${simpleHash(document.getElementById('profile-did-value').textContent)}`;
+            const didValue = document.getElementById('profile-did-value').textContent;
+            explorerLink.href = `https://www.chiaexplorer.com/blockchain/coin/${simpleHash(didValue)}`;
             explorerLink.style.display = 'inline-block';
             
         } else {
@@ -792,12 +810,50 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     /**
+     * Create a fallback QR code using an external service
+     * @param {HTMLElement} element - The element to append the QR code to
+     * @param {string} text - The text to encode in the QR code
+     */
+    function createFallbackQRCode(element, text) {
+        // Create a fallback QR code using an image
+        const img = document.createElement('img');
+        img.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(text)}`;
+        img.alt = 'QR Code';
+        img.width = 200;
+        img.height = 200;
+        element.appendChild(img);
+    }
+
+    /**
      * Generate default profile images
      */
     function generateDefaultProfileImages() {
         // Generate a default avatar with LG (Lochness Group) initials
-        if (typeof generateProfileAvatar === 'function') {
-            generateProfileAvatar('Lochness Group', 'profile-avatar');
+        try {
+            if (typeof generateProfileAvatar === 'function') {
+                generateProfileAvatar('Lochness Group', 'profile-avatar');
+            } else {
+                // Fallback if profile image generator is not available
+                const avatarElement = document.getElementById('profile-avatar');
+                if (avatarElement) {
+                    avatarElement.innerHTML = `
+                        <div style="width: 100%; height: 100%; background-color: #3498db; display: flex; justify-content: center; align-items: center; color: white; font-size: 36px; font-weight: bold; border-radius: 50%;">
+                            LG
+                        </div>
+                    `;
+                }
+            }
+        } catch (error) {
+            console.warn('Error generating profile image:', error);
+            // Fallback in case of error
+            const avatarElement = document.getElementById('profile-avatar');
+            if (avatarElement) {
+                avatarElement.innerHTML = `
+                    <div style="width: 100%; height: 100%; background-color: #3498db; display: flex; justify-content: center; align-items: center; color: white; font-size: 36px; font-weight: bold; border-radius: 50%;">
+                        LG
+                    </div>
+                `;
+            }
         }
     }
 
@@ -817,10 +873,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Set basic profile info
-        document.getElementById('profile-name').textContent = profile.name;
-        document.getElementById('profile-title').textContent = profile.title;
-        document.getElementById('profile-did-value').textContent = profile.did;
+        // Set basic profile info safely with error handling
+        const elements = {
+            'profile-name': profile.name || 'Unknown Name',
+            'profile-title': profile.title || 'Professional',
+            'profile-did-value': profile.did || 'did:chia:unknown'
+        };
+        
+        Object.entries(elements).forEach(([id, value]) => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.textContent = value;
+            }
+        });
         
         // Set overview information
         document.getElementById('profile-summary').textContent = profile.summary;
@@ -917,7 +982,7 @@ document.addEventListener('DOMContentLoaded', function() {
             certCard.className = 'certification-card';
             certCard.innerHTML = `
                 <div class="certification-logo">
-                    <img src="${cert.logo}" alt="${cert.name}">
+                    <img src="${cert.logo}" alt="${cert.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM2NjY2NjYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjgiIHI9IjciPjwvY2lyY2xlPjxwb2x5bGluZSBwb2ludHM9IjguMjEgMTMuODkgNyAyMyAxMiAyMCAxNyAyMyAxNS43OSAxMy44OCI+PC9wb2x5bGluZT48L3N2Zz4='; this.style.width='80px'; this.style.height='80px';">
                 </div>
                 <div class="certification-details">
                     <div class="certification-name">${cert.name}</div>
@@ -947,9 +1012,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const toolCard = document.createElement('div');
             toolCard.className = 'tool-card';
             
-            const iconHtml = tool.icon.startsWith('fa-') 
-                ? `<i class="fas ${tool.icon}"></i>` 
-                : `<img src="${tool.icon}" alt="${tool.name}">`;
+            let iconHtml = '';
+            try {
+                if (tool.icon && tool.icon.startsWith('fa-')) {
+                    iconHtml = `<i class="fas ${tool.icon}"></i>`;
+                } else if (tool.icon) {
+                    iconHtml = `<img src="${tool.icon}" alt="${tool.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM2NjY2NjYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzIiB5PSIzIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHJ4PSIyIiByeT0iMiI+PC9yZWN0PjxjaXJjbGUgY3g9IjguNSIgY3k9IjguNSIgcj0iMS41Ij48L2NpcmNsZT48cG9seWxpbmUgcG9pbnRzPSIyMSAxNSAxNiAxMCA1IDIxIj48L3BvbHlsaW5lPjwvc3ZnPg=='; this.style.width='24px'; this.style.height='24px';"">`;
+                } else {
+                    iconHtml = `<i class="fas fa-tools"></i>`;
+                }
+            } catch (error) {
+                console.warn('Error creating tool icon:', error);
+                iconHtml = `<i class="fas fa-tools"></i>`;
+            }
             
             toolCard.innerHTML = `
                 <div class="tool-icon">
@@ -1001,7 +1076,7 @@ document.addEventListener('DOMContentLoaded', function() {
             projectCard.className = 'project-card';
             projectCard.innerHTML = `
                 <div class="project-img">
-                    <img src="${project.image}" alt="${project.name}">
+                    <img src="${project.image}" alt="${project.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzY2NjY2NiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwb2x5Z29uIHBvaW50cz0iMTIgMiAyIDcgMTIgMTIgMjIgNyAxMiAyIj48L3BvbHlnb24+PHBvbHlsaW5lIHBvaW50cz0iMiAxNyAxMiAyMiAyMiAxNyI+PC9wb2x5bGluZT48cG9seWxpbmUgcG9pbnRzPSIyIDEyIDEyIDE3IDIyIDEyIj48L3BvbHlsaW5lPjwvc3ZnPg=='; this.style.width='100%'; this.style.height='auto';">
                 </div>
                 <div class="project-details">
                     <h4 class="project-name">${project.name}</h4>
@@ -1032,7 +1107,7 @@ document.addEventListener('DOMContentLoaded', function() {
             eduItem.className = 'education-item';
             eduItem.innerHTML = `
                 <div class="education-logo">
-                    <img src="${edu.logo}" alt="${edu.institution}">
+                    <img src="${edu.logo}" alt="${edu.institution}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM2NjY2NjYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMjIgMTl2M2gtMjB2LTNoMjBtLTgtMTB2LTNoLTR2M2g0bS04IDR2Mmg0di0yaDRsMCAyaDR2LTJsLTgtNWwtOCA1eiI+PC9wYXRoPjwvc3ZnPg=='; this.style.width='80px'; this.style.height='80px';">
                 </div>
                 <div class="education-details">
                     <h4 class="education-degree">${edu.degree}</h4>
@@ -1101,15 +1176,25 @@ document.addEventListener('DOMContentLoaded', function() {
             // Generate QR code for this contract
             setTimeout(() => {
                 const qrContainer = document.getElementById(`qr-${contract.title.toLowerCase().replace(/\s+/g, '-')}`);
-                if (qrContainer && window.QRCode) {
-                    new QRCode(qrContainer, {
-                        text: `offer1${contract.puzzle.substring(0, 20)}...`,
-                        width: 200,
-                        height: 200,
-                        colorDark: "#000000",
-                        colorLight: "#ffffff",
-                        correctLevel: QRCode.CorrectLevel.H
-                    });
+                if (qrContainer) {
+                    try {
+                        if (window.QRCode) {
+                            new QRCode(qrContainer, {
+                                text: `offer1${contract.puzzle.substring(0, 20)}...`,
+                                width: 200,
+                                height: 200,
+                                colorDark: "#000000",
+                                colorLight: "#ffffff",
+                                correctLevel: QRCode.CorrectLevel.H
+                            });
+                        } else {
+                            // Fallback if QRCode library is not available
+                            createFallbackQRCode(qrContainer, `offer1${contract.puzzle.substring(0, 20)}...`);
+                        }
+                    } catch (error) {
+                        console.warn('Error generating QR code:', error);
+                        createFallbackQRCode(qrContainer, `offer1${contract.puzzle.substring(0, 20)}...`);
+                    }
                 }
             }, 100);
         });
