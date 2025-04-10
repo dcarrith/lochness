@@ -87,6 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function verifyCredentials() {
         try {
+            console.log('Starting verification process...');
+            
             // Get the DID value with error handling
             const didElement = document.getElementById('profile-did-value');
             if (!didElement) {
@@ -96,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             const didValue = didElement.textContent;
+            console.log('Found DID:', didValue);
             
             // Show the verification modal with error handling
             const modal = document.getElementById('verification-modal');
@@ -105,13 +108,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
+            // Set display first, then add active class for animation
             modal.style.display = 'block';
             
-            // Reset the verification UI
-            resetVerificationUI();
+            // Force browser to recognize the display change before adding active class
+            setTimeout(() => {
+                modal.classList.add('active');
+                console.log('Modal activated');
+                
+                // Reset the verification UI
+                resetVerificationUI();
+                
+                // Start the verification process
+                runVerificationProcess(didValue);
+            }, 10);
             
-            // Start the verification process
-            runVerificationProcess(didValue);
         } catch (error) {
             console.error('Error in verification process:', error);
             showError('Verification process failed: ' + error.message, true);
@@ -122,12 +133,30 @@ document.addEventListener('DOMContentLoaded', function() {
      * Reset the verification UI to initial state
      */
     function resetVerificationUI() {
+        console.log('Resetting verification UI');
+        
+        // Get the containers with better error handling
+        const stepsContainer = document.getElementById('verification-steps');
+        const resultContainer = document.getElementById('verification-result');
+        
+        if (!stepsContainer || !resultContainer) {
+            console.error('Verification containers not found');
+            return false;
+        }
+        
         // Hide the result and show the steps
-        document.getElementById('verification-steps').style.display = 'block';
-        document.getElementById('verification-result').style.display = 'none';
+        stepsContainer.style.display = 'block';
+        resultContainer.style.display = 'none';
         
         // Reset all steps to waiting state
         const steps = document.querySelectorAll('.verification-step');
+        if (steps.length === 0) {
+            console.error('No verification steps found');
+            return false;
+        }
+        
+        console.log(`Found ${steps.length} verification steps`);
+        
         steps.forEach(step => {
             step.classList.remove('active', 'completed', 'failed');
             const statusText = step.querySelector('.status-text');
@@ -138,11 +167,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     statusText.textContent = 'Waiting to verify...';
                 }
             }
+            
+            // Show spinners correctly
+            const spinner = step.querySelector('.loading-spinner');
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
         });
         
         // Reset success/error icons
-        document.querySelector('.success-icon').style.display = 'block';
-        document.querySelector('.error-icon').style.display = 'none';
+        const successIcon = document.querySelector('.success-icon');
+        const errorIcon = document.querySelector('.error-icon');
+        
+        if (successIcon) successIcon.style.display = 'block';
+        if (errorIcon) errorIcon.style.display = 'none';
+        
+        return true;
     }
     
     /**
@@ -183,6 +223,8 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
+        console.log('Running verification process for DID:', didValue);
+        
         // Mark connecting step as active
         connectingStep.classList.add('active');
         
@@ -190,6 +232,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const connectingStatusText = connectingStep.querySelector('.status-text');
         if (!connectingStatusText) {
             console.warn('Status text element not found in connecting step');
+        }
+        
+        // Ensure spinner is visible
+        const connectingSpinner = connectingStep.querySelector('.loading-spinner');
+        if (connectingSpinner) {
+            connectingSpinner.style.display = 'block';
+        } else {
+            console.warn('Spinner not found in connecting step');
         }
         
         // Simulate connecting to the blockchain
@@ -433,9 +483,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Modal close button click handlers with better error handling
     if (closeModalBtn) {
         closeModalBtn.addEventListener('click', function() {
-            if (verificationModal) {
-                verificationModal.style.display = 'none';
-            }
+            closeVerificationModal();
         });
     } else {
         console.warn('Modal close button not found');
@@ -443,9 +491,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (verificationCloseBtn) {
         verificationCloseBtn.addEventListener('click', function() {
-            if (verificationModal) {
-                verificationModal.style.display = 'none';
-            }
+            closeVerificationModal();
         });
     } else {
         console.warn('Verification close button not found');
@@ -455,11 +501,27 @@ document.addEventListener('DOMContentLoaded', function() {
     if (verificationModal) {
         window.addEventListener('click', function(event) {
             if (event.target === verificationModal) {
-                verificationModal.style.display = 'none';
+                closeVerificationModal();
             }
         });
     } else {
         console.warn('Verification modal not found, cannot add click listener');
+    }
+    
+    /**
+     * Close the verification modal with animation
+     */
+    function closeVerificationModal() {
+        if (!verificationModal) return;
+        
+        // Remove active class first (triggers transition)
+        verificationModal.classList.remove('active');
+        
+        // Then hide after transition completes
+        setTimeout(() => {
+            verificationModal.style.display = 'none';
+            console.log('Modal closed');
+        }, 300); // Match the CSS transition time
     }
     
     // Check for offer parameter in URL

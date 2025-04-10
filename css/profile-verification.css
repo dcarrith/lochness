@@ -2,13 +2,21 @@
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 9999;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     overflow: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
 }
 
 .modal-content {
@@ -165,6 +173,8 @@
     margin-right: 10px;
     animation: spin 1s linear infinite;
     display: none;
+    opacity: 1;
+    visibility: visible;
 }
 
 @keyframes spin {
@@ -173,7 +183,7 @@
 }
 
 .verification-step.active .loading-spinner {
-    display: block;
+    display: block !important;
 }
 
 .status-text {
