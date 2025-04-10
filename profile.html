@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/contracts.css">
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/profile-enhanced.css">
+    <link rel="stylesheet" href="css/profile-verification.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -335,6 +336,105 @@
             </div>
         </div>
     </footer>
+
+    <!-- Verification Modal -->
+    <div id="verification-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-shield-alt"></i> Credential Verification</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="verification-steps">
+                    <div class="verification-step" data-step="connecting">
+                        <div class="step-icon">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>Connecting to Chia Blockchain</h3>
+                            <div class="step-status">
+                                <div class="loading-spinner"></div>
+                                <span class="status-text">Establishing connection...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="verification-step" data-step="did">
+                        <div class="step-icon">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>Verifying Decentralized Identity (DID)</h3>
+                            <div class="step-status">
+                                <div class="loading-spinner"></div>
+                                <span class="status-text">Waiting to verify...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="verification-step" data-step="credentials">
+                        <div class="step-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>Validating Credentials</h3>
+                            <div class="step-status">
+                                <div class="loading-spinner"></div>
+                                <span class="status-text">Waiting to validate...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="verification-step" data-step="integrity">
+                        <div class="step-icon">
+                            <i class="fas fa-check-double"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>Checking Credential Integrity</h3>
+                            <div class="step-status">
+                                <div class="loading-spinner"></div>
+                                <span class="status-text">Waiting to check...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="verification-result" style="display: none;">
+                    <div class="result-icon">
+                        <i class="fas fa-check-circle success-icon"></i>
+                        <i class="fas fa-times-circle error-icon" style="display: none;"></i>
+                    </div>
+                    <div class="result-content">
+                        <h3 class="result-title">Verification Complete</h3>
+                        <p class="result-message">All credentials verified successfully!</p>
+                        
+                        <div class="credential-details">
+                            <h4>Credential Information</h4>
+                            <div class="credential-item">
+                                <span class="credential-label">Issuer:</span>
+                                <span id="credential-issuer" class="credential-value">Chia Network</span>
+                            </div>
+                            <div class="credential-item">
+                                <span class="credential-label">Issued Date:</span>
+                                <span id="credential-date" class="credential-value">March 15, 2023</span>
+                            </div>
+                            <div class="credential-item">
+                                <span class="credential-label">Blockchain Confirmation:</span>
+                                <span id="credential-confirmation" class="credential-value">Confirmed on block 1234567</span>
+                            </div>
+                            <div class="credential-item">
+                                <span class="credential-label">Signature Status:</span>
+                                <span id="credential-signature" class="credential-value valid">Valid</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="verification-close-btn" class="btn btn-primary">Close</button>
+                <a id="verification-explorer-link" href="#" target="_blank" class="btn btn-secondary">
+                    <i class="fas fa-external-link-alt"></i> View on Blockchain Explorer
+                </a>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>

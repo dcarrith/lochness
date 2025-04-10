@@ -1,0 +1,249 @@
+/* Verification Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    width: 90%;
+    max-width: 700px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from {opacity: 0; transform: translateY(-30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    color: #3498db;
+}
+
+.modal-header h2 i {
+    margin-right: 12px;
+}
+
+.close-modal {
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-modal:hover {
+    color: #555;
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.modal-footer {
+    padding: 15px 25px;
+    border-top: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Verification Steps */
+.verification-step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #eee;
+}
+
+.verification-step:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.step-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.step-icon i {
+    font-size: 22px;
+    color: #95a5a6;
+}
+
+.verification-step.active .step-icon {
+    background-color: #3498db;
+}
+
+.verification-step.active .step-icon i {
+    color: white;
+}
+
+.verification-step.completed .step-icon {
+    background-color: #2ecc71;
+}
+
+.verification-step.completed .step-icon i {
+    color: white;
+}
+
+.verification-step.failed .step-icon {
+    background-color: #e74c3c;
+}
+
+.verification-step.failed .step-icon i {
+    color: white;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.step-status {
+    display: flex;
+    align-items: center;
+}
+
+.loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    margin-right: 10px;
+    animation: spin 1s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.verification-step.active .loading-spinner {
+    display: block;
+}
+
+.status-text {
+    color: #888;
+    font-size: 14px;
+}
+
+.verification-step.completed .status-text {
+    color: #2ecc71;
+    font-weight: 500;
+}
+
+.verification-step.failed .status-text {
+    color: #e74c3c;
+    font-weight: 500;
+}
+
+/* Verification Results */
+#verification-result {
+    text-align: center;
+    padding: 25px 0;
+}
+
+.result-icon {
+    font-size: 70px;
+    margin-bottom: 20px;
+}
+
+.success-icon {
+    color: #2ecc71;
+}
+
+.error-icon {
+    color: #e74c3c;
+}
+
+.result-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.result-message {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+}
+
+.credential-details {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.credential-details h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #34495e;
+    font-size: 18px;
+}
+
+.credential-item {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.credential-label {
+    min-width: 170px;
+    font-weight: 600;
+    color: #7f8c8d;
+}
+
+.credential-value {
+    flex: 1;
+    color: #2c3e50;
+}
+
+.credential-value.valid {
+    color: #2ecc71;
+    font-weight: 500;
+}
+
+.credential-value.invalid {
+    color: #e74c3c;
+    font-weight: 500;
+}

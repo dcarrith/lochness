@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactButton = document.getElementById('contact-button');
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabPanes = document.querySelectorAll('.tab-pane');
+    const verificationModal = document.getElementById('verification-modal');
+    const closeModalBtn = document.querySelector('.close-modal');
+    const verificationCloseBtn = document.getElementById('verification-close-btn');
     
     // Tabs Functionality
     tabButtons.forEach(button => {
@@ -54,8 +57,190 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Verify button click handler
     verifyButton.addEventListener('click', function() {
-        alert('Verification process would connect to the Chia blockchain to verify the DID and credentials.');
+        verifyCredentials();
     });
+    
+    /**
+     * Verify credentials using the Chia blockchain
+     */
+    function verifyCredentials() {
+        // Get the DID value
+        const didValue = document.getElementById('profile-did-value').textContent;
+        
+        // Show the verification modal
+        const modal = document.getElementById('verification-modal');
+        modal.style.display = 'block';
+        
+        // Reset the verification UI
+        resetVerificationUI();
+        
+        // Start the verification process
+        runVerificationProcess(didValue);
+    }
+    
+    /**
+     * Reset the verification UI to initial state
+     */
+    function resetVerificationUI() {
+        // Hide the result and show the steps
+        document.getElementById('verification-steps').style.display = 'block';
+        document.getElementById('verification-result').style.display = 'none';
+        
+        // Reset all steps to waiting state
+        const steps = document.querySelectorAll('.verification-step');
+        steps.forEach(step => {
+            step.classList.remove('active', 'completed', 'failed');
+            const statusText = step.querySelector('.status-text');
+            if (statusText) {
+                if (step.getAttribute('data-step') === 'connecting') {
+                    statusText.textContent = 'Establishing connection...';
+                } else {
+                    statusText.textContent = 'Waiting to verify...';
+                }
+            }
+        });
+        
+        // Reset success/error icons
+        document.querySelector('.success-icon').style.display = 'block';
+        document.querySelector('.error-icon').style.display = 'none';
+    }
+    
+    /**
+     * Run the verification process for a given DID
+     * @param {string} didValue - The DID to verify
+     */
+    function runVerificationProcess(didValue) {
+        // Get all verification steps
+        const connectingStep = document.querySelector('.verification-step[data-step="connecting"]');
+        const didStep = document.querySelector('.verification-step[data-step="did"]');
+        const credentialsStep = document.querySelector('.verification-step[data-step="credentials"]');
+        const integrityStep = document.querySelector('.verification-step[data-step="integrity"]');
+        
+        // Mark connecting step as active
+        connectingStep.classList.add('active');
+        
+        // Simulate connecting to the blockchain
+        setTimeout(() => {
+            // Mark connecting as completed
+            connectingStep.classList.remove('active');
+            connectingStep.classList.add('completed');
+            connectingStep.querySelector('.status-text').textContent = 'Connected successfully';
+            
+            // Start DID verification
+            didStep.classList.add('active');
+            didStep.querySelector('.status-text').textContent = 'Validating DID...';
+            
+            // Simulate DID verification
+            setTimeout(() => {
+                // Check if DID is valid (for demo, we'll say yes if it has "chia" in it)
+                const isDidValid = didValue.includes('chia');
+                
+                if (isDidValid) {
+                    // DID is valid
+                    didStep.classList.remove('active');
+                    didStep.classList.add('completed');
+                    didStep.querySelector('.status-text').textContent = 'DID verified on blockchain';
+                    
+                    // Start credentials verification
+                    credentialsStep.classList.add('active');
+                    credentialsStep.querySelector('.status-text').textContent = 'Checking credentials...';
+                    
+                    // Simulate credentials verification
+                    setTimeout(() => {
+                        // Credentials are valid
+                        credentialsStep.classList.remove('active');
+                        credentialsStep.classList.add('completed');
+                        credentialsStep.querySelector('.status-text').textContent = 'Credentials validated';
+                        
+                        // Start integrity check
+                        integrityStep.classList.add('active');
+                        integrityStep.querySelector('.status-text').textContent = 'Verifying signatures...';
+                        
+                        // Simulate integrity check
+                        setTimeout(() => {
+                            // Integrity check passed
+                            integrityStep.classList.remove('active');
+                            integrityStep.classList.add('completed');
+                            integrityStep.querySelector('.status-text').textContent = 'Integrity verified';
+                            
+                            // Show verification result after a short delay
+                            setTimeout(() => {
+                                showVerificationResult(true, {
+                                    issuer: 'Chia Network',
+                                    date: 'March 15, 2023',
+                                    confirmation: 'Confirmed on block 1234567',
+                                    signature: 'Valid'
+                                });
+                            }, 500);
+                            
+                        }, 1800); // Integrity check time
+                        
+                    }, 2000); // Credentials verification time
+                    
+                } else {
+                    // DID is invalid
+                    didStep.classList.remove('active');
+                    didStep.classList.add('failed');
+                    didStep.querySelector('.status-text').textContent = 'DID verification failed';
+                    
+                    // Show verification result with error after a short delay
+                    setTimeout(() => {
+                        showVerificationResult(false, {
+                            error: 'The provided DID could not be verified on the Chia blockchain.'
+                        });
+                    }, 500);
+                }
+                
+            }, 2500); // DID verification time
+            
+        }, 2000); // Connection time
+    }
+    
+    /**
+     * Show the verification result
+     * @param {boolean} success - Whether verification was successful
+     * @param {Object} details - The verification details
+     */
+    function showVerificationResult(success, details) {
+        // Hide the steps and show the result
+        document.getElementById('verification-steps').style.display = 'none';
+        document.getElementById('verification-result').style.display = 'block';
+        
+        const resultTitle = document.querySelector('.result-title');
+        const resultMessage = document.querySelector('.result-message');
+        const successIcon = document.querySelector('.success-icon');
+        const errorIcon = document.querySelector('.error-icon');
+        const credentialDetails = document.querySelector('.credential-details');
+        const explorerLink = document.getElementById('verification-explorer-link');
+        
+        if (success) {
+            // Show success UI
+            resultTitle.textContent = 'Verification Complete';
+            resultMessage.textContent = 'All credentials verified successfully!';
+            successIcon.style.display = 'block';
+            errorIcon.style.display = 'none';
+            credentialDetails.style.display = 'block';
+            
+            // Fill in credential details
+            document.getElementById('credential-issuer').textContent = details.issuer;
+            document.getElementById('credential-date').textContent = details.date;
+            document.getElementById('credential-confirmation').textContent = details.confirmation;
+            document.getElementById('credential-signature').textContent = details.signature;
+            
+            // Set explorer link
+            explorerLink.href = `https://www.chiaexplorer.com/blockchain/coin/${simpleHash(document.getElementById('profile-did-value').textContent)}`;
+            explorerLink.style.display = 'inline-block';
+            
+        } else {
+            // Show error UI
+            resultTitle.textContent = 'Verification Failed';
+            resultMessage.textContent = details.error;
+            successIcon.style.display = 'none';
+            errorIcon.style.display = 'block';
+            credentialDetails.style.display = 'none';
+            explorerLink.style.display = 'none';
+        }
+    }
     
     // Contact button click handler
     contactButton.addEventListener('click', function() {
@@ -63,6 +248,26 @@ document.addEventListener('DOMContentLoaded', function() {
         const contactSection = document.querySelector('footer');
         if (contactSection) {
             contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+    
+    // Modal close button click handlers
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', function() {
+            verificationModal.style.display = 'none';
+        });
+    }
+    
+    if (verificationCloseBtn) {
+        verificationCloseBtn.addEventListener('click', function() {
+            verificationModal.style.display = 'none';
+        });
+    }
+    
+    // Close modal when clicking outside the content
+    window.addEventListener('click', function(event) {
+        if (event.target === verificationModal) {
+            verificationModal.style.display = 'none';
         }
     });
     
