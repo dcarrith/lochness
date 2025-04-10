@@ -951,9 +951,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     rate: '0.3 XCH/hour',
                     minHours: '15 hours',
                     availability: 'Within 48 hours',
-                    puzzle: 'p2_delegation_puzzle_hash...',
+                    puzzle: '0ff1ce5577f9c5dcbb6f7f92752909b4a19ceeba9eb629e520050e9e7aa4c8de',
                     description: 'I will analyze your Chia farm setup and implement optimizations to improve efficiency, reduce response times, and maximize rewards.',
-                    offerFile: 'farm-specialist.offer'
+                    offerFile: 'farm-specialist.offer',
+                    offerUrl: 'offer1qqr83wcuu2rykcmqvpsxzgqq0n0czs60rss8u5zknzs3l97nk2z50m57978f73eamvl6zfa9m93xf7hl83qpuv02h838g02tcaxgxld5m6g8nhkw9n2cdncvxe2f7fgzptkh2s38y2cd5hh5h6hk9dr0zjy5cgk8qfth6kwch27u2tc6fgpa3u0kp6tn8vgkq7am6g00nhkwch27u2tcz8f5hrsgqam6g0d5hu4nggk8qfth6kwch27u2tcr8f5hg9gxam6g0t5me93ph5c0wflfgxam6g0l5merpgw82jgg0sm6g2tdk7fv8kdgxa'
                 },
                 {
                     title: 'Chialisp Smart Contract Developer',
@@ -961,9 +962,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     rate: '0.5 XCH/hour',
                     minHours: '20 hours',
                     availability: 'Within 72 hours',
-                    puzzle: 'p2_delegation_puzzle_hash...',
+                    puzzle: '7f3ac117da6d3e775be38d22f413d915f7418aaba815da080e08aee6f3de5fb2',
                     description: 'Custom smart contract development for your specific use case, with security best practices and thorough documentation.',
-                    offerFile: 'developer.offer'
+                    offerFile: 'developer.offer',
+                    offerUrl: 'offer1qqp83wcuu2rykcmqvpsxvgqqwmnl0zfkxdmpl837v3l9mjc8gnalkh5c0wflfgqam6g0nku0nggk8qpth6kwch27u2tc68f5hv9gqam6g0x5mer9gwfcjgg0sm6g2tdk7qvckdgxam6g0jku0nggk8qpth6kwch27u2tcsxfcj9gxam6g045murgw82jgg0sm6g2tdkc2vckdgxam6g0dkuznggk8qpth6kwch27u2tcaxfcj9gxam6g0v5me93ph5c0wflf'
                 },
                 {
                     title: 'DataLayer Solution Architect',
@@ -971,9 +973,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     rate: '0.6 XCH/hour',
                     minHours: '25 hours',
                     availability: 'Within 1 week',
-                    puzzle: 'p2_delegation_puzzle_hash...',
+                    puzzle: 'd4t4157eaf4e2e8ee32ce3c4893e6c35ece8ca4ee8c2f99a7b1e07ae5f5eeaa',
                     description: 'End-to-end design and implementation of DataLayer solutions for your business needs, including data modeling and integration.',
-                    offerFile: 'datalayer.offer'
+                    offerFile: 'datalayer.offer',
+                    offerUrl: 'offer1qqzh3wcuu2rykcmqvpsxygqqemhmlaekcenaj0z6xn0q0kesdmk4k9rw6ks8wfjkggua4tzt4xjjwmutn0gxjsnqlkwuz2zvhwf2jy0y6fn9trc8p3zdvhvlzudcnjxscz06qzzg5ge8ue4u8qetl5ymxn0gmjkgguh4thd98h4uhxt0gxjsnqlkwuqj39mw36zdvhvlzudcnjxscz06qzzg5ge8ue4u8qetjwymxn0gmjkgguh4thd98h4uhxt0gxjsnqlkwuyp48d4s'
                 }
             ]
         };
@@ -1358,6 +1361,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="contract-body">
                     <div class="contract-qr-container">
                         <div class="contract-qr-code" id="qr-${contract.title.toLowerCase().replace(/\s+/g, '-')}"></div>
+                        <div class="scan-instructions">Scan with Chia wallet</div>
                     </div>
                     <div class="contract-details">
                         <div class="contract-detail">
@@ -1375,7 +1379,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                     <p class="contract-description">${contract.description}</p>
                     <div class="contract-actions">
-                        <a href="${contract.offerFile}" class="btn btn-primary">
+                        <a href="data:text/plain;charset=utf-8,${encodeURIComponent(contract.offerUrl || `offer1${contract.puzzle}`)}" download="${contract.offerFile}" class="btn btn-primary">
                             <i class="fas fa-download"></i> Download Offer
                         </a>
                         <button class="btn btn-secondary copy-puzzle" data-puzzle="${contract.puzzle}">
@@ -1408,8 +1412,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             // Clear container before creating QR code
                             qrContainer.innerHTML = '';
                             
+                            // Use the full offer URL if available, or fall back to a generated one
+                            const offerText = contract.offerUrl || `offer1${contract.puzzle}`;
+                            
                             new QRCode(qrContainer, {
-                                text: `offer1${contract.puzzle.substring(0, 20)}...`,
+                                text: offerText,
                                 width: 200,
                                 height: 200,
                                 colorDark: "#000000",
@@ -1418,12 +1425,12 @@ document.addEventListener('DOMContentLoaded', function() {
                             });
                         } catch (qrError) {
                             console.warn(`Error generating QR code with library: ${qrError.message}`);
-                            createFallbackQRCode(qrContainer, `offer1${contract.puzzle.substring(0, 20)}...`);
+                            createFallbackQRCode(qrContainer, contract.offerUrl || `offer1${contract.puzzle}`);
                         }
                     } else {
                         // Fallback if QRCode library is not available
                         console.log('QRCode library not available, using fallback');
-                        createFallbackQRCode(qrContainer, `offer1${contract.puzzle.substring(0, 20)}...`);
+                        createFallbackQRCode(qrContainer, contract.offerUrl || `offer1${contract.puzzle}`);
                     }
                 } catch (error) {
                     console.error('Fatal error in QR code generation:', error);

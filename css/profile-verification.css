@@ -263,3 +263,14 @@
     color: #e74c3c;
     font-weight: 500;
 }
+
+/* QR Code Scan Instructions */
+.scan-instructions {
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+    padding: 5px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
