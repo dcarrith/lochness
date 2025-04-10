@@ -1000,40 +1000,87 @@ document.addEventListener('DOMContentLoaded', function() {
             // Clear existing content
             element.innerHTML = '';
             
-            // First try with local placeholder - more reliable than external API
+            // Try Google Charts API first - more reliable than QRServer
             const img = document.createElement('img');
-            img.src = getPlaceholder('QR_CODE');
+            const encodedText = encodeURIComponent(text);
+            img.src = `https://chart.googleapis.com/chart?cht=qr&chl=${encodedText}&chs=200x200&chld=H|0`;
             img.alt = 'QR Code';
             img.width = 200;
             img.height = 200;
             
-            // Add text overlay to indicate this is a placeholder
-            const overlay = document.createElement('div');
-            overlay.style.position = 'absolute';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.display = 'flex';
-            overlay.style.alignItems = 'center';
-            overlay.style.justifyContent = 'center';
-            overlay.style.color = '#555';
-            overlay.style.backgroundColor = 'rgba(255,255,255,0.7)';
-            overlay.style.borderRadius = '5px';
-            overlay.style.fontSize = '12px';
-            overlay.style.textAlign = 'center';
-            overlay.style.padding = '5px';
-            overlay.textContent = 'Sample QR Code\n(For demonstration)';
+            // Add loading state
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.style.position = 'absolute';
+            loadingOverlay.style.top = '0';
+            loadingOverlay.style.left = '0';
+            loadingOverlay.style.width = '100%';
+            loadingOverlay.style.height = '100%';
+            loadingOverlay.style.display = 'flex';
+            loadingOverlay.style.alignItems = 'center';
+            loadingOverlay.style.justifyContent = 'center';
+            loadingOverlay.style.backgroundColor = 'rgba(255,255,255,0.7)';
+            loadingOverlay.innerHTML = '<div style="text-align:center">Loading QR Code...</div>';
             
             // Create a wrapper with relative positioning
             const wrapper = document.createElement('div');
             wrapper.style.position = 'relative';
             wrapper.style.width = '200px';
             wrapper.style.height = '200px';
-            
             wrapper.appendChild(img);
-            wrapper.appendChild(overlay);
+            wrapper.appendChild(loadingOverlay);
             element.appendChild(wrapper);
+            
+            // When image loads, remove the loading overlay
+            img.onload = function() {
+                if (loadingOverlay && loadingOverlay.parentNode) {
+                    loadingOverlay.parentNode.removeChild(loadingOverlay);
+                }
+                
+                // Add a small "Scan with wallet" label under the QR code
+                const label = document.createElement('div');
+                label.style.textAlign = 'center';
+                label.style.fontSize = '11px';
+                label.style.marginTop = '5px';
+                label.style.color = '#666';
+                label.textContent = 'Scan with Chia wallet';
+                element.appendChild(label);
+            };
+            
+            // If Google Charts fails, try QRServer API
+            img.onerror = function() {
+                console.warn('Google Charts QR code failed, trying QRServer API');
+                img.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodedText}`;
+                
+                // If even QRServer fails, use a placeholder
+                img.onerror = function() {
+                    console.error('Both QR code services failed, using placeholder');
+                    wrapper.innerHTML = '';
+                    
+                    const placeholderImg = document.createElement('img');
+                    placeholderImg.src = getPlaceholder('QR_CODE');
+                    placeholderImg.alt = 'QR Code Placeholder';
+                    placeholderImg.width = 200;
+                    placeholderImg.height = 200;
+                    
+                    const placeholderOverlay = document.createElement('div');
+                    placeholderOverlay.style.position = 'absolute';
+                    placeholderOverlay.style.top = '0';
+                    placeholderOverlay.style.left = '0';
+                    placeholderOverlay.style.width = '100%';
+                    placeholderOverlay.style.height = '100%';
+                    placeholderOverlay.style.display = 'flex';
+                    placeholderOverlay.style.alignItems = 'center';
+                    placeholderOverlay.style.justifyContent = 'center';
+                    placeholderOverlay.style.backgroundColor = 'rgba(255,255,255,0.7)';
+                    placeholderOverlay.style.textAlign = 'center';
+                    placeholderOverlay.style.fontSize = '12px';
+                    placeholderOverlay.style.padding = '10px';
+                    placeholderOverlay.innerHTML = `QR Code Unavailable<br><span style="font-size:10px">Offer: ${text.substring(0, 15)}...</span>`;
+                    
+                    wrapper.appendChild(placeholderImg);
+                    wrapper.appendChild(placeholderOverlay);
+                };
+            };
             
         } catch (error) {
             console.warn('Error creating fallback QR code:', error);
@@ -1392,50 +1439,71 @@ document.addEventListener('DOMContentLoaded', function() {
             contractsContainer.appendChild(contractCard);
             
             // Generate QR code for this contract
-            // Defer QR code generation to ensure DOM is fully updated
+            // Use a longer delay and requestAnimationFrame for more reliable rendering
             setTimeout(() => {
-                try {
-                    const qrElementId = `qr-${contract.title.toLowerCase().replace(/\s+/g, '-')}`;
-                    const qrContainer = document.getElementById(qrElementId);
-                    
-                    if (!qrContainer) {
-                        console.warn(`QR container not found: #${qrElementId}`);
-                        return;
-                    }
-                    
-                    // Add a loading placeholder
-                    qrContainer.innerHTML = '<div style="width:200px;height:200px;display:flex;align-items:center;justify-content:center;background:#f5f5f5;">Loading QR...</div>';
-                    
-                    // Ensure QRCode is available before using it
-                    if (typeof QRCode === 'function') {
-                        try {
-                            // Clear container before creating QR code
-                            qrContainer.innerHTML = '';
-                            
-                            // Use the full offer URL if available, or fall back to a generated one
-                            const offerText = contract.offerUrl || `offer1${contract.puzzle}`;
-                            
-                            new QRCode(qrContainer, {
-                                text: offerText,
-                                width: 200,
-                                height: 200,
-                                colorDark: "#000000",
-                                colorLight: "#ffffff",
-                                correctLevel: QRCode.CorrectLevel.H
-                            });
-                        } catch (qrError) {
-                            console.warn(`Error generating QR code with library: ${qrError.message}`);
-                            createFallbackQRCode(qrContainer, contract.offerUrl || `offer1${contract.puzzle}`);
+                requestAnimationFrame(() => {
+                    try {
+                        const qrElementId = `qr-${contract.title.toLowerCase().replace(/\s+/g, '-')}`;
+                        const qrContainer = document.getElementById(qrElementId);
+                        
+                        if (!qrContainer) {
+                            console.warn(`QR container not found: #${qrElementId}`);
+                            return;
                         }
-                    } else {
-                        // Fallback if QRCode library is not available
-                        console.log('QRCode library not available, using fallback');
-                        createFallbackQRCode(qrContainer, contract.offerUrl || `offer1${contract.puzzle}`);
+                        
+                        // Add a loading placeholder
+                        qrContainer.innerHTML = '<div style="width:200px;height:200px;display:flex;align-items:center;justify-content:center;background:#f5f5f5;"><div style="text-align:center"><div class="loading-spinner" style="display:inline-block;margin-bottom:10px;"></div><div>Loading QR Code...</div></div></div>';
+                        
+                        // Create a separate function to generate the QR and call it after a delay
+                        const generateQR = () => {
+                            // Double-check that QRCode is defined
+                            if (typeof QRCode === 'function') {
+                                try {
+                                    // Use the full offer URL if available, or fall back to a generated one
+                                    const offerText = contract.offerUrl || `offer1${contract.puzzle}`;
+                                    
+                                    // Clear container right before creating QR code
+                                    qrContainer.innerHTML = '';
+                                    
+                                    // Create new QR code
+                                    new QRCode(qrContainer, {
+                                        text: offerText,
+                                        width: 200,
+                                        height: 200,
+                                        colorDark: "#000000",
+                                        colorLight: "#ffffff",
+                                        correctLevel: QRCode.CorrectLevel.H
+                                    });
+                                    
+                                    // Check if we got a real QR code or just placeholder
+                                    setTimeout(() => {
+                                        const qrImg = qrContainer.querySelector('img');
+                                        // If there's no img or it contains placeholder in the src, try fallback
+                                        if (!qrImg || qrImg.src.includes('placeholder') || qrImg.src.includes('data:image/svg+xml;base64')) {
+                                            console.warn('QR code looks like a placeholder, trying fallback');
+                                            createFallbackQRCode(qrContainer, offerText);
+                                        }
+                                    }, 100);
+                                    
+                                } catch (qrError) {
+                                    console.warn(`Error generating QR code with library: ${qrError.message}`);
+                                    createFallbackQRCode(qrContainer, contract.offerUrl || `offer1${contract.puzzle}`);
+                                }
+                            } else {
+                                // Fallback if QRCode library is not available
+                                console.log('QRCode library not available, using fallback');
+                                createFallbackQRCode(qrContainer, contract.offerUrl || `offer1${contract.puzzle}`);
+                            }
+                        };
+                        
+                        // Generate QR code after a short delay to ensure DOM is fully ready
+                        setTimeout(generateQR, 300);
+                        
+                    } catch (error) {
+                        console.error('Fatal error in QR code generation:', error);
                     }
-                } catch (error) {
-                    console.error('Fatal error in QR code generation:', error);
-                }
-            }, 100); // Short delay to ensure DOM is ready
+                });
+            }, 500); // Longer delay to ensure DOM is fully ready
         });
         
         // Add event listeners for copy puzzle buttons

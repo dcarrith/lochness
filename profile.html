@@ -437,7 +437,11 @@
     </div>
 
     <!-- External Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <script>
+        // Pre-define QRCode to detect if the library fails to load
+        window.qrCodeLibraryLoaded = false;
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js" onload="window.qrCodeLibraryLoaded = true;"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     
     <!-- Error handlers for scripts -->
@@ -449,56 +453,61 @@
             }
         }, true);
         
-        // Define QRCode globally before other scripts load
-        window.QRCode = window.QRCode || function(element, options) {
-            console.log('Using QRCode polyfill');
-            const img = document.createElement('img');
-            
-            // Default to our placeholder instead of external service which might fail
-            img.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxyZWN0IHg9IjMiIHk9IjMiIHdpZHRoPSI3IiBoZWlnaHQ9IjciPjwvcmVjdD48cmVjdCB4PSIxNCIgeT0iMyIgd2lkdGg9IjciIGhlaWdodD0iNyI+PC9yZWN0PjxyZWN0IHg9IjMiIHk9IjE0IiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ij48L3JlY3Q+PHJlY3QgeD0iMTQiIHk9IjE0IiB3aWR0aD0iMyIgaGVpZ2h0PSIzIj48L3JlY3Q+PHJlY3QgeD0iMTgiIHk9IjE0IiB3aWR0aD0iMyIgaGVpZ2h0PSIzIj48L3JlY3Q+PHJlY3QgeD0iMTQiIHk9IjE4IiB3aWR0aD0iMyIgaGVpZ2h0PSIzIj48L3JlY3Q+PHJlY3QgeD0iMTgiIHk9IjE4IiB3aWR0aD0iMyIgaGVpZ2h0PSIzIj48L3JlY3Q+PC9zdmc+';
-            img.alt = 'QR Code';
-            img.width = options.width || 200;
-            img.height = options.height || 200;
-            
-            // Add text overlay
-            const wrapper = document.createElement('div');
-            wrapper.style.position = 'relative';
-            wrapper.style.width = `${img.width}px`;
-            wrapper.style.height = `${img.height}px`;
-            
-            const overlay = document.createElement('div');
-            overlay.style.position = 'absolute';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.display = 'flex';
-            overlay.style.alignItems = 'center';
-            overlay.style.justifyContent = 'center';
-            overlay.style.color = '#555';
-            overlay.style.backgroundColor = 'rgba(255,255,255,0.7)';
-            overlay.style.textAlign = 'center';
-            overlay.style.padding = '5px';
-            overlay.style.fontSize = '12px';
-            overlay.innerHTML = 'Sample QR Code<br>(For demonstration)';
-            
-            wrapper.appendChild(img);
-            wrapper.appendChild(overlay);
-            
-            if (typeof element === 'string') {
-                element = document.getElementById(element);
-            }
-            
-            if (element) {
-                element.innerHTML = '';
-                element.appendChild(wrapper);
-            } else {
-                console.warn('QRCode target element not found');
-            }
-        };
-        
-        // Add the CorrectLevel property to match the library API
-        window.QRCode.CorrectLevel = { L: 1, M: 0, Q: 3, H: 2 };
+        // Polyfill for QRCode if the library fails to load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                if (!window.qrCodeLibraryLoaded && typeof QRCode === 'undefined') {
+                    console.warn('QRCode library failed to load, using Google Charts API instead');
+                    
+                    // Define a fallback QRCode constructor using Google Charts API
+                    window.QRCode = function(element, options) {
+                        if (typeof element === 'string') {
+                            element = document.getElementById(element);
+                        }
+                        
+                        if (!element) {
+                            console.warn('QRCode target element not found');
+                            return;
+                        }
+                        
+                        // Clear the element
+                        element.innerHTML = '';
+                        
+                        // Create the QR code using Google Charts API
+                        const img = document.createElement('img');
+                        const encodedText = encodeURIComponent(options.text);
+                        img.src = `https://chart.googleapis.com/chart?cht=qr&chl=${encodedText}&chs=${options.width}x${options.height}&chld=H|0`;
+                        img.alt = 'QR Code';
+                        img.width = options.width || 200;
+                        img.height = options.height || 200;
+                        
+                        // Handle image loading errors
+                        img.onerror = function() {
+                            console.warn('Google Charts QR code failed, trying QRServer API');
+                            img.src = `https://api.qrserver.com/v1/create-qr-code/?size=${options.width}x${options.height}&data=${encodedText}`;
+                            
+                            // If even this fails, show a placeholder
+                            img.onerror = function() {
+                                console.error('All QR code services failed, showing placeholder');
+                                element.innerHTML = `
+                                    <div style="width:${options.width}px;height:${options.height}px;display:flex;align-items:center;justify-content:center;border:1px solid #ddd;">
+                                        <div style="text-align:center;padding:10px;font-size:12px;">
+                                            <div>QR Code Unavailable</div>
+                                            <div style="margin-top:5px;font-size:10px;color:#888;">For offer: ${options.text.substring(0, 20)}...</div>
+                                        </div>
+                                    </div>
+                                `;
+                            };
+                        };
+                        
+                        element.appendChild(img);
+                    };
+                    
+                    // Add the CorrectLevel property to match the library API
+                    window.QRCode.CorrectLevel = { L: 1, M: 0, Q: 3, H: 2 };
+                }
+            }, 1000); // Give the library 1 second to load
+        });
         
         // Error handler for missing elements
         document.addEventListener('DOMContentLoaded', function() {
