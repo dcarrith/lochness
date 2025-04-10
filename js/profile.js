@@ -193,17 +193,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Simulate connecting to the blockchain
-        setTimeout(() => {
-            try {
-                // Mark connecting as completed
-                connectingStep.classList.remove('active');
-                connectingStep.classList.add('completed');
+        try {
+            setTimeout(() => {
+                try {
+                    // Mark connecting as completed
+                    connectingStep.classList.remove('active');
+                    connectingStep.classList.add('completed');
+                    
+                    if (connectingStatusText) {
+                        connectingStatusText.textContent = 'Connected successfully';
+                    }
                 
-                if (connectingStatusText) {
-                    connectingStatusText.textContent = 'Connected successfully';
-                }
-            
-                // Start DID verification
+                    // Start DID verification
                 didStep.classList.add('active');
                 const didStatusText = didStep.querySelector('.status-text');
                 if (didStatusText) {
@@ -296,6 +297,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 2500); // DID verification time
             
         }, 2000); // Connection time
+        } catch (error) {
+            console.error('Error in verification process:', error);
+            showError('Verification process failed unexpectedly', true);
+        }
     }
     
     /**
@@ -304,15 +309,20 @@ document.addEventListener('DOMContentLoaded', function() {
      * @returns {number} A numeric hash of the string
      */
     function simpleHash(str) {
-        if (!str) return 0;
-        
-        let hash = 0;
-        for (let i = 0; i < str.length; i++) {
-            const char = str.charCodeAt(i);
-            hash = ((hash << 5) - hash) + char;
-            hash = hash & hash; // Convert to 32bit integer
+        try {
+            if (!str) return 0;
+            
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32bit integer
+            }
+            return Math.abs(hash);
+        } catch (error) {
+            console.error('Error in hash calculation:', error);
+            return 0; // Return 0 as fallback in case of error
         }
-        return Math.abs(hash);
     }
 
     /**
@@ -320,8 +330,12 @@ document.addEventListener('DOMContentLoaded', function() {
      * @param {boolean} success - Whether verification was successful
      * @param {Object} details - The verification details
      */
-    function showVerificationResult(success, details) {
+    function showVerificationResult(success, details = {}) {
         try {
+            // Validate input parameters with defaults
+            success = !!success; // Ensure boolean
+            details = details || {}; // Ensure object
+            
             // Get elements with error handling
             const stepsContainer = document.getElementById('verification-steps');
             const resultContainer = document.getElementById('verification-result');
@@ -387,7 +401,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             console.error('Error showing verification result:', error);
-            alert('There was a problem displaying verification results. Please try again.');
+            // Use showError function instead of alert for consistency
+            showError('There was a problem displaying verification results. Please try again.', true);
         }
     }
     
