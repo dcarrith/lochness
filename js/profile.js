@@ -3,6 +3,24 @@
  * Handles loading and displaying professional profiles from Chia offer files
  */
 
+// Global error handler for UI elements
+function showError(message, isAlert = false) {
+    console.error('Error:', message);
+    
+    // Try to use error display element
+    const errorElement = document.getElementById('upload-error');
+    if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+        
+        // Scroll to error
+        errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else if (isAlert) {
+        // Fallback to alert
+        alert(message);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Generate default profile images on load
     generateDefaultProfileImages();
@@ -55,27 +73,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Verify button click handler
-    verifyButton.addEventListener('click', function() {
-        verifyCredentials();
-    });
+    // Verify button click handler with error handling
+    if (verifyButton) {
+        verifyButton.addEventListener('click', function() {
+            verifyCredentials();
+        });
+    } else {
+        console.warn('Verify button not found');
+    }
     
     /**
      * Verify credentials using the Chia blockchain
      */
     function verifyCredentials() {
-        // Get the DID value
-        const didValue = document.getElementById('profile-did-value').textContent;
-        
-        // Show the verification modal
-        const modal = document.getElementById('verification-modal');
-        modal.style.display = 'block';
-        
-        // Reset the verification UI
-        resetVerificationUI();
-        
-        // Start the verification process
-        runVerificationProcess(didValue);
+        try {
+            // Get the DID value with error handling
+            const didElement = document.getElementById('profile-did-value');
+            if (!didElement) {
+                console.warn('DID element not found');
+                showError('Cannot verify: DID information is missing', true);
+                return;
+            }
+            
+            const didValue = didElement.textContent;
+            
+            // Show the verification modal with error handling
+            const modal = document.getElementById('verification-modal');
+            if (!modal) {
+                console.error('Verification modal not found');
+                showError('Verification cannot be completed due to a technical issue', true);
+                return;
+            }
+            
+            modal.style.display = 'block';
+            
+            // Reset the verification UI
+            resetVerificationUI();
+            
+            // Start the verification process
+            runVerificationProcess(didValue);
+        } catch (error) {
+            console.error('Error in verification process:', error);
+            showError('Verification process failed: ' + error.message, true);
+        }
     }
     
     /**
@@ -106,29 +146,69 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     /**
+     * Safely get DOM element with error handling
+     * @param {string} selector - CSS selector for the element
+     * @param {string} context - Description of what we're looking for (for error messages)
+     * @returns {Element|null} - The found element or null if not found
+     */
+    function safeQuerySelector(selector, context = 'element') {
+        try {
+            const element = document.querySelector(selector);
+            if (!element) {
+                console.warn(`${context} not found: ${selector}`);
+            }
+            return element;
+        } catch (error) {
+            console.error(`Error finding ${context}: ${error.message}`);
+            return null;
+        }
+    }
+    
+    /**
      * Run the verification process for a given DID
      * @param {string} didValue - The DID to verify
      */
     function runVerificationProcess(didValue) {
-        // Get all verification steps
-        const connectingStep = document.querySelector('.verification-step[data-step="connecting"]');
-        const didStep = document.querySelector('.verification-step[data-step="did"]');
-        const credentialsStep = document.querySelector('.verification-step[data-step="credentials"]');
-        const integrityStep = document.querySelector('.verification-step[data-step="integrity"]');
+        // Get all verification steps with error handling
+        const connectingStep = safeQuerySelector('.verification-step[data-step="connecting"]', 'Connecting step');
+        const didStep = safeQuerySelector('.verification-step[data-step="did"]', 'DID step');
+        const credentialsStep = safeQuerySelector('.verification-step[data-step="credentials"]', 'Credentials step');
+        const integrityStep = safeQuerySelector('.verification-step[data-step="integrity"]', 'Integrity step');
+        
+        // Check if required elements exist
+        if (!connectingStep || !didStep || !credentialsStep || !integrityStep) {
+            console.error('Cannot run verification process: required elements are missing');
+            const errorMessage = 'Verification process cannot be completed due to a technical issue. Please try again later.';
+            showError(errorMessage);
+            return;
+        }
         
         // Mark connecting step as active
         connectingStep.classList.add('active');
         
+        // Get status text element with error handling
+        const connectingStatusText = connectingStep.querySelector('.status-text');
+        if (!connectingStatusText) {
+            console.warn('Status text element not found in connecting step');
+        }
+        
         // Simulate connecting to the blockchain
         setTimeout(() => {
-            // Mark connecting as completed
-            connectingStep.classList.remove('active');
-            connectingStep.classList.add('completed');
-            connectingStep.querySelector('.status-text').textContent = 'Connected successfully';
+            try {
+                // Mark connecting as completed
+                connectingStep.classList.remove('active');
+                connectingStep.classList.add('completed');
+                
+                if (connectingStatusText) {
+                    connectingStatusText.textContent = 'Connected successfully';
+                }
             
-            // Start DID verification
-            didStep.classList.add('active');
-            didStep.querySelector('.status-text').textContent = 'Validating DID...';
+                // Start DID verification
+                didStep.classList.add('active');
+                const didStatusText = didStep.querySelector('.status-text');
+                if (didStatusText) {
+                    didStatusText.textContent = 'Validating DID...';
+                }
             
             // Simulate DID verification
             setTimeout(() => {
@@ -139,29 +219,47 @@ document.addEventListener('DOMContentLoaded', function() {
                     // DID is valid
                     didStep.classList.remove('active');
                     didStep.classList.add('completed');
-                    didStep.querySelector('.status-text').textContent = 'DID verified on blockchain';
+                    
+                    const didStatusText = didStep.querySelector('.status-text');
+                    if (didStatusText) {
+                        didStatusText.textContent = 'DID verified on blockchain';
+                    }
                     
                     // Start credentials verification
                     credentialsStep.classList.add('active');
-                    credentialsStep.querySelector('.status-text').textContent = 'Checking credentials...';
+                    const credentialsStatusText = credentialsStep.querySelector('.status-text');
+                    if (credentialsStatusText) {
+                        credentialsStatusText.textContent = 'Checking credentials...';
+                    }
                     
                     // Simulate credentials verification
                     setTimeout(() => {
                         // Credentials are valid
                         credentialsStep.classList.remove('active');
                         credentialsStep.classList.add('completed');
-                        credentialsStep.querySelector('.status-text').textContent = 'Credentials validated';
+                        
+                        const credStatusText = credentialsStep.querySelector('.status-text');
+                        if (credStatusText) {
+                            credStatusText.textContent = 'Credentials validated';
+                        }
                         
                         // Start integrity check
                         integrityStep.classList.add('active');
-                        integrityStep.querySelector('.status-text').textContent = 'Verifying signatures...';
+                        const integrityStatusText = integrityStep.querySelector('.status-text');
+                        if (integrityStatusText) {
+                            integrityStatusText.textContent = 'Verifying signatures...';
+                        }
                         
                         // Simulate integrity check
                         setTimeout(() => {
                             // Integrity check passed
                             integrityStep.classList.remove('active');
                             integrityStep.classList.add('completed');
-                            integrityStep.querySelector('.status-text').textContent = 'Integrity verified';
+                            
+                            const integStatusText = integrityStep.querySelector('.status-text');
+                            if (integStatusText) {
+                                integStatusText.textContent = 'Integrity verified';
+                            }
                             
                             // Show verification result after a short delay
                             setTimeout(() => {
@@ -181,7 +279,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     // DID is invalid
                     didStep.classList.remove('active');
                     didStep.classList.add('failed');
-                    didStep.querySelector('.status-text').textContent = 'DID verification failed';
+                    
+                    const didStatusText = didStep.querySelector('.status-text');
+                    if (didStatusText) {
+                        didStatusText.textContent = 'DID verification failed';
+                    }
                     
                     // Show verification result with error after a short delay
                     setTimeout(() => {
@@ -219,44 +321,73 @@ document.addEventListener('DOMContentLoaded', function() {
      * @param {Object} details - The verification details
      */
     function showVerificationResult(success, details) {
-        // Hide the steps and show the result
-        document.getElementById('verification-steps').style.display = 'none';
-        document.getElementById('verification-result').style.display = 'block';
+        try {
+            // Get elements with error handling
+            const stepsContainer = document.getElementById('verification-steps');
+            const resultContainer = document.getElementById('verification-result');
+            
+            if (!stepsContainer || !resultContainer) {
+                console.error('Verification result containers not found');
+                return;
+            }
+            
+            // Hide the steps and show the result
+            stepsContainer.style.display = 'none';
+            resultContainer.style.display = 'block';
+            
+            const resultTitle = safeQuerySelector('.result-title', 'Result title');
+            const resultMessage = safeQuerySelector('.result-message', 'Result message');
+            const successIcon = safeQuerySelector('.success-icon', 'Success icon');
+            const errorIcon = safeQuerySelector('.error-icon', 'Error icon');
+            const credentialDetails = safeQuerySelector('.credential-details', 'Credential details');
+            const explorerLink = document.getElementById('verification-explorer-link');
+            
+            // If any essential elements are missing, show a generic error
+            if (!resultTitle || !resultMessage || !successIcon || !errorIcon) {
+                console.error('Essential verification result elements not found');
+                alert('There was a problem displaying verification results. Please try again.');
+                return;
+            }
         
-        const resultTitle = document.querySelector('.result-title');
-        const resultMessage = document.querySelector('.result-message');
-        const successIcon = document.querySelector('.success-icon');
-        const errorIcon = document.querySelector('.error-icon');
-        const credentialDetails = document.querySelector('.credential-details');
-        const explorerLink = document.getElementById('verification-explorer-link');
-        
-        if (success) {
-            // Show success UI
-            resultTitle.textContent = 'Verification Complete';
-            resultMessage.textContent = 'All credentials verified successfully!';
-            successIcon.style.display = 'block';
-            errorIcon.style.display = 'none';
-            credentialDetails.style.display = 'block';
+            if (success) {
+                // Show success UI
+                if (resultTitle) resultTitle.textContent = 'Verification Complete';
+                if (resultMessage) resultMessage.textContent = 'All credentials verified successfully!';
+                if (successIcon) successIcon.style.display = 'block';
+                if (errorIcon) errorIcon.style.display = 'none';
+                if (credentialDetails) credentialDetails.style.display = 'block';
+                
+                // Fill in credential details
+                const issuerElement = document.getElementById('credential-issuer');
+                const dateElement = document.getElementById('credential-date');
+                const confirmationElement = document.getElementById('credential-confirmation');
+                const signatureElement = document.getElementById('credential-signature');
+                
+                if (issuerElement) issuerElement.textContent = details.issuer;
+                if (dateElement) dateElement.textContent = details.date;
+                if (confirmationElement) confirmationElement.textContent = details.confirmation;
+                if (signatureElement) signatureElement.textContent = details.signature;
+                
+                // Set explorer link
+                if (explorerLink) {
+                    const didElement = document.getElementById('profile-did-value');
+                    const didValue = didElement ? didElement.textContent : 'unknown';
+                    explorerLink.href = `https://www.chiaexplorer.com/blockchain/coin/${simpleHash(didValue)}`;
+                    explorerLink.style.display = 'inline-block';
+                }
             
-            // Fill in credential details
-            document.getElementById('credential-issuer').textContent = details.issuer;
-            document.getElementById('credential-date').textContent = details.date;
-            document.getElementById('credential-confirmation').textContent = details.confirmation;
-            document.getElementById('credential-signature').textContent = details.signature;
-            
-            // Set explorer link
-            const didValue = document.getElementById('profile-did-value').textContent;
-            explorerLink.href = `https://www.chiaexplorer.com/blockchain/coin/${simpleHash(didValue)}`;
-            explorerLink.style.display = 'inline-block';
-            
-        } else {
-            // Show error UI
-            resultTitle.textContent = 'Verification Failed';
-            resultMessage.textContent = details.error;
-            successIcon.style.display = 'none';
-            errorIcon.style.display = 'block';
-            credentialDetails.style.display = 'none';
-            explorerLink.style.display = 'none';
+            } else {
+                // Show error UI
+                if (resultTitle) resultTitle.textContent = 'Verification Failed';
+                if (resultMessage) resultMessage.textContent = details.error || 'Unknown verification error';
+                if (successIcon) successIcon.style.display = 'none';
+                if (errorIcon) errorIcon.style.display = 'block';
+                if (credentialDetails) credentialDetails.style.display = 'none';
+                if (explorerLink) explorerLink.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('Error showing verification result:', error);
+            alert('There was a problem displaying verification results. Please try again.');
         }
     }
     
@@ -269,25 +400,37 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Modal close button click handlers
+    // Modal close button click handlers with better error handling
     if (closeModalBtn) {
         closeModalBtn.addEventListener('click', function() {
-            verificationModal.style.display = 'none';
+            if (verificationModal) {
+                verificationModal.style.display = 'none';
+            }
         });
+    } else {
+        console.warn('Modal close button not found');
     }
     
     if (verificationCloseBtn) {
         verificationCloseBtn.addEventListener('click', function() {
-            verificationModal.style.display = 'none';
+            if (verificationModal) {
+                verificationModal.style.display = 'none';
+            }
         });
+    } else {
+        console.warn('Verification close button not found');
     }
     
     // Close modal when clicking outside the content
-    window.addEventListener('click', function(event) {
-        if (event.target === verificationModal) {
-            verificationModal.style.display = 'none';
-        }
-    });
+    if (verificationModal) {
+        window.addEventListener('click', function(event) {
+            if (event.target === verificationModal) {
+                verificationModal.style.display = 'none';
+            }
+        });
+    } else {
+        console.warn('Verification modal not found, cannot add click listener');
+    }
     
     // Check for offer parameter in URL
     checkForOfferInUrl();
@@ -815,26 +958,53 @@ document.addEventListener('DOMContentLoaded', function() {
      * @param {string} text - The text to encode in the QR code
      */
     function createFallbackQRCode(element, text) {
+        if (!element) {
+            console.warn('Cannot create fallback QR code: container element is null');
+            return;
+        }
+        
         try {
-            // Use our local placeholder if the external service is unavailable
+            // Clear existing content
+            element.innerHTML = '';
+            
+            // First try with local placeholder - more reliable than external API
             const img = document.createElement('img');
-            img.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(text)}`;
+            img.src = getPlaceholder('QR_CODE');
             img.alt = 'QR Code';
             img.width = 200;
             img.height = 200;
             
-            // Add error handler to use a local SVG fallback if the API call fails
-            img.onerror = function() {
-                this.src = getPlaceholder('QR_CODE');
-                this.onerror = null; // Prevent infinite error loop
-                console.log('Using local QR code placeholder');
-            };
+            // Add text overlay to indicate this is a placeholder
+            const overlay = document.createElement('div');
+            overlay.style.position = 'absolute';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.display = 'flex';
+            overlay.style.alignItems = 'center';
+            overlay.style.justifyContent = 'center';
+            overlay.style.color = '#555';
+            overlay.style.backgroundColor = 'rgba(255,255,255,0.7)';
+            overlay.style.borderRadius = '5px';
+            overlay.style.fontSize = '12px';
+            overlay.style.textAlign = 'center';
+            overlay.style.padding = '5px';
+            overlay.textContent = 'Sample QR Code\n(For demonstration)';
             
-            element.innerHTML = '';
-            element.appendChild(img);
+            // Create a wrapper with relative positioning
+            const wrapper = document.createElement('div');
+            wrapper.style.position = 'relative';
+            wrapper.style.width = '200px';
+            wrapper.style.height = '200px';
+            
+            wrapper.appendChild(img);
+            wrapper.appendChild(overlay);
+            element.appendChild(wrapper);
+            
         } catch (error) {
             console.warn('Error creating fallback QR code:', error);
-            element.innerHTML = `<div style="width:200px;height:200px;display:flex;align-items:center;justify-content:center;border:1px solid #ddd;font-size:12px;">QR Code<br>Unavailable</div>`;
+            element.innerHTML = `<div style="width:200px;height:200px;display:flex;align-items:center;justify-content:center;border:1px solid #ddd;font-size:12px;text-align:center;">QR Code<br>Unavailable</div>`;
         }
     }
 
@@ -1187,16 +1357,27 @@ document.addEventListener('DOMContentLoaded', function() {
             
             contractsContainer.appendChild(contractCard);
             
-            // Generate QR code for this contract - use a more reliable approach
-            const qrContainer = document.getElementById(`qr-${contract.title.toLowerCase().replace(/\s+/g, '-')}`);
-            if (qrContainer) {
-                // Add a loading placeholder
-                qrContainer.innerHTML = '<div style="width:200px;height:200px;display:flex;align-items:center;justify-content:center;background:#f5f5f5;">Loading QR...</div>';
-                
-                // Use requestAnimationFrame to ensure DOM is ready
-                requestAnimationFrame(() => {
-                    try {
-                        if (typeof QRCode === 'function') {
+            // Generate QR code for this contract
+            // Defer QR code generation to ensure DOM is fully updated
+            setTimeout(() => {
+                try {
+                    const qrElementId = `qr-${contract.title.toLowerCase().replace(/\s+/g, '-')}`;
+                    const qrContainer = document.getElementById(qrElementId);
+                    
+                    if (!qrContainer) {
+                        console.warn(`QR container not found: #${qrElementId}`);
+                        return;
+                    }
+                    
+                    // Add a loading placeholder
+                    qrContainer.innerHTML = '<div style="width:200px;height:200px;display:flex;align-items:center;justify-content:center;background:#f5f5f5;">Loading QR...</div>';
+                    
+                    // Ensure QRCode is available before using it
+                    if (typeof QRCode === 'function') {
+                        try {
+                            // Clear container before creating QR code
+                            qrContainer.innerHTML = '';
+                            
                             new QRCode(qrContainer, {
                                 text: `offer1${contract.puzzle.substring(0, 20)}...`,
                                 width: 200,
@@ -1205,16 +1386,19 @@ document.addEventListener('DOMContentLoaded', function() {
                                 colorLight: "#ffffff",
                                 correctLevel: QRCode.CorrectLevel.H
                             });
-                        } else {
-                            // Fallback if QRCode library is not available
+                        } catch (qrError) {
+                            console.warn(`Error generating QR code with library: ${qrError.message}`);
                             createFallbackQRCode(qrContainer, `offer1${contract.puzzle.substring(0, 20)}...`);
                         }
-                    } catch (error) {
-                        console.warn('Error generating QR code:', error);
+                    } else {
+                        // Fallback if QRCode library is not available
+                        console.log('QRCode library not available, using fallback');
                         createFallbackQRCode(qrContainer, `offer1${contract.puzzle.substring(0, 20)}...`);
                     }
-                });
-            }
+                } catch (error) {
+                    console.error('Fatal error in QR code generation:', error);
+                }
+            }, 100); // Short delay to ensure DOM is ready
         });
         
         // Add event listeners for copy puzzle buttons
