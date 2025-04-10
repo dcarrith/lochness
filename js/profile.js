@@ -194,17 +194,27 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Simulate connecting to the blockchain
         try {
-            setTimeout(() => {
-                try {
-                    // Mark connecting as completed
-                    connectingStep.classList.remove('active');
-                    connectingStep.classList.add('completed');
+            // Use a Promise-based approach for better error handling with async code
+            const connectPromise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    try {
+                        // Mark connecting as completed
+                        connectingStep.classList.remove('active');
+                        connectingStep.classList.add('completed');
+                        
+                        if (connectingStatusText) {
+                            connectingStatusText.textContent = 'Connected successfully';
+                        }
                     
-                    if (connectingStatusText) {
-                        connectingStatusText.textContent = 'Connected successfully';
+                        // Start DID verification
+                        resolve();
+                    } catch (innerError) {
+                        reject(innerError);
                     }
-                
-                    // Start DID verification
+                }, 2000); // Connection time
+            });
+            
+            connectPromise.then(() => {
                 didStep.classList.add('active');
                 const didStatusText = didStep.querySelector('.status-text');
                 if (didStatusText) {
@@ -296,10 +306,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 
             }, 2500); // DID verification time
             
-        }, 2000); // Connection time
+            }).catch(error => {
+                console.error('Error in verification process:', error);
+                showError('Verification process failed unexpectedly', true);
+            });
         } catch (error) {
-            console.error('Error in verification process:', error);
-            showError('Verification process failed unexpectedly', true);
+            console.error('Error in verification setup:', error);
+            showError('Verification process failed to initialize', true);
         }
     }
     
@@ -310,9 +323,11 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function simpleHash(str) {
         try {
-            if (!str) return 0;
+            // Early return for empty or non-string inputs
+            if (!str || typeof str !== 'string') return 0;
             
             let hash = 0;
+            // Use a standard djb2 hash algorithm
             for (let i = 0; i < str.length; i++) {
                 const char = str.charCodeAt(i);
                 hash = ((hash << 5) - hash) + char;
@@ -334,7 +349,7 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             // Validate input parameters with defaults
             success = !!success; // Ensure boolean
-            details = details || {}; // Ensure object
+            // details default parameter already handles empty object case
             
             // Get elements with error handling
             const stepsContainer = document.getElementById('verification-steps');
