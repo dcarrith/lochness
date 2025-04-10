@@ -1033,7 +1033,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else if (tool.icon) {
                     iconHtml = `<img src="${tool.icon}" alt="${tool.name}" onerror="this.src=getPlaceholder('TOOL'); this.style.width='24px'; this.style.height='24px';">`;
                 } else {
-                    iconHtml = `<i class="fas fa-tools"></i>`;
+                    iconHtml = `<i class="fas fa-tools" onerror="this.outerHTML='<span>🛠️</span>';"></i>`;
                 }
             } catch (error) {
                 console.warn('Error creating tool icon:', error);
