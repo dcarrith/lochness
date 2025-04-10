@@ -436,17 +436,45 @@
         </div>
     </div>
 
+    <!-- External Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
-    <!-- Add error handlers for scripts -->
+    
+    <!-- Error handlers for scripts -->
     <script>
         // Handle script loading errors
         window.addEventListener('error', function(e) {
-            if (e.target && e.target.tagName === 'SCRIPT') {
-                console.warn('Script loading error:', e.target.src);
+            if (e.target && (e.target.tagName === 'SCRIPT' || e.target.tagName === 'IMG')) {
+                console.warn('Resource loading error:', e.target.src);
             }
         }, true);
+        
+        // Create a global QRCode fallback in case the library fails to load
+        if (typeof QRCode === 'undefined') {
+            window.QRCode = function(element, options) {
+                const img = document.createElement('img');
+                img.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(options.text)}`;
+                img.alt = 'QR Code';
+                img.width = options.width || 200;
+                img.height = options.height || 200;
+                
+                if (typeof element === 'string') {
+                    element = document.getElementById(element);
+                }
+                
+                if (element) {
+                    element.innerHTML = '';
+                    element.appendChild(img);
+                }
+            };
+            
+            // Add the CorrectLevel property to match the library API
+            window.QRCode.CorrectLevel = { L: 1, M: 0, Q: 3, H: 2 };
+        }
     </script>
+    
+    <!-- Application Scripts -->
+    <script src="js/placeholders.js"></script>
     <script src="js/profile-image-generator.js"></script>
     <script src="js/main.js"></script>
     <script src="js/contracts.js"></script>

@@ -109,6 +109,22 @@
     color: white;
 }
 
+/* Fallback styles for missing Font Awesome icons */
+.fas {
+    display: inline-block;
+    text-align: center;
+    min-width: 1em;
+}
+
+.fas[style*="none"] {
+    display: none;
+}
+
+/* Ensure the modal has proper z-index and is visible */
+.modal {
+    z-index: 9999;
+}
+
 .verification-step.completed .step-icon {
     background-color: #2ecc71;
 }

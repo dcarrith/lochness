@@ -815,13 +815,27 @@ document.addEventListener('DOMContentLoaded', function() {
      * @param {string} text - The text to encode in the QR code
      */
     function createFallbackQRCode(element, text) {
-        // Create a fallback QR code using an image
-        const img = document.createElement('img');
-        img.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(text)}`;
-        img.alt = 'QR Code';
-        img.width = 200;
-        img.height = 200;
-        element.appendChild(img);
+        try {
+            // Use our local placeholder if the external service is unavailable
+            const img = document.createElement('img');
+            img.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(text)}`;
+            img.alt = 'QR Code';
+            img.width = 200;
+            img.height = 200;
+            
+            // Add error handler to use a local SVG fallback if the API call fails
+            img.onerror = function() {
+                this.src = getPlaceholder('QR_CODE');
+                this.onerror = null; // Prevent infinite error loop
+                console.log('Using local QR code placeholder');
+            };
+            
+            element.innerHTML = '';
+            element.appendChild(img);
+        } catch (error) {
+            console.warn('Error creating fallback QR code:', error);
+            element.innerHTML = `<div style="width:200px;height:200px;display:flex;align-items:center;justify-content:center;border:1px solid #ddd;font-size:12px;">QR Code<br>Unavailable</div>`;
+        }
     }
 
     /**
@@ -850,7 +864,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (avatarElement) {
                 avatarElement.innerHTML = `
                     <div style="width: 100%; height: 100%; background-color: #3498db; display: flex; justify-content: center; align-items: center; color: white; font-size: 36px; font-weight: bold; border-radius: 50%;">
-                        LG
+                        ${profile ? profile.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'LG'}
                     </div>
                 `;
             }
@@ -982,7 +996,7 @@ document.addEventListener('DOMContentLoaded', function() {
             certCard.className = 'certification-card';
             certCard.innerHTML = `
                 <div class="certification-logo">
-                    <img src="${cert.logo}" alt="${cert.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM2NjY2NjYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjgiIHI9IjciPjwvY2lyY2xlPjxwb2x5bGluZSBwb2ludHM9IjguMjEgMTMuODkgNyAyMyAxMiAyMCAxNyAyMyAxNS43OSAxMy44OCI+PC9wb2x5bGluZT48L3N2Zz4='; this.style.width='80px'; this.style.height='80px';">
+                    <img src="${cert.logo}" alt="${cert.name}" onerror="this.src=getPlaceholder('CERTIFICATION'); this.style.width='80px'; this.style.height='80px';">
                 </div>
                 <div class="certification-details">
                     <div class="certification-name">${cert.name}</div>
@@ -1017,7 +1031,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (tool.icon && tool.icon.startsWith('fa-')) {
                     iconHtml = `<i class="fas ${tool.icon}"></i>`;
                 } else if (tool.icon) {
-                    iconHtml = `<img src="${tool.icon}" alt="${tool.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM2NjY2NjYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzIiB5PSIzIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHJ4PSIyIiByeT0iMiI+PC9yZWN0PjxjaXJjbGUgY3g9IjguNSIgY3k9IjguNSIgcj0iMS41Ij48L2NpcmNsZT48cG9seWxpbmUgcG9pbnRzPSIyMSAxNSAxNiAxMCA1IDIxIj48L3BvbHlsaW5lPjwvc3ZnPg=='; this.style.width='24px'; this.style.height='24px';"">`;
+                    iconHtml = `<img src="${tool.icon}" alt="${tool.name}" onerror="this.src=getPlaceholder('TOOL'); this.style.width='24px'; this.style.height='24px';">`;
                 } else {
                     iconHtml = `<i class="fas fa-tools"></i>`;
                 }
@@ -1076,7 +1090,7 @@ document.addEventListener('DOMContentLoaded', function() {
             projectCard.className = 'project-card';
             projectCard.innerHTML = `
                 <div class="project-img">
-                    <img src="${project.image}" alt="${project.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzY2NjY2NiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwb2x5Z29uIHBvaW50cz0iMTIgMiAyIDcgMTIgMTIgMjIgNyAxMiAyIj48L3BvbHlnb24+PHBvbHlsaW5lIHBvaW50cz0iMiAxNyAxMiAyMiAyMiAxNyI+PC9wb2x5bGluZT48cG9seWxpbmUgcG9pbnRzPSIyIDEyIDEyIDE3IDIyIDEyIj48L3BvbHlsaW5lPjwvc3ZnPg=='; this.style.width='100%'; this.style.height='auto';">
+                    <img src="${project.image}" alt="${project.name}" onerror="this.src=getPlaceholder('PROJECT'); this.style.width='100%'; this.style.height='auto';">
                 </div>
                 <div class="project-details">
                     <h4 class="project-name">${project.name}</h4>
@@ -1107,7 +1121,7 @@ document.addEventListener('DOMContentLoaded', function() {
             eduItem.className = 'education-item';
             eduItem.innerHTML = `
                 <div class="education-logo">
-                    <img src="${edu.logo}" alt="${edu.institution}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM2NjY2NjYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMjIgMTl2M2gtMjB2LTNoMjBtLTgtMTB2LTNoLTR2M2g0bS04IDR2Mmg0di0yaDRsMCAyaDR2LTJsLTgtNWwtOCA1eiI+PC9wYXRoPjwvc3ZnPg=='; this.style.width='80px'; this.style.height='80px';">
+                    <img src="${edu.logo}" alt="${edu.institution}" onerror="this.src=getPlaceholder('EDUCATION'); this.style.width='80px'; this.style.height='80px';">
                 </div>
                 <div class="education-details">
                     <h4 class="education-degree">${edu.degree}</h4>
@@ -1173,12 +1187,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             contractsContainer.appendChild(contractCard);
             
-            // Generate QR code for this contract
-            setTimeout(() => {
-                const qrContainer = document.getElementById(`qr-${contract.title.toLowerCase().replace(/\s+/g, '-')}`);
-                if (qrContainer) {
+            // Generate QR code for this contract - use a more reliable approach
+            const qrContainer = document.getElementById(`qr-${contract.title.toLowerCase().replace(/\s+/g, '-')}`);
+            if (qrContainer) {
+                // Add a loading placeholder
+                qrContainer.innerHTML = '<div style="width:200px;height:200px;display:flex;align-items:center;justify-content:center;background:#f5f5f5;">Loading QR...</div>';
+                
+                // Use requestAnimationFrame to ensure DOM is ready
+                requestAnimationFrame(() => {
                     try {
-                        if (window.QRCode) {
+                        if (typeof QRCode === 'function') {
                             new QRCode(qrContainer, {
                                 text: `offer1${contract.puzzle.substring(0, 20)}...`,
                                 width: 200,
@@ -1195,8 +1213,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         console.warn('Error generating QR code:', error);
                         createFallbackQRCode(qrContainer, `offer1${contract.puzzle.substring(0, 20)}...`);
                     }
-                }
-            }, 100);
+                });
+            }
         });
         
         // Add event listeners for copy puzzle buttons
