@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Profiles | Lochness Group</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/contracts.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/profiles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="images/lochness-logo.svg" alt="Lochness Group Logo">
+                <span>Lochness Group</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#technology">Technology</a>
+                <a href="index.html#datalayer">DataLayer</a>
+                <a href="index.html#enterprise">Enterprise</a>
+                <a href="index.html#contracts">Contracts</a>
+                <a href="profiles.html" class="active">Profiles</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="profiles-header parallax-section">
+        <div class="parallax-bg" style="background-image: url('images/crypto-bg.jpg');"></div>
+        <div class="container">
+            <div class="section-header light">
+                <h1>Professional Profiles</h1>
+                <div class="separator"></div>
+                <p>Connect with verified blockchain professionals through Chia's decentralized identity system</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section class="search-filter">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-input-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="profile-search" placeholder="Search by name or skills (e.g., Chialisp, Farming, DataLayer)">
+                </div>
+                <button class="btn btn-primary search-btn">Search</button>
+            </div>
+            
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label for="category-filter">Category</label>
+                    <select id="category-filter">
+                        <option value="all">All Categories</option>
+                        <option value="developer">Smart Contract Developer</option>
+                        <option value="farming">Farm Specialist</option>
+                        <option value="data">DataLayer Architect</option>
+                        <option value="security">Security Auditor</option>
+                        <option value="aiops">AIOps Engineer</option>
+                        <option value="infrastructure">Infrastructure Specialist</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="rating-filter">Min Rating</label>
+                    <select id="rating-filter">
+                        <option value="0">Any Rating</option>
+                        <option value="4.5">4.5 & Up</option>
+                        <option value="4.0">4.0 & Up</option>
+                        <option value="3.5">3.5 & Up</option>
+                        <option value="3.0">3.0 & Up</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="availability-filter">Availability</label>
+                    <select id="availability-filter">
+                        <option value="all">All</option>
+                        <option value="available">Available Now</option>
+                        <option value="limited">Limited Availability</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="rate-filter">Max Rate (XCH/hr)</label>
+                    <select id="rate-filter">
+                        <option value="100">Any Rate</option>
+                        <option value="0.3">0.3 XCH</option>
+                        <option value="0.5">0.5 XCH</option>
+                        <option value="0.8">0.8 XCH</option>
+                        <option value="1.0">1.0 XCH</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="filter-tags" id="filter-tags">
+                <!-- Active filters will appear here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Indicator -->
+    <section class="loading-section" id="loading-section">
+        <div class="container">
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <p>Loading professionals from Chia DataLayer...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profiles Grid -->
+    <section class="profiles-grid" id="profiles-grid">
+        <div class="container">
+            <div class="grid-controls">
+                <div class="results-count">
+                    Showing <span id="results-count">0</span> professionals
+                </div>
+                <div class="sort-controls">
+                    <label for="sort-select">Sort by:</label>
+                    <select id="sort-select">
+                        <option value="rating">Rating (High to Low)</option>
+                        <option value="rate-low">Rate (Low to High)</option>
+                        <option value="rate-high">Rate (High to Low)</option>
+                        <option value="name">Name (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="profiles-container" id="profiles-container">
+                <!-- Profile cards will be dynamically inserted here -->
+            </div>
+            
+            <div class="pagination" id="pagination">
+                <!-- Pagination controls will be added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Empty Results Message -->
+    <section class="empty-results" id="empty-results" style="display: none;">
+        <div class="container">
+            <div class="empty-message">
+                <i class="fas fa-search"></i>
+                <h3>No professionals found</h3>
+                <p>Try adjusting your search filters or try again later.</p>
+                <button class="btn btn-primary reset-filters-btn">Reset Filters</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- DataLayer Connection Error -->
+    <section class="connection-error" id="connection-error" style="display: none;">
+        <div class="container">
+            <div class="error-message">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Connection Error</h3>
+                <p>We couldn't connect to the Chia DataLayer. Please check your connection and try again.</p>
+                <button class="btn btn-primary retry-btn">Retry Connection</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Card Template (hidden, used by JavaScript) -->
+    <template id="profile-card-template">
+        <div class="profile-card">
+            <div class="profile-card-header">
+                <div class="profile-avatar">
+                    <!-- Avatar will be inserted here -->
+                </div>
+                <div class="profile-card-rating">
+                    <span class="rating-score">4.9</span>
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <span class="rating-count">(42)</span>
+                </div>
+            </div>
+            <div class="profile-card-body">
+                <h3 class="profile-name">John Smith</h3>
+                <div class="profile-title">Chia Developer & Farm Specialist</div>
+                <div class="profile-skills">
+                    <span class="skill-tag">Chialisp</span>
+                    <span class="skill-tag">Farming</span>
+                    <span class="skill-tag">Security</span>
+                </div>
+                <div class="profile-rate">
+                    <i class="fas fa-tag"></i> <span class="rate-value">0.5 XCH/hr</span>
+                </div>
+                <div class="profile-availability available">
+                    <i class="fas fa-clock"></i> Available Now
+                </div>
+            </div>
+            <div class="profile-card-footer">
+                <a href="profile.html?did=did:chia:1234567890" class="btn btn-primary btn-sm">View Profile</a>
+                <button class="btn btn-secondary btn-sm contact-btn">
+                    <i class="fas fa-envelope"></i> Contact
+                </button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/lochness-logo-white.svg" alt="Lochness Group Logo">
+                    <span>Lochness Group</span>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="index.html#about">About Us</a>
+                        <a href="#">Team</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Press</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <a href="index.html#services">Farm Monitoring</a>
+                        <a href="index.html#services">Chialisp Security</a>
+                        <a href="index.html#services">Farming Analytics</a>
+                        <a href="index.html#services">Smart Contract Development</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <a href="#">Blog</a>
+                        <a href="#">Whitepapers</a>
+                        <a href="#">Documentation</a>
+                        <a href="#">API</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">GDPR</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Lochness Group. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- External Libraries -->
+    <script>
+        // Pre-define QRCode to detect if the library fails to load
+        window.qrCodeLibraryLoaded = false;
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js" onload="window.qrCodeLibraryLoaded = true;"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    
+    <!-- Application Scripts -->
+    <script src="js/placeholders.js"></script>
+    <script src="js/profile-image-generator.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/profiles.js"></script>
+</body>
+</html>

@@ -868,12 +868,73 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     /**
-     * Load sample profile data for demonstration
+     * Load profile data from DataLayer or show sample profile
      */
     function loadSampleProfileData() {
+        // Check for DID parameter in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const didParam = urlParams.get('did');
+        
+        if (didParam) {
+            // Show loading state
+            document.getElementById('profile-name').textContent = 'Loading profile...';
+            
+            // Load profile data from DataLayer
+            loadProfileFromDataLayer(didParam)
+                .then(profileData => {
+                    if (profileData) {
+                        renderProfile(profileData);
+                    } else {
+                        showError('Profile not found in Chia DataLayer', true);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading profile:', error);
+                    showError('Failed to load profile data from Chia DataLayer', true);
+                });
+        } else {
+            // No DID parameter, use sample data
+            renderProfile(getSampleProfile());
+        }
+    }
+    
+    /**
+     * Load profile data from Chia DataLayer
+     * @param {string} did - Decentralized Identifier to load
+     * @returns {Promise<Object>} - Promise resolving to profile data
+     */
+    async function loadProfileFromDataLayer(did) {
+        try {
+            console.log(`Loading profile for DID: ${did} from Chia DataLayer`);
+            
+            // In a real implementation, this would fetch the specific profile data
+            // from Chia DataLayer using the provided DID
+            // For example:
+            // const response = await fetch(`/api/datalayer/profiles/${did}`);
+            // return response.json();
+            
+            // Simulate a network request with delay
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    // For demonstration, return the sample profile with the requested DID
+                    resolve(getSampleProfile(did));
+                }, 1000);
+            });
+        } catch (error) {
+            console.error('Error loading profile from DataLayer:', error);
+            throw new Error('Failed to load profile data from Chia DataLayer');
+        }
+    }
+    
+    /**
+     * Get a sample profile for demonstration
+     * @param {string} did - Optional DID to include in the profile
+     * @returns {Object} - Sample profile data
+     */
+    function getSampleProfile(did) {
         // Sample profile data
-        const profileData = {
-            did: 'did:chia:1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t',
+        return {
+            did: did || 'did:chia:1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t',
             name: 'Alex Morgan',
             title: 'Senior Chia Blockchain Engineer & AIOps Specialist',
             summary: 'Experienced blockchain engineer specializing in Chia network architecture, Chialisp smart contract development, and AI-powered operational solutions. With over 5 years in distributed systems and 3 years focused exclusively on Chia blockchain, I bring deep expertise in optimizing farm operations, developing secure smart contracts, and implementing enterprise-grade blockchain solutions.',
@@ -1042,9 +1103,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             ]
         };
-        
-        // Render profile data
-        renderProfile(profileData);
     }
     
     /**
