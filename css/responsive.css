@@ -1,0 +1,65 @@
+/* Responsive layout adjustments for the Lochness Group website */
+
+/* Hero section flex container */
+.hero-flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.hero-content {
+    flex: 1 1 50%;
+    order: 1;
+    min-width: 300px;
+    padding-right: 30px;
+}
+
+.lochness-wordcloud {
+    flex: 1 1 50%;
+    order: 2;
+    position: relative;
+}
+
+/* For medium and smaller screens, rearrange the order */
+@media (max-width: 991px) {
+    .hero-flex-container {
+        flex-direction: column;
+    }
+    
+    .hero-content {
+        order: 2;
+        text-align: center;
+        width: 100%;
+        padding-right: 0;
+        margin-top: 40px;
+    }
+    
+    .lochness-wordcloud {
+        order: 1;
+        width: 100%;
+        margin-bottom: 20px;
+        transform: scale(0.9);
+    }
+}
+
+/* Additional responsive adjustments for very small screens */
+@media (max-width: 576px) {
+    .hero-content h1 {
+        font-size: 28px;
+    }
+    
+    .hero-content p {
+        font-size: 16px;
+    }
+    
+    .lochness-wordcloud {
+        transform: scale(0.8);
+    }
+    
+    .word {
+        font-size: 90%;
+    }
+}
