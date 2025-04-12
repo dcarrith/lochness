@@ -32,6 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const uploadError = document.getElementById('upload-error');
     const verifyButton = document.getElementById('verify-button');
     const contactButton = document.getElementById('contact-button');
+    
+    // Load profile data from DataLayer
+    loadProfileFromDataLayer();
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabPanes = document.querySelectorAll('.tab-pane');
     const verificationModal = document.getElementById('verification-modal');
@@ -868,61 +871,91 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     /**
-     * Load profile data from DataLayer or show sample profile
+     * Load a basic sample profile if needed
+     * This is a fallback function that isn't used by default anymore
+     * but kept for compatibility
      */
     function loadSampleProfileData() {
-        // Check for DID parameter in URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const didParam = urlParams.get('did');
-        
-        if (didParam) {
+        // This function is now replaced by loadProfileFromDataLayer
+        // but we'll keep it for backward compatibility
+        console.warn('loadSampleProfileData is deprecated, use loadProfileFromDataLayer instead');
+        loadProfileFromDataLayer();
+    }
+    
+    /**
+     * Load profile data from DataLayer using URL parameters
+     */
+    async function loadProfileFromDataLayer() {
+        try {
             // Show loading state
             document.getElementById('profile-name').textContent = 'Loading profile...';
             
-            // Load profile data from DataLayer
-            loadProfileFromDataLayer(didParam)
-                .then(profileData => {
-                    if (profileData) {
-                        renderProfile(profileData);
-                    } else {
-                        showError('Profile not found in Chia DataLayer', true);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error loading profile:', error);
-                    showError('Failed to load profile data from Chia DataLayer', true);
-                });
-        } else {
-            // No DID parameter, use sample data
-            renderProfile(getSampleProfile());
+            // Get DID from URL query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const did = urlParams.get('did');
+            
+            if (!did) {
+                showError('Profile DID not specified in URL', true);
+                return;
+            }
+            
+            // Fetch profile data from DataLayer
+            const profile = await getProfileData(did);
+            
+            // Render the profile data
+            renderProfile(profile);
+            
+            console.log('Profile loaded successfully:', profile);
+        } catch (error) {
+            console.error('Error loading profile from DataLayer:', error);
+            showError(`Failed to load profile: ${error.message}`, true);
         }
     }
     
     /**
-     * Load profile data from Chia DataLayer
+     * Get profile data using DataLayer utilities or fallback to sample data
      * @param {string} did - Decentralized Identifier to load
-     * @returns {Promise<Object>} - Promise resolving to profile data
+     * @returns {Promise<Object>} - Profile data
      */
-    async function loadProfileFromDataLayer(did) {
+    async function getProfileData(did) {
         try {
-            console.log(`Loading profile for DID: ${did} from Chia DataLayer`);
+            // Get DataLayer mirror information from URL query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            let mirrors = [];
+            const storeId = urlParams.get('storeId') || '';
             
-            // In a real implementation, this would fetch the specific profile data
-            // from Chia DataLayer using the provided DID
-            // For example:
-            // const response = await fetch(`/api/datalayer/profiles/${did}`);
-            // return response.json();
+            // Parse mirrors parameter if present
+            if (urlParams.has('mirrors')) {
+                try {
+                    mirrors = JSON.parse(urlParams.get('mirrors'));
+                    if (!Array.isArray(mirrors)) {
+                        mirrors = [mirrors]; // Convert to array if it's a string
+                    }
+                } catch (e) {
+                    console.warn('Failed to parse mirrors from URL:', e);
+                    mirrors = [];
+                }
+            }
             
-            // Simulate a network request with delay
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    // For demonstration, return the sample profile with the requested DID
-                    resolve(getSampleProfile(did));
-                }, 1000);
-            });
+            // Prepare profile metadata for DataLayer query
+            const profileMetadata = {
+                storeId,
+                mirrors
+            };
+            
+            console.log('Profile metadata for DataLayer query:', profileMetadata);
+            
+            // Use DataLayerUtils if available, otherwise fall back to sample data
+            if (window.DataLayerUtils && typeof window.DataLayerUtils.getProfileFromDataLayer === 'function') {
+                console.log('Fetching profile from Chia DataLayer mirrors...');
+                return await window.DataLayerUtils.getProfileFromDataLayer(did, profileMetadata);
+            } else {
+                console.warn('DataLayerUtils not available, using sample data');
+                return getSampleProfile(did);
+            }
         } catch (error) {
-            console.error('Error loading profile from DataLayer:', error);
-            throw new Error('Failed to load profile data from Chia DataLayer');
+            console.error('Error fetching profile data:', error);
+            return getSampleProfile(did);
         }
     }
     

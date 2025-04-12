@@ -121,20 +121,32 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     async function loadProfilesFromDataLayer() {
         try {
-            // In a real implementation, this would make API calls to the Chia DataLayer
-            // or a mirror database to retrieve profiles
-            console.log('Fetching profiles from Chia DataLayer...');
-            
-            // Example API call code (commented out as this is a mock implementation):
-            // const response = await fetch('/api/datalayer/profiles');
-            // return response.json();
-            
-            // For this prototype, use a simulated network request
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve(generateMockProfiles());
-                }, 1500);
-            });
+            // Use DataLayerUtils if available, otherwise fall back to mock data
+            if (window.DataLayerUtils && typeof window.DataLayerUtils.queryProfilesFromDataLayer === 'function') {
+                console.log('Fetching profiles from Chia DataLayer mirrors...');
+                
+                // Get filters from URL query parameters if any
+                const urlParams = new URLSearchParams(window.location.search);
+                const initialFilters = {};
+                
+                if (urlParams.has('search')) initialFilters.search = urlParams.get('search');
+                if (urlParams.has('category')) initialFilters.category = urlParams.get('category');
+                if (urlParams.has('rating')) initialFilters.minRating = parseFloat(urlParams.get('rating'));
+                if (urlParams.has('availability')) initialFilters.availability = urlParams.get('availability');
+                if (urlParams.has('rate')) initialFilters.maxRate = parseFloat(urlParams.get('rate'));
+                
+                // Query profiles with these filters
+                return await window.DataLayerUtils.queryProfilesFromDataLayer(initialFilters);
+            } else {
+                console.warn('DataLayerUtils not available, using mock data');
+                
+                // For this prototype, use a simulated network request
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve(generateMockProfiles());
+                    }, 1500);
+                });
+            }
         } catch (error) {
             console.error('Error fetching from DataLayer:', error);
             throw error;
@@ -498,6 +510,13 @@ document.addEventListener('DOMContentLoaded', function() {
         profileCard.dataset.did = profile.did;
         profileCard.dataset.id = profile.id;
         
+        // Include DataLayer metadata for mirror selection
+        if (profile.dataLayerMetadata) {
+            // Store DataLayer metadata as a serialized data attribute
+            profileCard.dataset.mirrors = JSON.stringify(profile.dataLayerMetadata.mirrors || []);
+            profileCard.dataset.storeId = profile.dataLayerMetadata.storeId || '';
+        }
+        
         // Fill in the profile data
         const avatar = profileCard.querySelector('.profile-avatar');
         const name = profileCard.querySelector('.profile-name');
@@ -672,9 +691,32 @@ document.addEventListener('DOMContentLoaded', function() {
      * @param {string} did - The DID of the professional to contact
      */
     function contactProfessional(did) {
-        // In a real implementation, this would navigate to a contact form or open a messaging interface
-        // For now, we'll just scroll to the contact section
-        window.location.href = `profile.html?did=${did}#contact`;
+        // Find the profile card element to get the DataLayer metadata
+        const profileCard = document.querySelector(`.profile-card[data-did="${did}"]`);
+        
+        if (!profileCard) {
+            // If card not found, just navigate to profile without mirror info
+            window.location.href = `profile.html?did=${did}#contact`;
+            return;
+        }
+        
+        // Get DataLayer metadata from the card
+        const mirrors = profileCard.dataset.mirrors || '';
+        const storeId = profileCard.dataset.storeId || '';
+        
+        // Build the URL with mirror information
+        let profileUrl = `profile.html?did=${did}`;
+        
+        // Add DataLayer metadata as query parameters
+        if (mirrors) {
+            profileUrl += `&mirrors=${encodeURIComponent(mirrors)}`;
+        }
+        if (storeId) {
+            profileUrl += `&storeId=${encodeURIComponent(storeId)}`;
+        }
+        
+        // Navigate to the profile page with the contact section
+        window.location.href = `${profileUrl}#contact`;
     }
     
     /**
