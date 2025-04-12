@@ -58,6 +58,14 @@
         bottom: 20px;
         z-index: 2;
     }
+
+    /* Force the AIOps section to clear below the wordcloud */
+    .clearfix {
+        clear: both;
+        display: block;
+        width: 100%;
+        height: 15px; /* Add some space */
+    }
 }
 
 /* Additional responsive adjustments for very small screens */
