@@ -205,10 +205,6 @@ async function submitToDataLayer(registrationData) {
             throw new Error('No DataLayer mirrors available');
         }
 
-        // Use the first available mirror
-        const mirror = mirrors[0];
-        console.log(`Submitting registration to DataLayer via mirror: ${mirror}`);
-
         // Convert registration data to a JSON string
         const registrationJson = JSON.stringify(registrationData);
 
@@ -219,18 +215,48 @@ async function submitToDataLayer(registrationData) {
             data_value: registrationJson
         };
 
-        // Submit the update to DataLayer
-        const result = await window.DataLayerUtils.submitDataLayerUpdate(
-            mirror,
-            updateData.singleton_id,
-            updateData.data_key,
-            updateData.data_value
-        );
+        // Try to submit to up to 3 mirrors for redundancy
+        const mirrorCount = Math.min(mirrors.length, 3);
+        let successCount = 0;
+        let lastResult = null;
+        let errors = [];
+
+        for (let i = 0; i < mirrorCount; i++) {
+            const mirror = mirrors[i];
+            console.log(`Submitting registration to DataLayer mirror ${i + 1}/${mirrorCount}: ${mirror}`);
+            
+            try {
+                // Submit the update to this mirror
+                const result = await window.DataLayerUtils.submitDataLayerUpdate(
+                    mirror,
+                    updateData.singleton_id,
+                    updateData.data_key,
+                    updateData.data_value
+                );
+                
+                // Store the result and increment success count
+                lastResult = result;
+                successCount++;
+                
+                console.log(`Successfully submitted to mirror ${mirror}`);
+            } catch (mirrorError) {
+                console.error(`Error submitting to mirror ${mirror}:`, mirrorError);
+                errors.push({ mirror, error: mirrorError.message });
+                
+                // Continue to the next mirror despite this error
+            }
+        }
+
+        if (successCount === 0) {
+            throw new Error(`Failed to submit to any DataLayer mirrors. Errors: ${JSON.stringify(errors)}`);
+        }
 
         return {
             success: true,
-            transactionId: result.transactionId || "simulation_txid_" + Date.now(),
-            message: "Registration submitted to DataLayer successfully"
+            transactionId: lastResult?.transactionId || "simulation_txid_" + Date.now(),
+            mirrorCount: mirrorCount,
+            successCount: successCount,
+            message: `Registration submitted to ${successCount}/${mirrorCount} DataLayer mirrors successfully`
         };
     } catch (error) {
         console.error("Error submitting to DataLayer:", error);

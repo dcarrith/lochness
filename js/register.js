@@ -402,8 +402,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Show success message
             registrationForm.style.display = 'none';
             if (submissionSuccess) {
-                // Update success message with transaction details
-                updateSuccessMessage(result.transactionId);
+                // Update success message with transaction details and replication status
+                updateSuccessMessage(result);
                 
                 submissionSuccess.style.display = 'block';
                 
@@ -420,15 +420,34 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Update success message with transaction details
-    function updateSuccessMessage(transactionId) {
+    function updateSuccessMessage(result) {
         const txIdElement = document.getElementById('transaction-id');
-        if (txIdElement && transactionId) {
-            txIdElement.textContent = transactionId;
+        const txContainer = document.getElementById('transaction-container');
+        
+        if (txIdElement && result) {
+            const transactionId = typeof result === 'string' ? result : result.transactionId;
             
-            // Make the transaction ID container visible
-            const txContainer = document.getElementById('transaction-container');
-            if (txContainer) {
-                txContainer.style.display = 'block';
+            if (transactionId) {
+                txIdElement.textContent = transactionId;
+                
+                // Make the transaction ID container visible
+                if (txContainer) {
+                    txContainer.style.display = 'block';
+                    
+                    // If we have mirror information, add it to the message
+                    if (result.mirrorCount && result.successCount) {
+                        // Remove existing replication note if it exists
+                        const existingNote = txContainer.querySelector('.replication-status');
+                        if (existingNote) {
+                            existingNote.remove();
+                        }
+                        
+                        const replicationNote = document.createElement('p');
+                        replicationNote.className = 'blockchain-note replication-status';
+                        replicationNote.innerHTML = `<strong>Replication Status:</strong> Your application was successfully submitted to ${result.successCount} out of ${result.mirrorCount} available DataLayer mirrors for enhanced reliability.`;
+                        txContainer.appendChild(replicationNote);
+                    }
+                }
             }
         }
     }
