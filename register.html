@@ -385,13 +385,24 @@
                     <i class="fas fa-check-circle"></i>
                 </div>
                 <h2>Application Submitted Successfully!</h2>
-                <p>Thank you for applying to join the Lochness Group DAO. Your application has been received and is now being processed.</p>
+                <p>Thank you for applying to join the Lochness Group DAO. Your application has been submitted to the Chia blockchain and will be reviewed by existing DAO members.</p>
+                
+                <div id="transaction-container" class="transaction-container" style="display: none;">
+                    <div class="transaction-title">
+                        <i class="fas fa-link"></i> Blockchain Transaction Details
+                    </div>
+                    <p>Your application has been recorded on the Chia blockchain with the following transaction ID:</p>
+                    <div id="transaction-id" class="transaction-id">Processing...</div>
+                    <p class="blockchain-note">Note: The transaction may take a few minutes to be confirmed on the blockchain.</p>
+                </div>
+                
                 <div class="next-steps">
                     <h3>Next Steps:</h3>
                     <ol>
-                        <li>Our team will review your application (typically within 3-5 business days).</li>
-                        <li>You will receive an email with instructions for the blockchain verification process.</li>
-                        <li>Once verified, you will be granted DAO membership and access to the contract marketplace.</li>
+                        <li>DAO members will review your application via the Chia DataLayer.</li>
+                        <li>Members will vote on your application (typically within 3-5 business days).</li>
+                        <li>You will receive an email notification when a decision is made.</li>
+                        <li>If approved, you will be granted DAO membership and access to the contract marketplace.</li>
                     </ol>
                 </div>
                 <div class="success-actions">
@@ -458,6 +469,8 @@
     
     <!-- Application Scripts -->
     <script src="js/main.js"></script>
+    <script src="js/datalayer-utils.js"></script>
+    <script src="js/datalayer-registration.js"></script>
     <script src="js/register.js"></script>
 </body>
 </html>

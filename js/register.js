@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Handle form submission
-    function handleFormSubmit(e) {
+    async function handleFormSubmit(e) {
         e.preventDefault();
         
         // Validate the form
@@ -339,19 +339,97 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // In a real implementation, this would send the form data to a server
-        // For this demo, we'll just show the success message
-        
-        // Clear the saved draft
-        localStorage.removeItem('registrationDraft');
-        
-        // Show success message
-        registrationForm.style.display = 'none';
-        if (submissionSuccess) {
-            submissionSuccess.style.display = 'block';
+        try {
+            // Show loading state
+            showLoadingState(true);
             
-            // Scroll to the success message
-            submissionSuccess.scrollIntoView({ behavior: 'smooth' });
+            // Collect form data
+            const formData = new FormData(registrationForm);
+            const formObject = {};
+            
+            formData.forEach((value, key) => {
+                // If a checkbox is not checked, it won't be in the FormData
+                // If we already have this key, it might be a multi-select value
+                if (formObject[key]) {
+                    // If it's already an array, push to it
+                    if (Array.isArray(formObject[key])) {
+                        formObject[key].push(value);
+                    } else {
+                        // Convert to array with both values
+                        formObject[key] = [formObject[key], value];
+                    }
+                } else {
+                    formObject[key] = value;
+                }
+            });
+            
+            // Check if DataLayer integration is available
+            if (!window.DataLayerRegistration) {
+                throw new Error('DataLayer registration module not loaded');
+            }
+            
+            // Check for existing registration
+            const emailExists = await window.DataLayerRegistration.checkExistingRegistration(
+                formObject['email'],
+                formObject['chia-address']
+            );
+            
+            if (emailExists) {
+                throw new Error('An application with this email or Chia address already exists');
+            }
+            
+            // Prepare data for DataLayer
+            const registrationData = window.DataLayerRegistration.prepareRegistrationData(formObject);
+            
+            // Submit to DataLayer
+            const result = await window.DataLayerRegistration.submitToDataLayer(registrationData);
+            
+            if (!result.success) {
+                throw new Error(result.error || 'Failed to submit application to the blockchain');
+            }
+            
+            // Store transaction ID in session storage for reference
+            sessionStorage.setItem('registrationTxId', result.transactionId);
+            sessionStorage.setItem('registrationData', JSON.stringify({
+                name: formObject['full-name'],
+                email: formObject['email'],
+                timestamp: new Date().toISOString()
+            }));
+            
+            // Clear the saved draft
+            localStorage.removeItem('registrationDraft');
+            
+            // Show success message
+            registrationForm.style.display = 'none';
+            if (submissionSuccess) {
+                // Update success message with transaction details
+                updateSuccessMessage(result.transactionId);
+                
+                submissionSuccess.style.display = 'block';
+                
+                // Scroll to the success message
+                submissionSuccess.scrollIntoView({ behavior: 'smooth' });
+            }
+            
+        } catch (error) {
+            console.error('Error submitting application:', error);
+            showNotification(error.message || 'An error occurred while submitting your application. Please try again.', 'error');
+        } finally {
+            showLoadingState(false);
+        }
+    }
+    
+    // Update success message with transaction details
+    function updateSuccessMessage(transactionId) {
+        const txIdElement = document.getElementById('transaction-id');
+        if (txIdElement && transactionId) {
+            txIdElement.textContent = transactionId;
+            
+            // Make the transaction ID container visible
+            const txContainer = document.getElementById('transaction-container');
+            if (txContainer) {
+                txContainer.style.display = 'block';
+            }
         }
     }
     
