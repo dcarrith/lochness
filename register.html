@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Our DAO | Lochness Group</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/contracts.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/profiles.css">
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="images/lochness-logo.svg" alt="Lochness Group Logo">
+                <span>Lochness Group</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#technology">Technology</a>
+                <a href="index.html#datalayer">DataLayer</a>
+                <a href="index.html#enterprise">Enterprise</a>
+                <a href="index.html#contracts">Contracts</a>
+                <a href="profiles.html">Profiles</a>
+                <a href="register.html" class="active">Join DAO</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Registration Header -->
+    <section class="register-header parallax-section">
+        <div class="parallax-bg" style="background-image: url('images/crypto-bg.jpg');"></div>
+        <div class="container">
+            <div class="section-header light">
+                <h1>Join Our DAO</h1>
+                <div class="separator"></div>
+                <p>Apply to become a verified blockchain professional in our decentralized autonomous organization</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Form Section -->
+    <section class="registration-form">
+        <div class="container">
+            <div class="section-header">
+                <h2>Professional Registration</h2>
+                <div class="separator"></div>
+                <p>Complete the form below to apply for membership in the Lochness Group DAO. Once submitted, your application will be reviewed and verified through the Chia blockchain.</p>
+            </div>
+
+            <div class="form-container">
+                <form id="registration-form">
+                    <div class="form-section">
+                        <h3><i class="fas fa-user"></i> Personal Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="full-name">Full Name*</label>
+                                <input type="text" id="full-name" name="full-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="professional-title">Professional Title*</label>
+                                <input type="text" id="professional-title" name="professional-title" required placeholder="e.g., Chia Developer, Farm Specialist">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address*</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="location">Location*</label>
+                                <input type="text" id="location" name="location" required placeholder="City, Country">
+                            </div>
+                            <div class="form-group">
+                                <label for="languages">Languages Spoken*</label>
+                                <input type="text" id="languages" name="languages" required placeholder="e.g., English, Spanish">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="about">Professional Summary*</label>
+                                <textarea id="about" name="about" rows="4" required placeholder="A brief overview of your professional background and expertise"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-briefcase"></i> Expertise & Specialization</h3>
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label>Primary Expertise Area(s)*</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="expert-developer" name="expertise" value="developer">
+                                        <label for="expert-developer">Chialisp Developer</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="expert-farming" name="expertise" value="farming">
+                                        <label for="expert-farming">Farm Specialist</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="expert-data" name="expertise" value="data">
+                                        <label for="expert-data">DataLayer Architect</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="expert-security" name="expertise" value="security">
+                                        <label for="expert-security">Security Auditor</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="expert-aiops" name="expertise" value="aiops">
+                                        <label for="expert-aiops">AIOps Engineer</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="expert-infrastructure" name="expertise" value="infrastructure">
+                                        <label for="expert-infrastructure">Infrastructure Specialist</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="hourly-rate">Hourly Rate (XCH)*</label>
+                                <input type="number" id="hourly-rate" name="hourly-rate" step="0.01" min="0.1" required placeholder="0.5">
+                                <span class="input-hint">Your preferred hourly rate in XCH</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="availability">Availability*</label>
+                                <select id="availability" name="availability" required>
+                                    <option value="" disabled selected>Select your availability</option>
+                                    <option value="full-time">Full-time (40+ hours/week)</option>
+                                    <option value="part-time">Part-time (20-39 hours/week)</option>
+                                    <option value="limited">Limited (10-19 hours/week)</option>
+                                    <option value="minimal">Minimal (Less than 10 hours/week)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-tools"></i> Skills & Technologies</h3>
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="skills">Technical Skills*</label>
+                                <input type="text" id="skills" name="skills" required placeholder="e.g., Chialisp, Python, Kubernetes, Machine Learning">
+                                <span class="input-hint">Enter skills separated by commas</span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="tools">Tools & Technologies</label>
+                                <input type="text" id="tools" name="tools" placeholder="e.g., Docker, AWS, TensorFlow, Git">
+                                <span class="input-hint">Enter tools separated by commas</span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="certifications">Certifications & Credentials</label>
+                                <textarea id="certifications" name="certifications" rows="3" placeholder="List any relevant certifications or credentials you possess"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-history"></i> Work Experience</h3>
+                        <div id="experience-container">
+                            <div class="experience-entry">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="company-1">Company/Organization*</label>
+                                        <input type="text" id="company-1" name="company-1" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="position-1">Position*</label>
+                                        <input type="text" id="position-1" name="position-1" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="start-date-1">Start Date*</label>
+                                        <input type="month" id="start-date-1" name="start-date-1" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="end-date-1">End Date</label>
+                                        <input type="month" id="end-date-1" name="end-date-1">
+                                        <div class="checkbox-single">
+                                            <input type="checkbox" id="current-1" name="current-1">
+                                            <label for="current-1">I currently work here</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group full-width">
+                                        <label for="responsibilities-1">Key Responsibilities & Achievements*</label>
+                                        <textarea id="responsibilities-1" name="responsibilities-1" rows="3" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="add-experience" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-plus"></i> Add Another Experience
+                        </button>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-project-diagram"></i> Notable Projects</h3>
+                        <div id="projects-container">
+                            <div class="project-entry">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="project-name-1">Project Name</label>
+                                        <input type="text" id="project-name-1" name="project-name-1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="project-role-1">Your Role</label>
+                                        <input type="text" id="project-role-1" name="project-role-1">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group full-width">
+                                        <label for="project-description-1">Project Description</label>
+                                        <textarea id="project-description-1" name="project-description-1" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group full-width">
+                                        <label for="project-url-1">Project URL/Repository</label>
+                                        <input type="url" id="project-url-1" name="project-url-1" placeholder="https://...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="add-project" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-plus"></i> Add Another Project
+                        </button>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                        <div id="education-container">
+                            <div class="education-entry">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="institution-1">Institution</label>
+                                        <input type="text" id="institution-1" name="institution-1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="degree-1">Degree/Certification</label>
+                                        <input type="text" id="degree-1" name="degree-1">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="edu-start-date-1">Start Date</label>
+                                        <input type="month" id="edu-start-date-1" name="edu-start-date-1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edu-end-date-1">End Date</label>
+                                        <input type="month" id="edu-end-date-1" name="edu-end-date-1">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group full-width">
+                                        <label for="field-of-study-1">Field of Study</label>
+                                        <input type="text" id="field-of-study-1" name="field-of-study-1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="add-education" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-plus"></i> Add Another Education
+                        </button>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-link"></i> Blockchain Identity</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="chia-did">Chia DID (if you have one)</label>
+                                <input type="text" id="chia-did" name="chia-did" placeholder="did:chia:">
+                                <span class="input-hint">Your Decentralized Identifier on the Chia blockchain</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="chia-address">Chia Wallet Address*</label>
+                                <input type="text" id="chia-address" name="chia-address" required placeholder="xch1...">
+                                <span class="input-hint">Address for receiving payments</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-file-upload"></i> Resume & Portfolio</h3>
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="resume">Upload Resume (PDF)</label>
+                                <div class="file-upload-container">
+                                    <input type="file" id="resume" name="resume" accept=".pdf">
+                                    <label for="resume" class="file-upload-label">
+                                        <i class="fas fa-upload"></i> Choose File
+                                    </label>
+                                    <span id="resume-file-name">No file chosen</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="portfolio-url">Portfolio/Website URL</label>
+                                <input type="url" id="portfolio-url" name="portfolio-url" placeholder="https://...">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="github">GitHub Profile</label>
+                                <input type="url" id="github" name="github" placeholder="https://github.com/...">
+                            </div>
+                            <div class="form-group">
+                                <label for="linkedin">LinkedIn Profile</label>
+                                <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-lock"></i> Terms & Submission</h3>
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <div class="terms-container">
+                                    <h4>DAO Membership Terms</h4>
+                                    <p>By submitting this application, you agree to the following terms:</p>
+                                    <ol>
+                                        <li>All information provided is accurate and complete. Misrepresentation may result in removal from the DAO.</li>
+                                        <li>You understand that joining the Lochness Group DAO requires verification through the Chia blockchain.</li>
+                                        <li>When accepted, you will receive contracts and payments through the Chia blockchain.</li>
+                                        <li>You will maintain the confidentiality of all client information and projects.</li>
+                                        <li>The DAO may use non-personally identifiable information about your skills and expertise to match you with appropriate projects.</li>
+                                        <li>You will adhere to all DAO governance procedures and participate in relevant governance decisions.</li>
+                                        <li>You understand that the DAO takes a small percentage of contract value to maintain operations and infrastructure.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <div class="checkbox-single terms-checkbox">
+                                    <input type="checkbox" id="terms-agree" name="terms-agree" required>
+                                    <label for="terms-agree">I agree to the DAO Membership Terms*</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="save-draft">Save Draft</button>
+                        <button type="submit" class="btn btn-primary">Submit Application</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Message (Hidden by default) -->
+    <section class="submission-success" id="submission-success" style="display: none;">
+        <div class="container">
+            <div class="success-message">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Application Submitted Successfully!</h2>
+                <p>Thank you for applying to join the Lochness Group DAO. Your application has been received and is now being processed.</p>
+                <div class="next-steps">
+                    <h3>Next Steps:</h3>
+                    <ol>
+                        <li>Our team will review your application (typically within 3-5 business days).</li>
+                        <li>You will receive an email with instructions for the blockchain verification process.</li>
+                        <li>Once verified, you will be granted DAO membership and access to the contract marketplace.</li>
+                    </ol>
+                </div>
+                <div class="success-actions">
+                    <a href="index.html" class="btn btn-secondary">Return to Homepage</a>
+                    <a href="profiles.html" class="btn btn-primary">Browse Professional Profiles</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/lochness-logo-white.svg" alt="Lochness Group Logo">
+                    <span>Lochness Group</span>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="index.html#about">About Us</a>
+                        <a href="#">Team</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Press</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <a href="index.html#services">Farm Monitoring</a>
+                        <a href="index.html#services">Chialisp Security</a>
+                        <a href="index.html#services">Farming Analytics</a>
+                        <a href="index.html#services">Smart Contract Development</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <a href="#">Blog</a>
+                        <a href="#">Whitepapers</a>
+                        <a href="#">Documentation</a>
+                        <a href="#">API</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">GDPR</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Lochness Group. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    
+    <!-- Application Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/register.js"></script>
+</body>
+</html>
