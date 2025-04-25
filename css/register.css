@@ -1,12 +1,22 @@
 /* Registration Page Styles */
+
+/* Header Section */
 .register-header {
-    min-height: 40vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     text-align: center;
+    padding: 100px 0 80px;
+}
+
+.register-header h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
     color: #fff;
-    position: relative;
+}
+
+.register-header p {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .registration-form {
