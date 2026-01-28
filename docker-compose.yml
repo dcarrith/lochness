@@ -5,6 +5,9 @@ services:
       - "8888:80"
     volumes:
       - ./index.html:/usr/share/nginx/html/index.html
+      - ./profiles.html:/usr/share/nginx/html/profiles.html
+      - ./profile.html:/usr/share/nginx/html/profile.html
+      - ./register.html:/usr/share/nginx/html/register.html
       - ./css:/usr/share/nginx/html/css
       - ./js:/usr/share/nginx/html/js
       - ./images:/usr/share/nginx/html/images

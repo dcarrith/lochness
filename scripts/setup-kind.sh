@@ -15,10 +15,10 @@ fi
 
 # Create a kind cluster
 echo "Creating kind cluster..."
-kind create cluster --name lochness-website
+kind create cluster --name lochness-cluster
 
 # Set kubectl context to kind
-kubectl cluster-info --context kind-lochness-website
+kubectl cluster-info --context kind-lochness-cluster
 
 # Apply Kubernetes configurations
 echo "Applying Kubernetes configurations..."

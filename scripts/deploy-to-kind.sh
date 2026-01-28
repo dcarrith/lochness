@@ -29,9 +29,6 @@ else
     echo "✅ Kind cluster 'lochness-cluster' already exists"
 fi
 
-# Create k8s directory if it doesn't exist
-mkdir -p k8s
-
 # Build Docker image
 echo "🔨 Building Docker image..."
 docker build -t lochness-website:latest .
@@ -42,8 +39,8 @@ kind load docker-image lochness-website:latest --name lochness-cluster
 
 # Apply Kubernetes manifests
 echo "🚢 Applying Kubernetes manifests..."
-kubectl apply -f k8s/deployment.yaml
-kubectl apply -f k8s/service.yaml
+kubectl apply -f kubernetes/deployment.yaml
+kubectl apply -f kubernetes/service.yaml
 
 # Wait for deployment to be ready
 echo "⏳ Waiting for deployment to be ready..."
@@ -52,5 +49,5 @@ kubectl wait --for=condition=available --timeout=60s deployment/lochness-website
 echo "✅ Deployment complete! Your application should be available at http://localhost:8080"
 echo "📊 To check the status of your deployment, run: kubectl get pods"
 echo "🔍 To view logs, run: kubectl logs -l app=lochness-website"
-echo "🗑️  To delete the deployment, run: kubectl delete -f k8s/"
+echo "🗑️  To delete the deployment, run: kubectl delete -f kubernetes/"
 echo "🗑️  To delete the cluster, run: kind delete cluster --name lochness-cluster"
