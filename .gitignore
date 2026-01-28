@@ -1,3 +1,9 @@
 .aider*
 terraform/.terraform
 .DS_Store
+node_modules/
+.next/
+.env.local
+.jest-cache/
+out/
+skills/
