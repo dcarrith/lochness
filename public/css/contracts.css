@@ -21,22 +21,32 @@
 }
 
 .contract-card {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.7);
+    /* Darker background by default */
     backdrop-filter: blur(10px);
     border-radius: 10px;
     padding: 30px;
     transition: all 0.3s ease;
     cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.5);
+    /* Greenish border by default */
     position: relative;
     overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    /* Stronger default shadow */
 }
 
 .contract-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-    background: rgba(0, 0, 0, 0.7);
-    border-color: rgba(76, 175, 80, 0.5);
+    /* Lift on hover */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    /* Deeper shadow on hover */
+    border-color: #4CAF50;
+    /* Full opacity green border */
+    background: rgba(0, 0, 0, 0.75);
+    /* Slightly darker/more contrast */
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
+    /* Green glow effect */
 }
 
 .contract-icon {
