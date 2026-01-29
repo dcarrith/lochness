@@ -85,7 +85,7 @@ section {
 
 .btn-primary {
     background: var(--gradient-primary);
-    color: var(--light-text);
+    color: var(--dark-color);
     box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
 }
 
