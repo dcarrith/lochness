@@ -9,33 +9,37 @@
 .register-header h1 {
     font-size: 40px;
     margin-bottom: 20px;
-    color: #fff;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .register-header p {
     font-size: 18px;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-color);
     max-width: 800px;
     margin: 0 auto;
 }
 
 .registration-form {
     padding: 5rem 0;
-    background-color: #f8f9fa;
+    background-color: var(--dark-color);
 }
 
 .form-container {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     padding: 2rem;
     margin-top: 2rem;
+    border: 1px solid rgba(0, 255, 157, 0.1);
 }
 
 .form-section {
     margin-bottom: 2.5rem;
     padding-bottom: 2rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .form-section:last-child {
@@ -44,7 +48,7 @@
 
 .form-section h3 {
     margin-bottom: 1.5rem;
-    color: #2c3e50;
+    color: var(--light-text);
     font-size: 1.4rem;
     font-weight: 600;
     display: flex;
@@ -53,7 +57,7 @@
 
 .form-section h3 i {
     margin-right: 10px;
-    color: #3498db;
+    color: var(--secondary-color);
     font-size: 1.2rem;
 }
 
@@ -78,7 +82,7 @@
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
-    color: #34495e;
+    color: var(--text-color);
 }
 
 .form-group input[type="text"],
@@ -91,18 +95,20 @@
 .form-group textarea {
     width: 100%;
     padding: 12px 15px;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     font-size: 1rem;
     transition: border-color 0.3s;
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--light-text);
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    border-color: #3498db;
+    border-color: var(--secondary-color);
     outline: none;
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.2);
 }
 
 .form-group textarea {
@@ -113,7 +119,7 @@
 .input-hint {
     display: block;
     font-size: 0.8rem;
-    color: #7f8c8d;
+    color: rgba(255, 255, 255, 0.5);
     margin-top: 5px;
 }
 
@@ -148,18 +154,19 @@
 }
 
 .file-upload-label {
-    background-color: #3498db;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--accent-color);
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
     margin-right: 10px;
     font-size: 0.9rem;
     transition: background-color 0.3s;
+    font-weight: bold;
 }
 
 .file-upload-label:hover {
-    background-color: #2980b9;
+    background-color: var(--secondary-color);
 }
 
 input[type="file"] {
@@ -168,8 +175,8 @@ input[type="file"] {
 
 /* Terms Container */
 .terms-container {
-    background-color: #f8f9fa;
-    border: 1px solid #eee;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 5px;
     padding: 20px;
     height: 200px;
@@ -180,7 +187,7 @@ input[type="file"] {
 .terms-container h4 {
     margin-top: 0;
     margin-bottom: 15px;
-    color: #2c3e50;
+    color: var(--light-text);
 }
 
 .terms-container ol {
@@ -191,6 +198,7 @@ input[type="file"] {
     margin-bottom: 10px;
     font-size: 0.95rem;
     line-height: 1.5;
+    color: var(--text-color);
 }
 
 .terms-checkbox {
@@ -280,7 +288,8 @@ input[type="file"] {
     font-style: italic;
 }
 
-.replication-status, .dao-voting-note {
+.replication-status,
+.dao-voting-note {
     margin-top: 1.25rem;
     padding: 0.75rem;
     background-color: rgba(52, 152, 219, 0.1);
@@ -364,8 +373,13 @@ input[type="file"] {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Responsive Styles */
@@ -373,11 +387,11 @@ input[type="file"] {
     .form-group {
         flex: 0 0 100%;
     }
-    
+
     .checkbox-item {
         flex: 0 0 50%;
     }
-    
+
     .success-actions {
         flex-direction: column;
         gap: 10px;
@@ -388,11 +402,11 @@ input[type="file"] {
     .checkbox-item {
         flex: 0 0 100%;
     }
-    
+
     .form-section h3 {
         font-size: 1.2rem;
     }
-    
+
     .form-container {
         padding: 1.5rem;
     }
