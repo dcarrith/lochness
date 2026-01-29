@@ -679,10 +679,11 @@ section {
     min-width: 150px;
     text-align: center;
     padding: 30px 20px;
-    background: white;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     box-shadow: var(--box-shadow);
     transition: var(--transition);
+    border: 1px solid rgba(0, 255, 157, 0.2);
 }
 
 .stat-item:hover {
@@ -703,7 +704,7 @@ section {
 
 .stat-label {
     font-size: 1rem;
-    color: var(--dark-color);
+    color: var(--text-color);
 }
 
 /* Services Section */
@@ -786,10 +787,11 @@ section {
 .tech-feature {
     margin-bottom: 30px;
     padding: 20px;
-    background: white;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     box-shadow: var(--box-shadow);
     transition: var(--transition);
+    border: 1px solid rgba(0, 240, 255, 0.2);
 }
 
 .tech-feature:hover {
@@ -1059,13 +1061,14 @@ section {
 .enterprise-feature {
     display: flex;
     position: relative;
-    background: white;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     padding: 30px;
     box-shadow: var(--box-shadow);
     transition: var(--transition);
     cursor: pointer;
     overflow: hidden;
+    border: 1px solid rgba(0, 255, 157, 0.1);
 }
 
 .enterprise-feature:hover {
@@ -1123,7 +1126,7 @@ section {
 .feature-content h4 {
     font-size: 1.3rem;
     margin-bottom: 10px;
-    color: var(--dark-color);
+    color: var(--light-text);
 }
 
 .feature-content p {
@@ -1173,12 +1176,13 @@ section {
 .case-study {
     display: flex;
     align-items: center;
-    background: white;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: var(--box-shadow);
     transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .case-study:hover {
@@ -1203,7 +1207,7 @@ section {
 .case-content h5 {
     font-size: 1.2rem;
     margin-bottom: 5px;
-    color: var(--dark-color);
+    color: var(--light-text);
 }
 
 .case-content p {
@@ -1323,11 +1327,13 @@ section {
 .form-group textarea {
     width: 100%;
     padding: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     transition: var(--transition);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--light-text);
 }
 
 .form-group textarea {

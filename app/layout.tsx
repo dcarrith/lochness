@@ -60,6 +60,7 @@ export default function RootLayout({
                 <link rel="stylesheet" href="/css/responsive.css" />
                 <link rel="stylesheet" href="/css/profile.css" />
                 <link rel="stylesheet" href="/css/profiles.css" />
+                <link rel="stylesheet" href="/css/profile-verification.css" />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
                 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
             </head>

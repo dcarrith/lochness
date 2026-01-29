@@ -224,7 +224,7 @@
 .rating-score {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #333;
+    color: var(--light-text);
 }
 
 .stars-container {
@@ -232,7 +232,7 @@
 }
 
 .rating-count {
-    color: #777;
+    color: var(--text-color);
     font-size: 0.9rem;
 }
 
