@@ -292,7 +292,7 @@ const RegisterSection: React.FC = () => {
             <div className="register-header parallax-section">
                 <div className="container">
                     <div className="section-header light">
-                        <h1>Join our DAO</h1>
+                        <h1>Join our DAO (Wizard)</h1>
                         <p>Complete the steps below to apply for membership.</p>
                     </div>
                 </div>

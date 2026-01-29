@@ -14,7 +14,7 @@ describe('RegisterSection Multi-Step Wizard', () => {
 
     it('renders the first step initially', () => {
         render(<RegisterSection />);
-        expect(screen.getByText('Join our DAO')).toBeInTheDocument();
+        expect(screen.getByText('Join our DAO (Wizard)')).toBeInTheDocument();
         expect(screen.getByText('Personal Information')).toBeInTheDocument();
         expect(screen.getByLabelText(/Full Name/i)).toBeInTheDocument();
         // Should not see Step 2 content yet
