@@ -1366,7 +1366,7 @@ section {
 
 .footer-logo {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     margin-bottom: 20px;
 }
 
