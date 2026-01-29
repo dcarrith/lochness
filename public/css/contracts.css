@@ -21,8 +21,9 @@
 }
 
 /* Contract Card Dark Theme */
-.contract-card {
-    background: rgba(5, 16, 32, 0.8);
+/* Contract Card Dark Theme */
+.contracts-grid .contract-card {
+    background: rgba(5, 16, 32, 0.85) !important;
     backdrop-filter: blur(10px);
     border-radius: 10px;
     padding: 30px;
@@ -34,9 +35,9 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-.contract-card:hover {
+.contracts-grid .contract-card:hover {
     transform: translateY(-2px);
-    background: rgba(5, 16, 32, 0.95);
+    background: rgba(5, 16, 32, 0.95) !important;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 255, 157, 0.15);
 }
 
