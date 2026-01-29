@@ -22,24 +22,22 @@
 
 /* Contract Card Dark Theme */
 .contract-card {
-    background: rgba(2, 12, 27, 0.7);
+    background: rgba(5, 16, 32, 0.8);
     backdrop-filter: blur(10px);
     border-radius: 10px;
     padding: 30px;
     transition: all 0.3s ease;
     cursor: pointer;
-    border: 1px solid rgba(0, 255, 157, 0.3);
+    border: 1px solid var(--primary-color);
     position: relative;
     overflow: hidden;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .contract-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    border-color: var(--primary-color);
-    background: rgba(5, 16, 32, 0.8);
-    box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+    transform: translateY(-2px);
+    background: rgba(5, 16, 32, 0.95);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 255, 157, 0.15);
 }
 
 .contract-icon {
