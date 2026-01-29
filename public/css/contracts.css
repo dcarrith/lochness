@@ -75,7 +75,8 @@
 
 .detail-label {
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.8);
+    color: #fff;
+    /* Pure white as requested */
 }
 
 .detail-value {
