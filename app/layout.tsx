@@ -4,7 +4,42 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://lochness.group:8888'),
     title: 'Lochness Group | Decentralized Employment',
-    description: 'Lochness Group is a decentralized autonomous organization (DAO) that utilizes the Chia Blockchain.',
+    description: 'Lochness Group is a decentralized autonomous organization (DAO) that utilizes the Chia Blockchain to create a decentralized employment model.',
+    keywords: ['Chia', 'Blockchain', 'DAO', 'Decentralized Employment', 'Smart Contracts', 'Chialisp', 'AIOps', 'DataLayer', 'Lochness Group'],
+    openGraph: {
+        title: 'Lochness Group | Decentralized Employment',
+        description: 'Lochness Group is a decentralized autonomous organization (DAO) that utilizes the Chia Blockchain to create a decentralized employment model.',
+        url: 'http://lochness.group:8888',
+        siteName: 'Lochness Group',
+        images: [
+            {
+                url: '/images/og-image.png',
+                width: 1200,
+                height: 630,
+                alt: 'Lochness Group Logo',
+            },
+        ],
+        locale: 'en_US',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Lochness Group | Decentralized Employment',
+        description: 'Lochness Group is a decentralized autonomous organization (DAO) that utilizes the Chia Blockchain to create a decentralized employment model.',
+        images: ['/images/og-image.png'],
+        creator: '@lochnessgroup',
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
+    },
 };
 
 export const viewport = {

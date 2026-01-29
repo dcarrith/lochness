@@ -9,7 +9,7 @@ export default function Footer() {
             <div className="container">
                 <div className="footer-content">
                     <div className="footer-logo">
-                        <img src="/images/lochness-logo-white.svg" alt="Lochness Group Logo" />
+                        <img src="/images/lochness-logo.svg" alt="Lochness Group Logo" />
                         <span>Lochness Group</span>
                     </div>
                     <div className="footer-links">
