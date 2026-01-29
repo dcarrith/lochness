@@ -35,20 +35,22 @@
         width: 100%;
         padding-right: 0;
         margin-top: 60px;
-        /* Increased to push AIOps section down more */
+        flex: 0 0 auto;
+        /* Prevent shrinking */
     }
 
     .lochness-wordcloud {
         order: 1;
         width: 100%;
+        height: 400px;
+        /* Force rigid height */
         margin-bottom: 0;
-        /* Removed margin-bottom */
         transform: scale(0.9);
         margin-top: -30px;
-        /* Negative margin to move it closer to navbar */
         position: relative;
         z-index: 1;
-        /* Ensure it's above other content */
+        flex: 0 0 auto;
+        /* Prevent shrinking */
     }
 
     /* Reset hero height to auto to prevent overlapping content */
@@ -106,12 +108,14 @@
 
     /* Ensure proper spacing between sections */
     .hero-content {
-        margin-top: 50px;
+        margin-top: 80px;
+        /* Increased separation */
     }
 
     /* Adjust hero section padding for smaller screens */
     .hero.parallax-section {
-        padding-top: 60px;
+        padding-top: 120px;
+        /* Maintain navbar clearance */
         padding-bottom: 80px;
     }
 }
