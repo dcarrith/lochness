@@ -288,47 +288,47 @@ const RegisterSection: React.FC = () => {
     );
 
     return (
+    return (
         <section id="register" className="register-section">
-            <div className="register-header parallax-section">
-                <div className="container">
-                    <div className="section-header light">
-                        <h1>Join our DAO (Wizard)</h1>
-                        <p>Complete the steps below to apply for membership.</p>
-                    </div>
-                </div>
-            </div>
+            <div className="register-bg"></div>
 
-            <div className="container">
+            <div className="container" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
+                <div className="section-header light" style={{ marginBottom: '40px' }}>
+                    <h1>Join our DAO</h1>
+                    <p>Complete the steps below to apply for membership.</p>
+                </div>
+
                 {/* Stepper */}
-                <div className="wizard-progress" style={{ display: 'flex', justifyContent: 'center', marginBottom: '30px', gap: '10px' }}>
+                <div className="wizard-progress" style={{ display: 'flex', justifyContent: 'center', marginBottom: '30px', gap: '20px' }}>
                     {[1, 2, 3, 4].map(step => (
-                        <div key={step} style={{
+                        <div key={step} className={step <= currentStep ? 'active' : ''} style={{
                             width: '40px', height: '40px', borderRadius: '50%',
-                            backgroundColor: step <= currentStep ? '#3498db' : '#e0e0e0',
+                            backgroundColor: step <= currentStep ? 'var(--primary-color)' : 'rgba(255,255,255,0.1)',
+                            border: step <= currentStep ? 'none' : '1px solid rgba(255,255,255,0.2)',
                             color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            fontWeight: 'bold'
+                            fontWeight: 'bold', transition: 'all 0.3s ease'
                         }}>
                             {step}
                         </div>
                     ))}
                 </div>
 
-                <div className="form-container">
+                <div className="glass-wizard-container fade-in">
                     <form onSubmit={handleSubmit}>
                         {currentStep === 1 && renderStep1()}
                         {currentStep === 2 && renderStep2()}
                         {currentStep === 3 && renderStep3()}
                         {currentStep === 4 && renderStep4()}
 
-                        <div className="form-actions" style={{ marginTop: '30px', display: 'flex', justifyContent: 'space-between' }}>
+                        <div className="form-actions" style={{ marginTop: '40px', display: 'flex', justifyContent: 'space-between' }}>
                             {currentStep > 1 ? (
                                 <button type="button" className="btn btn-secondary" onClick={prevStep}>Back</button>
                             ) : <div></div>}
 
                             {currentStep < 4 ? (
-                                <button type="button" className="btn btn-primary" onClick={nextStep}>Next step</button>
+                                <button type="button" className="btn btn-primary" onClick={nextStep}>Next Step</button>
                             ) : (
-                                <button type="submit" className="btn btn-success" disabled={isSubmitting}>
+                                <button type="submit" className="btn btn-primary" disabled={isSubmitting} style={{ background: 'var(--gradient-primary)', border: 'none' }}>
                                     {isSubmitting ? 'Submitting...' : 'Submit Application'}
                                 </button>
                             )}
@@ -337,6 +337,7 @@ const RegisterSection: React.FC = () => {
                 </div>
             </div>
         </section>
+    );
     );
 };
 

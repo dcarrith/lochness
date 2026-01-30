@@ -42,7 +42,7 @@ export default function Navbar() {
                     <Link href="/#enterprise" onClick={() => setIsMenuOpen(false)}>Enterprise</Link>
                     <Link href="/#contracts" onClick={() => setIsMenuOpen(false)}>Contracts</Link>
                     <Link href="/profiles" onClick={() => setIsMenuOpen(false)}>Profiles</Link>
-                    <Link href="/register" onClick={() => setIsMenuOpen(false)}>Join</Link>
+                    <Link href="/register" onClick={() => setIsMenuOpen(false)}>Careers</Link>
                     <Link href="/#contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
                 </div>
                 <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>

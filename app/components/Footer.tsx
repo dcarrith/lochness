@@ -17,7 +17,6 @@ export default function Footer() {
                             <h4>Company</h4>
                             <Link href="/profiles">About Us</Link>
                             <Link href="/profiles">Team</Link>
-                            <Link href="/register">Join Our DAO</Link>
                             <Link href="/register">Careers</Link>
                             <Link href="/#contact">Press</Link>
                         </div>
