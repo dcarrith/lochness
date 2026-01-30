@@ -7,6 +7,8 @@ const RegisterSection: React.FC = () => {
     const [currentStep, setCurrentStep] = useState(1);
     const [submitted, setSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errors, setErrors] = useState<string[]>([]);
+    const [validationMsg, setValidationMsg] = useState('');
 
     // Form Data State
     const [formData, setFormData] = useState({
@@ -35,6 +37,11 @@ const RegisterSection: React.FC = () => {
     // --- State Updates ---
     const updateField = (field: string, value: any) => {
         setFormData(prev => ({ ...prev, [field]: value }));
+        // Clear specific error if it exists (simple approach: clear all errors on interaction to reduce friction)
+        if (errors.length > 0) {
+            setErrors([]);
+            setValidationMsg('');
+        }
     };
 
     const handleExperienceChange = (id: number, field: string, value: string) => {
@@ -56,35 +63,77 @@ const RegisterSection: React.FC = () => {
                 : [...prev.skills, skill];
             return { ...prev, skills };
         });
+        if (errors.includes('skills')) {
+            setErrors(prev => prev.filter(e => e !== 'skills'));
+            if (errors.length <= 1) setValidationMsg('');
+        }
     };
+
+    // --- Validation & Styling ---
+    const getInputStyle = (fieldName: string) => {
+        if (errors.includes(fieldName)) {
+            return { borderColor: 'var(--primary-color)', boxShadow: '0 0 8px var(--primary-color)' };
+        }
+        return {};
+    };
+
+    const validateStep = (step: number): boolean => {
+        const newErrors: string[] = [];
+        let isValid = true;
+        const missingFieldNames: string[] = [];
+
+        const addError = (field: string, label: string) => {
+            newErrors.push(field);
+            missingFieldNames.push(label);
+        };
+
+        if (step === 1) {
+            if (!formData.name) addError('name', 'Full Name');
+            if (!formData.title) addError('title', 'Professional Title');
+            if (!formData.email) addError('email', 'Email Address');
+            if (!formData.location) addError('location', 'Location');
+            if (!formData.about) addError('about', 'Professional Summary');
+        } else if (step === 2) {
+            if (formData.skills.length === 0) addError('skills', 'Primary Expertise');
+            if (!formData.rate) addError('rate', 'Hourly Rate');
+            if (!formData.availability) addError('availability', 'Availability');
+        } else if (step === 4) {
+            if (!formData.walletAddress) addError('walletAddress', 'Chia Wallet Address');
+            if (!formData.terms) addError('terms', 'Terms Agreement');
+        }
+
+        if (newErrors.length > 0) {
+            setErrors(newErrors);
+            setValidationMsg(`Please fill in the following required fields: ${missingFieldNames.join(', ')}.`);
+            isValid = false;
+        } else {
+            setErrors([]);
+            setValidationMsg('');
+        }
+        return isValid;
+    };
+
 
     // --- Navigation ---
     const nextStep = () => {
-        // Basic validation before processing
-        if (currentStep === 1 && (!formData.name || !formData.email)) {
-            alert('Please fill in required fields (Name, Email).');
-            return;
+        if (validateStep(currentStep)) {
+            setCurrentStep(prev => Math.min(prev + 1, 4));
+            window.scrollTo(0, 0);
         }
-        if (currentStep === 2 && (!formData.availability || formData.skills.length === 0)) {
-            alert('Please select availability and at least one skill.');
-            return;
-        }
-        setCurrentStep(prev => Math.min(prev + 1, 4));
-        window.scrollTo(0, 0);
     };
 
     const prevStep = () => {
         setCurrentStep(prev => Math.max(prev - 1, 1));
         window.scrollTo(0, 0);
+        setErrors([]); // Clear errors when going back
+        setValidationMsg('');
     };
 
     // --- Submission ---
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!formData.terms) {
-            alert("Please accept the terms.");
-            return;
-        }
+
+        if (!validateStep(4)) return;
 
         setIsSubmitting(true);
 
@@ -162,26 +211,26 @@ const RegisterSection: React.FC = () => {
             <div className="form-row">
                 <div className="form-group">
                     <label htmlFor="full-name">Full Name*</label>
-                    <input type="text" id="full-name" value={formData.name} onChange={(e) => updateField('name', e.target.value)} required />
+                    <input type="text" id="full-name" value={formData.name} onChange={(e) => updateField('name', e.target.value)} style={getInputStyle('name')} required />
                 </div>
                 <div className="form-group">
                     <label htmlFor="professional-title">Professional Title*</label>
-                    <input type="text" id="professional-title" value={formData.title} onChange={(e) => updateField('title', e.target.value)} required placeholder="e.g., Chia Developer" />
+                    <input type="text" id="professional-title" value={formData.title} onChange={(e) => updateField('title', e.target.value)} style={getInputStyle('title')} required placeholder="e.g., Chia Developer" />
                 </div>
             </div>
             <div className="form-row">
                 <div className="form-group">
                     <label htmlFor="email">Email Address*</label>
-                    <input type="email" id="email" value={formData.email} onChange={(e) => updateField('email', e.target.value)} required />
+                    <input type="email" id="email" value={formData.email} onChange={(e) => updateField('email', e.target.value)} style={getInputStyle('email')} required />
                 </div>
                 <div className="form-group">
                     <label htmlFor="location">Location*</label>
-                    <input type="text" id="location" value={formData.location} onChange={(e) => updateField('location', e.target.value)} required placeholder="City, Country" />
+                    <input type="text" id="location" value={formData.location} onChange={(e) => updateField('location', e.target.value)} style={getInputStyle('location')} required placeholder="City, Country" />
                 </div>
             </div>
             <div className="form-group full-width">
                 <label htmlFor="about">Professional Summary*</label>
-                <textarea id="about" rows={4} value={formData.about} onChange={(e) => updateField('about', e.target.value)} required></textarea>
+                <textarea id="about" rows={4} value={formData.about} onChange={(e) => updateField('about', e.target.value)} style={getInputStyle('about')} required></textarea>
             </div>
         </div>
     );
@@ -189,8 +238,8 @@ const RegisterSection: React.FC = () => {
     const renderStep2 = () => (
         <div className="form-section fade-in">
             <h3><i className="fas fa-briefcase"></i> Expertise & Availability</h3>
-            <div className="form-group full-width">
-                <label>Primary Expertise Area(s)*</label>
+            <div className="form-group full-width" style={errors.includes('skills') ? { border: '1px solid var(--primary-color)', padding: '10px', borderRadius: '5px' } : {}}>
+                <label style={errors.includes('skills') ? { color: 'var(--primary-color)' } : {}}>Primary Expertise Area(s)*</label>
                 <div className="checkbox-group" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '10px' }}>
                     {['Chialisp Developer', 'Farm Specialist', 'DataLayer Architect', 'Security Auditor', 'AIOps Engineer', 'Infrastructure Specialist'].map(exp => (
                         <div key={exp} className="checkbox-item">
@@ -208,11 +257,11 @@ const RegisterSection: React.FC = () => {
             <div className="form-row">
                 <div className="form-group">
                     <label htmlFor="hourly-rate">Hourly Rate (XCH)*</label>
-                    <input type="number" id="hourly-rate" step="0.01" value={formData.rate} onChange={(e) => updateField('rate', e.target.value)} required placeholder="0.5" />
+                    <input type="number" id="hourly-rate" step="0.01" value={formData.rate} onChange={(e) => updateField('rate', e.target.value)} style={getInputStyle('rate')} required placeholder="0.5" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="availability">Availability*</label>
-                    <select id="availability" value={formData.availability} onChange={(e) => updateField('availability', e.target.value)} required>
+                    <select id="availability" value={formData.availability} onChange={(e) => updateField('availability', e.target.value)} style={getInputStyle('availability')} required>
                         <option value="">Select availability</option>
                         <option value="full-time">Full-time</option>
                         <option value="part-time">Part-time</option>
@@ -227,9 +276,9 @@ const RegisterSection: React.FC = () => {
         <div className="form-section fade-in">
             <h3><i className="fas fa-history"></i> Work & Education (Optional)</h3>
             {/* Experience */}
-            <h4 style={{ marginTop: '20px', color: '#555' }}>Experience</h4>
+            <h4 style={{ marginTop: '20px', color: '#ccc' }}>Experience</h4>
             {experiences.map((exp, index) => (
-                <div key={exp.id} className="experience-entry" style={{ padding: '15px', border: '1px solid #eee', marginBottom: '15px', borderRadius: '4px' }}>
+                <div key={exp.id} className="experience-entry" style={{ padding: '15px', border: '1px solid rgba(255,255,255,0.1)', marginBottom: '15px', borderRadius: '4px', background: 'rgba(0,0,0,0.2)' }}>
                     <div className="form-row">
                         <div className="form-group">
                             <label>Company</label>
@@ -245,9 +294,9 @@ const RegisterSection: React.FC = () => {
             <button type="button" className="btn btn-secondary btn-sm" onClick={addExperience}>+ Add Experience</button>
 
             {/* Education */}
-            <h4 style={{ marginTop: '30px', color: '#555' }}>Education</h4>
+            <h4 style={{ marginTop: '30px', color: '#ccc' }}>Education</h4>
             {education.map((edu) => (
-                <div key={edu.id} className="education-entry" style={{ padding: '15px', border: '1px solid #eee', marginBottom: '15px', borderRadius: '4px' }}>
+                <div key={edu.id} className="education-entry" style={{ padding: '15px', border: '1px solid rgba(255,255,255,0.1)', marginBottom: '15px', borderRadius: '4px', background: 'rgba(0,0,0,0.2)' }}>
                     <div className="form-row">
                         <div className="form-group">
                             <label>Institution</label>
@@ -274,12 +323,12 @@ const RegisterSection: React.FC = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="chia-address">Chia Wallet Address*</label>
-                    <input type="text" id="chia-address" value={formData.walletAddress} onChange={(e) => updateField('walletAddress', e.target.value)} required placeholder="xch1..." />
+                    <input type="text" id="chia-address" value={formData.walletAddress} onChange={(e) => updateField('walletAddress', e.target.value)} style={getInputStyle('walletAddress')} required placeholder="xch1..." />
                 </div>
             </div>
 
             <div className="form-section">
-                <div className="checkbox-single">
+                <div className="checkbox-single" style={errors.includes('terms') ? { color: 'var(--primary-color)' } : {}}>
                     <input type="checkbox" id="terms" checked={formData.terms} onChange={(e) => updateField('terms', e.target.checked)} required />
                     <label htmlFor="terms" style={{ marginLeft: '10px' }}>I agree to the DAO Membership Terms*</label>
                 </div>
@@ -287,7 +336,6 @@ const RegisterSection: React.FC = () => {
         </div>
     );
 
-    return (
     return (
         <section id="register" className="register-section">
             <div className="register-bg"></div>
@@ -315,6 +363,21 @@ const RegisterSection: React.FC = () => {
 
                 <div className="glass-wizard-container fade-in">
                     <form onSubmit={handleSubmit}>
+                        {validationMsg && (
+                            <div style={{
+                                background: 'rgba(0, 255, 157, 0.1)',
+                                border: '1px solid var(--primary-color)',
+                                color: 'var(--primary-color)',
+                                padding: '10px',
+                                borderRadius: '5px',
+                                marginBottom: '20px',
+                                textAlign: 'center'
+                            }}>
+                                <i className="fas fa-exclamation-circle" style={{ marginRight: '8px' }}></i>
+                                {validationMsg}
+                            </div>
+                        )}
+
                         {currentStep === 1 && renderStep1()}
                         {currentStep === 2 && renderStep2()}
                         {currentStep === 3 && renderStep3()}
@@ -337,7 +400,6 @@ const RegisterSection: React.FC = () => {
                 </div>
             </div>
         </section>
-    );
     );
 };
 
