@@ -1043,7 +1043,7 @@ section {
 .enterprise-info h3 {
     font-size: 2rem;
     margin-bottom: 20px;
-    color: var(--dark-color);
+    color: var(--light-text);
 }
 
 .enterprise-info>p {

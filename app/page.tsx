@@ -160,7 +160,7 @@ export default function Home() {
             <section id="about" className="about">
                 <div className="container">
                     <div className="section-header">
-                        <h2>About Lochness Group</h2>
+                        <h2>About Us</h2>
                         <div className="separator"></div>
                     </div>
                     <div className="about-content">
@@ -220,11 +220,11 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* Enterprise Solutions Section */}
+            {/* Solutions Section */}
             <section id="enterprise" className="enterprise">
                 <div className="container">
                     <div className="section-header">
-                        <h2>Enterprise Blockchain Solutions</h2>
+                        <h2>Blockchain Solutions</h2>
                         <div className="separator"></div>
                     </div>
                     <div className="enterprise-content">
