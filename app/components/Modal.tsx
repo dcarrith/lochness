@@ -57,6 +57,14 @@ const Modal: React.FC<ModalProps> = ({ modalId, isOpen, onClose }) => {
                                 size={300}
                                 level={"H"}
                                 includeMargin={true}
+                                fgColor={"#00ff9d"}
+                                bgColor={"#020c1b"}
+                                imageSettings={{
+                                    src: "/images/lochness-logo.png",
+                                    height: 60,
+                                    width: 60,
+                                    excavate: true,
+                                }}
                             />
                         </div>
                     )}
