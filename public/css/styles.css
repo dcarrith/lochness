@@ -1976,8 +1976,8 @@ body.modal-open {
 
 .glass-wizard-container {
     background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     padding: 40px;

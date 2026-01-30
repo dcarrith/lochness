@@ -353,7 +353,7 @@ const RegisterSection: React.FC = () => {
                             width: '40px', height: '40px', borderRadius: '50%',
                             backgroundColor: step <= currentStep ? 'var(--primary-color)' : 'rgba(255,255,255,0.1)',
                             border: step <= currentStep ? 'none' : '1px solid rgba(255,255,255,0.2)',
-                            color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            color: step <= currentStep ? 'black' : 'white', display: 'flex', alignItems: 'center', justifyContent: 'center',
                             fontWeight: 'bold', transition: 'all 0.3s ease'
                         }}>
                             {step}
