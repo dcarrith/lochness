@@ -1146,7 +1146,7 @@ section {
     flex: 1;
     min-width: 300px;
     background: var(--gradient-primary);
-    color: white;
+    color: var(--dark-color);
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(58, 172, 89, 0.2);
