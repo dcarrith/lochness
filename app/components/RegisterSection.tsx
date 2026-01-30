@@ -341,8 +341,8 @@ const RegisterSection: React.FC = () => {
             <div className="register-bg"></div>
 
             <div className="container" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
-                <div className="section-header light" style={{ marginBottom: '40px' }}>
-                    <h1>Join our DAO</h1>
+                <div className="section-header light glass-header">
+                    <h1>Apply for DAO Membership</h1>
                     <p>Complete the steps below to apply for membership.</p>
                 </div>
 

@@ -1986,6 +1986,20 @@ body.modal-open {
     margin-bottom: 60px;
 }
 
+.glass-header {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    margin-bottom: 40px;
+    display: inline-block;
+    /* Keep it centered and fitting content if preferred, or block */
+    width: 100%;
+}
+
 .register-header h1,
 .register-header p {
     color: var(--light-text);
