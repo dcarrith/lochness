@@ -240,6 +240,7 @@ const ProfilesSection: React.FC = () => {
                             <i className="fas fa-search"></i>
                             <input
                                 type="text"
+                                id="profile-search"
                                 placeholder="Search by name or skills (e.g., Chialisp, Farming)"
                                 value={searchText}
                                 onChange={(e) => setSearchText(e.target.value)}
