@@ -15,7 +15,7 @@ export default function Home() {
 
     const testimonials = [
         {
-            text: "Lochness Group's AIOps platform has revolutionized how we manage our Chia farming operation. Our farming efficiency increased by 28%, and we've seen a significant boost in XCH rewards.",
+            text: "Working with Lochness Group has helped us to revolutionize our company site and development processes.",
             author: "Sarah Johnson",
             role: "CTO, GreenFarm Collective",
             image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&h=100&q=80"
@@ -51,31 +51,25 @@ export default function Home() {
 
         switch (service) {
             case 'farm-monitoring':
-                responseMessage = 'We\'ll help you optimize your Chia farming operation!';
-                break;
-            case 'chialisp-security':
-                responseMessage = 'Our Chialisp security experts will be in touch to discuss your smart contract needs.';
-                break;
-            case 'farming-analytics':
-                responseMessage = 'We\'ll analyze your farming setup to help maximize your XCH rewards.';
+                responseMessage = 'Our monitoring specialists will help you monnitor and optimize your farming operations.';
                 break;
             case 'smart-contracts':
-                responseMessage = 'Our Chialisp developers will contact you about your smart contract project.';
+                responseMessage = 'Our smart contract developers will be in touch to discuss your business needs.';
                 break;
-            case 'datalayer-rad':
+            case 'rapid-application-development':
                 responseMessage = 'Our DataLayer specialists will contact you to discuss your rapid application development needs.';
                 break;
             case 'enterprise-provenance':
-                responseMessage = 'Our enterprise blockchain team will reach out to discuss how we can implement provenance and transparency solutions for your business.';
+                responseMessage = 'Our blockchain developers will contact you to discuss how we can implement provenance and transparency solutions for your business.';
                 break;
             case 'infrastructure-as-code':
-                responseMessage = 'Our infrastructure specialists will contact you to discuss automating your Chia blockchain infrastructure deployment and management.';
+                responseMessage = 'Our infrastructure-as-code specialists will contact you to discuss your blockchain infrastructure and management.';
                 break;
             case 'performance-optimization':
-                responseMessage = 'Our performance engineering team will reach out to help optimize your Chia operations for maximum efficiency and throughput.';
+                responseMessage = 'Our performance engineering specialists will reach out to help optimize your Chia operations for maximum efficiency and throughput.';
                 break;
             default:
-                responseMessage = 'We\'ll get back to you shortly about your Chia blockchain needs.';
+                responseMessage = 'We\'ll get back to you shortly about your blockchain needs.';
         }
 
         setFormResponse(`Thank you for your message, ${name}! ${responseMessage} We'll reach out to you at ${email} within 24 hours.`);
@@ -109,7 +103,7 @@ export default function Home() {
                             {/* Body */}
                             <span className="word w-xlarge body1">AIOps</span>
                             <span className="word w-large body2">Smart Contracts</span>
-                            <span className="word w-medium body3">Chialisp</span>
+                            <span className="word w-medium body3">ChiaLisp</span>
                             <span className="word w-small body4">Analytics</span>
                             <span className="word w-medium body5">Farming</span>
                             <span className="word w-small body6">DePin</span>
@@ -165,13 +159,13 @@ export default function Home() {
                     </div>
                     <div className="about-content">
                         <div className="about-text">
-                            <p>Lochness Group is a decentralized autonomous organization (DAO) that utilizes the Chia Blockchain's next-generation peer-to-peer Blockchain technology to create a decentralized employment model to attract top-tier talent.</p>
+                            <p>Lochness Group is a decentralized autonomous organization (DAO) that utilizes the Chia blockchain's cutting-edge peer-to-peer technology to create a decentralized employment model to attract top-tier talent.</p>
                             <p>Founded by a Chia farmer with twenty-two years of experience in the IT industry who was tired of working for a centralized organization where they bill the client twice the rate they paid him.</p>
                         </div>
                         <div className="about-stats">
                             <div className="stat-item">
                                 <span className="stat-number">100%</span>
-                                <span className="stat-label">Employee Owned</span>
+                                <span className="stat-label">Member Owned</span>
                             </div>
                             <div className="stat-item">
                                 <span className="stat-number">100%</span>
@@ -196,14 +190,12 @@ export default function Home() {
                     </div>
                     <div className="services-grid">
                         {[
-                            { id: 'modal-farm-monitoring', icon: 'fa-robot', title: 'AI-Powered Farm Monitoring', desc: 'Continuous monitoring of Chia farms with intelligent anomaly detection and automated response systems to maximize farming efficiency.' },
-                            { id: 'modal-chialisp-security', icon: 'fa-shield-alt', title: 'Chialisp Security', desc: 'Advanced security protocols and threat detection to protect Chia smart contracts and blockchain infrastructure from vulnerabilities.' },
-                            { id: 'modal-farming-analytics', icon: 'fa-chart-line', title: 'Farming Predictive Analytics', desc: 'Leverage machine learning to forecast farming yields, optimize plot management, and prevent downtime in your Chia farming operation.' },
-                            { id: 'modal-smart-contracts', icon: 'fa-cogs', title: 'Smart Contract Operations', desc: 'Streamline Chia smart contract development with intelligent automation, testing frameworks, and deployment optimization.' },
-                            { id: 'modal-datalayer-rad', icon: 'fa-database', title: 'DataLayer RAD', desc: 'AI-powered rapid application development utilizing Chia DataLayer for decentralized data storage and management solutions.' },
+                            { id: 'modal-farm-monitoring', icon: 'fa-robot', title: 'AI-Powered Farm Monitoring', desc: 'Continuous monitoring of farms with intelligent anomaly detection and automated response systems to maximize farming efficiency.' },
+                            { id: 'modal-smart-contracts', icon: 'fa-cogs', title: 'Smart Contract Operations', desc: 'Streamline smart contract development with intelligent automation, testing frameworks, and deployment optimization.' },
+                            { id: 'modal-rapid-application-development', icon: 'fa-database', title: 'DataLayer RAD', desc: 'Rapid application development integrating DataLayer for decentralized data storage and management solutions.' },
                             { id: 'modal-enterprise-provenance', icon: 'fa-fingerprint', title: 'Enterprise Provenance', desc: 'Blockchain-based tracking and verification solutions for enterprise supply chains, product authentication, and regulatory compliance.' },
-                            { id: 'modal-infrastructure-as-code', icon: 'fa-server', title: 'Infrastructure as Code', desc: 'Automated deployment and management of Chia blockchain infrastructure using modern IaC tools, ensuring consistency, scalability, and disaster recovery.' },
-                            { id: 'modal-performance-optimization', icon: 'fa-tachometer-alt', title: 'Performance Optimization', desc: 'Comprehensive analysis and tuning of Chia nodes, farming operations, and smart contracts to maximize throughput, minimize latency, and reduce resource usage.' },
+                            { id: 'modal-infrastructure-as-code', icon: 'fa-server', title: 'Infrastructure as Code', desc: 'Automated deployment and management of blockchain infrastructure using modern IaC tools, ensuring consistency, scalability, and disaster recovery.' },
+                            { id: 'modal-performance-optimization', icon: 'fa-tachometer-alt', title: 'Performance Optimization', desc: 'Comprehensive analysis and tuning of blockchain nodes, farming operations, and smart contracts to maximize throughput, minimize latency, and reduce resource usage.' },
                         ].map((service, index) => (
                             <div key={index} className="service-card" onClick={() => openModal(service.id)}>
                                 <div className="service-icon">
@@ -230,7 +222,7 @@ export default function Home() {
                     <div className="enterprise-content">
                         <div className="enterprise-info">
                             <h3>Provenance &amp; Transparency Solutions</h3>
-                            <p>Lochness Group provides enterprise-grade blockchain solutions that leverage Chia's sustainable blockchain to create immutable records for supply chain tracking, product authentication, and regulatory compliance.</p>
+                            <p>Lochness Group provides enterprise-grade blockchain solutions that leverage sustainable blockchain to create immutable records for supply chain tracking, product authentication, and regulatory compliance.</p>
 
                             <div className="enterprise-features">
                                 <div className="enterprise-feature" onClick={() => openModal('modal-supply-chain')}>
@@ -239,7 +231,7 @@ export default function Home() {
                                     </div>
                                     <div className="feature-content">
                                         <h4>Supply Chain Traceability</h4>
-                                        <p>Track products from origin to consumer with immutable blockchain records. Our solution integrates with existing ERP systems and provides real-time visibility across your entire supply chain.</p>
+                                        <p>Track products from origin to consumer with immutable blockchain records. Our specialists can integrates with existing systems and provide real-time visibility across your entire supply chain.</p>
                                     </div>
                                     <div className="feature-overlay">
                                         <span>Learn More</span>
@@ -252,7 +244,7 @@ export default function Home() {
                                     </div>
                                     <div className="feature-content">
                                         <h4>Product Authentication</h4>
-                                        <p>Combat counterfeiting with blockchain-verified product authenticity. Each product receives a unique digital identity on the Chia blockchain that consumers can verify instantly.</p>
+                                        <p>Combat counterfeiting with blockchain-verified product authenticity. Each product can be assigned a unique digital identity on the blockchain that consumers can verify instantly.</p>
                                     </div>
                                     <div className="feature-overlay">
                                         <span>Learn More</span>
@@ -265,7 +257,7 @@ export default function Home() {
                                     </div>
                                     <div className="feature-content">
                                         <h4>Regulatory Compliance</h4>
-                                        <p>Simplify compliance reporting with automated, tamper-proof record keeping. Our solutions help meet requirements for industries including pharmaceuticals, food safety, and luxury goods.</p>
+                                        <p>Simplify compliance reporting with automated, tamper-proof record keeping. Our solutions can help meet requirements for industries including pharmaceuticals, food safety, and luxury goods.</p>
                                     </div>
                                     <div className="feature-overlay">
                                         <span>Learn More</span>
@@ -278,7 +270,7 @@ export default function Home() {
                                     </div>
                                     <div className="feature-content">
                                         <h4>Sustainable Blockchain</h4>
-                                        <p>Unlike energy-intensive blockchains, Chia's proof of space and time consensus mechanism provides enterprise-grade security with minimal environmental impact.</p>
+                                        <p>Unlike energy-intensive blockchains that use PoW (Proof of Work) the PoST (Proof of Space and Time) consensus mechanism provides enterprise-grade security with minimal environmental impact.</p>
                                     </div>
                                     <div className="feature-overlay">
                                         <span>Learn More</span>
@@ -334,9 +326,9 @@ export default function Home() {
                     </div>
                     <div className="contracts-grid">
                         {[
-                            { id: 'modal-farm-specialist', icon: 'fa-tractor', title: 'Chia Farm Specialist', desc: 'Expert optimization of Chia farming operations', rate: '15 XCH/hour', term: '40 hours' },
-                            { id: 'modal-chialisp-developer', icon: 'fa-code', title: 'Chialisp Developer', desc: 'Smart contract development and optimization', rate: '21 XCH/hour', term: '40 hours' },
-                            { id: 'modal-security-auditor', icon: 'fa-shield-alt', title: 'Security Auditor', desc: 'Comprehensive security audits for Chialisp contracts', rate: '17 XCH/hour', term: '15 hours' },
+                            { id: 'modal-farm-specialist', icon: 'fa-tractor', title: 'Farm Specialist', desc: 'Expert optimization of Chia farming operations', rate: '15 XCH/hour', term: '40 hours' },
+                            { id: 'modal-smart-contract-developer', icon: 'fa-code', title: 'Smart Contract Developer', desc: 'Smart contract development and optimization', rate: '21 XCH/hour', term: '40 hours' },
+                            { id: 'modal-security-auditor', icon: 'fa-shield-alt', title: 'Security Auditor', desc: 'Comprehensive security audits for smart contracts', rate: '17 XCH/hour', term: '15 hours' },
                             { id: 'modal-datalayer-architect', icon: 'fa-database', title: 'DataLayer Architect', desc: 'Design and implementation of DataLayer solutions', rate: '19 XCH/hour', term: '25 hours' },
                             { id: 'modal-aiops-engineer', icon: 'fa-robot', title: 'AIOps Engineer', desc: 'Implementation of AI-powered operational solutions', rate: '23 XCH/hour', term: '40 hours' },
                             { id: 'modal-infrastructure-specialist', icon: 'fa-server', title: 'Infrastructure Engineer', desc: 'Design and deployment of highly-available infrastructure', rate: '25 XCH/hour', term: '80 hours' }
@@ -426,20 +418,20 @@ export default function Home() {
                     </div>
                     <div className="contact-content">
                         <div className="contact-info">
-                            <h3>Ready to transform your Chia operations?</h3>
-                            <p>Our team of experts is ready to help you implement cutting-edge AIOps solutions for your Chia farming and smart contract development.</p>
+                            <h3>Ready to transform your operations?</h3>
+                            <p>Our team of experts is ready to help you implement cutting-edge AIOps solutions for your blockchain farming and smart contract development.</p>
                             <div className="contact-details">
                                 <div className="contact-item">
                                     <i className="fas fa-map-marker-alt"></i>
-                                    <span>123 Blockchain Avenue, San Francisco, CA 94105</span>
+                                    <span>Herndon, VA</span>
                                 </div>
                                 <div className="contact-item">
                                     <i className="fas fa-envelope"></i>
-                                    <span>info@lochnessgroup.com</span>
+                                    <span>info@lochness.group</span>
                                 </div>
                                 <div className="contact-item">
                                     <i className="fas fa-phone"></i>
-                                    <span>+1 (415) 555-0123</span>
+                                    <span>(571)252-9747</span>
                                 </div>
                             </div>
                             <div className="social-links">
@@ -468,10 +460,8 @@ export default function Home() {
                                         <select id="service" name="service" defaultValue="">
                                             <option value="" disabled>Select Service</option>
                                             <option value="farm-monitoring">Farm Monitoring</option>
-                                            <option value="chialisp-security">Chialisp Security</option>
-                                            <option value="farming-analytics">Farming Analytics</option>
                                             <option value="smart-contracts">Smart Contract Development</option>
-                                            <option value="datalayer-rad">DataLayer RAD</option>
+                                            <option value="rapid-application-development">Rapid Application Development</option>
                                             <option value="enterprise-provenance">Enterprise Provenance</option>
                                             <option value="infrastructure-as-code">Infrastructure as Code</option>
                                             <option value="performance-optimization">Performance Optimization</option>
