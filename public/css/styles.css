@@ -1692,7 +1692,7 @@ section {
 
 .modal-header h3,
 .modal-header i {
-    color: #ffffff;
+    color: #000000;
 }
 
 .modal-body {
@@ -1754,7 +1754,7 @@ section {
 
 .modal-footer {
     padding: 20px 30px;
-    background: #000000;
+    background: #0a192f;
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
