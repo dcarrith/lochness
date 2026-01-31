@@ -3,12 +3,12 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://lochness.group'),
-    title: 'Lochness Group | Decentralized Employment',
+    title: 'Lochness Group - a Decentralized Autonomous Organization (DAO)',
     description: 'Lochness Group is a decentralized autonomous organization (DAO) that utilizes the Chia Blockchain to create a decentralized employment model.',
-    keywords: ['Chia', 'Blockchain', 'DAO', 'Decentralized Employment', 'Smart Contracts', 'Chialisp', 'AIOps', 'DataLayer', 'Lochness Group'],
+    keywords: ['Chia', 'Blockchain', 'Decentralized Autonomous Organization', 'DAO', 'Decentralized Employment', 'Smart Contracts', 'Chialisp', 'AIOps', 'DataLayer', 'Lochness Group'],
     openGraph: {
-        title: 'Lochness Group | Decentralized Employment',
-        description: 'Lochness Group is a decentralized autonomous organization (DAO) that utilizes the Chia Blockchain to create a decentralized employment model.',
+        title: 'Lochness Group - a Decentralized Autonomous Organization (DAO)',
+        description: 'Lochness Group is a decentralized autonomous organization (DAO) that utilizes the Chia Blockchain to create a decentralized employment and ownership model.',
         url: 'https://lochness.group',
         siteName: 'Lochness Group',
         images: [
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Lochness Group | Decentralized Employment',
-        description: 'Lochness Group is a decentralized autonomous organization (DAO) that utilizes the Chia Blockchain to create a decentralized employment model.',
+        title: 'Lochness Group - a Decentralized Autonomous Organization (DAO)',
+        description: 'Lochness Group is a decentralized autonomous organization (DAO) that utilizes the Chia Blockchain to create a decentralized employmentand ownership model.',
         images: ['/images/og-image.png'],
         creator: '@lochnessgroup',
     },
