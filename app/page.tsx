@@ -419,7 +419,7 @@ export default function Home() {
                     <div className="contact-content">
                         <div className="contact-info">
                             <h3>Ready to transform your operations?</h3>
-                            <p>Our team of experts is ready to help you implement cutting-edge AIOps solutions for your blockchain farming and smart contract development.</p>
+                            <p>Our team of experts is ready to help you implement cutting-edge AIOps solutions to transform your business operations.</p>
                             <div className="contact-details">
                                 <div className="contact-item">
                                     <i className="fas fa-map-marker-alt"></i>
