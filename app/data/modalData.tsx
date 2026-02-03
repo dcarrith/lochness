@@ -126,8 +126,8 @@ export const MODAL_DATA: Record<string, ModalData> = {
             </>
         )
     },
-    'modal-datalayer-rad': {
-        title: 'DataLayer RAD',
+    'modal-rapid-application-development': {
+        title: 'Rapid Application Development',
         icon: 'fas fa-database',
         content: (
             <>
