@@ -23,13 +23,14 @@
 /* Contract Card Dark Theme */
 /* Contract Card Dark Theme */
 .contracts-grid .contract-card {
-    background: rgba(5, 16, 32, 0.85) !important;
+    background: linear-gradient(rgba(5, 16, 32, 0.85), rgba(5, 16, 32, 0.85)) padding-box,
+        var(--gradient-primary) border-box !important;
+    border: 2px solid transparent;
     backdrop-filter: blur(10px);
     border-radius: 10px;
     padding: 30px;
     transition: all 0.3s ease;
     cursor: pointer;
-    border: 1px solid var(--primary-color);
     position: relative;
     overflow: hidden;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
@@ -37,13 +38,19 @@
 
 .contracts-grid .contract-card:hover {
     transform: translateY(-2px);
-    background: rgba(5, 16, 32, 0.95) !important;
+    background: linear-gradient(rgba(5, 16, 32, 0.95), rgba(5, 16, 32, 0.95)) padding-box,
+        var(--gradient-primary) border-box !important;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 255, 157, 0.15);
 }
 
 .contract-icon {
     font-size: 2.5rem;
     margin-bottom: 20px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
     color: var(--primary-color);
 }
 
