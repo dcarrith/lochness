@@ -327,7 +327,7 @@ export default function Home() {
                     <div className="contracts-grid">
                         {[
                             { id: 'modal-farm-specialist', icon: 'fa-tractor', title: 'Farm Specialist', desc: 'Expert optimization of Chia farming operations', rate: '15 XCH/hour', term: '40 hours' },
-                            { id: 'modal-smart-contract-developer', icon: 'fa-code', title: 'Smart Contract Developer', desc: 'Smart contract development and optimization', rate: '21 XCH/hour', term: '40 hours' },
+                            { id: 'modal-smart-contracts', icon: 'fa-code', title: 'Smart Contract Developer', desc: 'Smart contract development and optimization', rate: '21 XCH/hour', term: '40 hours' },
                             { id: 'modal-security-auditor', icon: 'fa-shield-alt', title: 'Security Auditor', desc: 'Comprehensive security audits for smart contracts', rate: '17 XCH/hour', term: '15 hours' },
                             { id: 'modal-datalayer-architect', icon: 'fa-database', title: 'DataLayer Architect', desc: 'Design and implementation of DataLayer solutions', rate: '19 XCH/hour', term: '25 hours' },
                             { id: 'modal-aiops-engineer', icon: 'fa-robot', title: 'AIOps Engineer', desc: 'Implementation of AI-powered operational solutions', rate: '23 XCH/hour', term: '40 hours' },
